@@ -5,7 +5,14 @@ import rootReducer from "./reducers/rootReducer";
 const initialState = {};
 
 const middleware = [thunk];
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const composeEnhancer =
+  process.env.NODE_ENV !== "production" &&
+  window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+    ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
+        name: "App",
+        actionBlacklist: ["REDUX_STORAGE_SAVE"]
+      })
+    : compose;
 const store = createStore(
   rootReducer,
   initialState,
