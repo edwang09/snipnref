@@ -268,7 +268,7 @@ class Bazi extends Component {
             />
           </div>
         </div>
-        <div className="row justify-content-md-center">
+        <div className="row justify-content-center">
           <a href="#result">
             <img
               src={taichi}
