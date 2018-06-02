@@ -1,0 +1,28 @@
+{
+  "name": "snipnref",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "nodemon server",
+    "client-install": "npm install --prefix my-app",
+    "client": "npm run start --prefix my-app",
+    "dev": "concurrently \"npm run server\" \"npm run client \"",
+    "heroku-postbuild":"NPM_CONFIG_PRODUCTION=false npm install --prefix my-app && npm run build --prefix my-app"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.3",
+    "concurrently": "^3.5.1",
+    "express": "^4.16.3",
+    "jsonwebtoken": "^8.2.1",
+    "mongoose": "^5.1.2",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
+    "validator": "^10.2.0"
+  },
+  "proxy":"http://localhost:8080"
+}
