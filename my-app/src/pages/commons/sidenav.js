@@ -7,8 +7,9 @@ class Sidenav extends Component {
     const { navlist, cat, logo } = this.props;
     const navItems = navlist.map(navItem => (
       <Link
+        key={navItem.name}
         className={classnames("nav-link", {
-          active: cat == navItem.cat
+          active: cat === navItem.cat
         })}
         to={navItem.link}
       >

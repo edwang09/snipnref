@@ -16,7 +16,9 @@
 .pillar-result{
   font-family: STKaiti, "华文楷体","KaiTi", "楷体",Georgia, "Times New Roman",   serif;
   font-size: 3rem;
-
+}
+.curser-pointer{
+  cursor: pointer;
 }
 .App {
   margin:0;

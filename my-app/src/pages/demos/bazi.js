@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { DatePicker, Card } from "antd";
 import taichi from "./taichi.png";
 import isEmpty from "../../utils/is-empty";
-import moment from "moment";
 
 class Bazi extends Component {
   constructor(props) {
@@ -169,9 +168,9 @@ class Bazi extends Component {
 
   fixMonth = extractdate => {
     if (isEmpty(extractdate)) {
-      throw "Parameter is not valid!";
+      throw new Error("Parameter is not valid!");
     } else {
-      const { year, month, day, hour } = extractdate;
+      const { month, day } = extractdate;
       var newmonth = month;
       if (this.state.monthfixer[month - 1] > day) {
         //day before jieqi
@@ -183,7 +182,7 @@ class Bazi extends Component {
   };
   getPillars = extractdate => {
     if (isEmpty(extractdate)) {
-      throw "Parameter is not valid!";
+      throw new Error("Parameter is not valid!");
     } else {
       const datediff =
         36000000 +
@@ -192,7 +191,7 @@ class Bazi extends Component {
             new Date(2018, 4, 31)) /
             (1000 * 60 * 60 * 24)
         );
-      const { year, month, day, hour } = this.fixMonth(extractdate);
+      const { year, month, hour } = this.fixMonth(extractdate);
       const yearPillar =
         this.state.tiangan[(year - 3) % 10] + this.state.dizhi[(year - 3) % 12];
       const monthPillar =
@@ -208,14 +207,13 @@ class Bazi extends Component {
         this.state.dizhi[hournumber];
       return { yearPillar, monthPillar, dayPillar, hourPillar };
     }
-    return null;
   };
   extractpillars = dateString => {
     if (typeof dateString === "string" && dateString !== "") {
-      const year = parseInt(dateString.split(" ")[0].split("-")[0]);
-      const month = parseInt(dateString.split(" ")[0].split("-")[1]);
-      const day = parseInt(dateString.split(" ")[0].split("-")[2]);
-      const hour = parseInt(dateString.split(" ")[1].split(":")[0]);
+      const year = parseInt(dateString.split(" ")[0].split("-")[0], 10);
+      const month = parseInt(dateString.split(" ")[0].split("-")[1], 10);
+      const day = parseInt(dateString.split(" ")[0].split("-")[2], 10);
+      const hour = parseInt(dateString.split(" ")[1].split(":")[0], 10);
       return { year, month, day, hour };
     }
     return {};

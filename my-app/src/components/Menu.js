@@ -28,14 +28,10 @@ class Navbar extends Component {
     const userLink = (
       <ul className="navbar-nav">
         <li className="nav-item">
-          <a href="#" className="nav-link">
-            {" "}
-            Welcome back!{" "}
-          </a>
+          <a className="nav-link"> Welcome back! </a>
         </li>
         <li className="nav-item dropdown">
           <a
-            href="#"
             className="nav-link dropdown-toggle"
             id="authDropdown"
             data-toggle="dropdown"
@@ -43,14 +39,8 @@ class Navbar extends Component {
             <b>{auth.user.name}</b>
           </a>
           <div className="dropdown-menu" aria-labelledby="authDropdown">
-            <a className="dropdown-item" href="#">
-              Actions
-            </a>
-            <a
-              className="dropdown-item"
-              href="#"
-              onClick={this.props.logoutUser}
-            >
+            <a className="dropdown-item">Actions</a>
+            <a className="dropdown-item" onClick={this.props.logoutUser}>
               Log out
             </a>
           </div>
@@ -75,7 +65,6 @@ class Navbar extends Component {
             <ul className="navbar-nav mr-auto">
               <li className="nav-item dropdown">
                 <a
-                  href="#"
                   className="nav-link dropdown-toggle"
                   id="authDropdown"
                   data-toggle="dropdown"
@@ -96,7 +85,6 @@ class Navbar extends Component {
               </li>
               <li className="nav-item dropdown">
                 <a
-                  href="#"
                   className="nav-link dropdown-toggle"
                   id="authDropdown"
                   data-toggle="dropdown"
@@ -111,7 +99,6 @@ class Navbar extends Component {
               </li>
               <li className="nav-item dropdown">
                 <a
-                  href="#"
                   className="nav-link dropdown-toggle"
                   id="authDropdown"
                   data-toggle="dropdown"
@@ -129,7 +116,6 @@ class Navbar extends Component {
               </li>
               <li className="nav-item dropdown">
                 <a
-                  href="#"
                   className="nav-link dropdown-toggle"
                   id="authDropdown"
                   data-toggle="dropdown"
@@ -137,10 +123,7 @@ class Navbar extends Component {
                   <b>Business Demos</b>
                 </a>
                 <div className="dropdown-menu" aria-labelledby="authDropdown">
-                  <Link
-                    className="dropdown-item"
-                    to="/demos/bazi"
-                  >
+                  <Link className="dropdown-item" to="/demos/bazi">
                     生辰八字
                   </Link>
                 </div>
