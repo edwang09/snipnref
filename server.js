@@ -23,6 +23,32 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 
+//Permissions Control (will be deleted)
+app.use(function (req, res, next) {
+  // Website you wish to allow to connect
+  var allowedOrigins = ["http://localhost:4200"];
+  var origin = req.headers.origin;
+  if (allowedOrigins.indexOf(origin) > -1) {
+    res.setHeader("Access-Control-Allow-Origin", origin);
+  }
+  // Request methods you wish to allow
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST"
+  );
+  // Request headers you wish to allow
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Origin, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version, X-Requested-With, X-Response-Time, X-PINGOTHER, X-CSRF-Token,Authorization"
+  );
+  // Set to true if you need the website to include cookies in the requests sent
+  // to the API (e.g. in case you use sessions)
+  res.setHeader("Access-Control-Allow-Credentials", true);
+  // Pass to next layer of middleware
+  next();
+});
+
+
 //passport
 app.use(passport.initialize());
 
