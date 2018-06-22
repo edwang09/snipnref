@@ -7,6 +7,7 @@ const path = require("path");
 const users = require("./routes/api/users");
 const snippets = require("./routes/api/snippets");
 const references = require("./routes/api/references");
+const fengshui = require("./routes/fengshui/api");
 
 const app = express();
 
@@ -17,7 +18,9 @@ mongoose
   .catch(err => console.log(err));
 
 //add body parser
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({
+  extended: false
+}));
 app.use(bodyParser.json());
 
 //passport
@@ -28,6 +31,9 @@ require("./config/passport")(passport);
 app.use("/api/users", users);
 app.use("/api/snippets", snippets);
 app.use("/api/references", references);
+
+//万年历api
+app.use("/api/fengshui", fengshui);
 
 if (process.env.NODE_ENV === "production") {
   // Set static folder
