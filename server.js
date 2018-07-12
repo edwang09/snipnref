@@ -7,6 +7,7 @@ const path = require("path");
 const users = require("./routes/api/users");
 const snippets = require("./routes/api/snippets");
 const references = require("./routes/api/references");
+const votes = require("./routes/api/votes");
 const fengshui = require("./routes/fengshui/api");
 
 const app = express();
@@ -18,24 +19,26 @@ mongoose
   .catch(err => console.log(err));
 
 //add body parser
-app.use(bodyParser.urlencoded({
-  extended: false
-}));
+app.use(
+  bodyParser.urlencoded({
+    extended: true
+  })
+);
 app.use(bodyParser.json());
 
 //Permissions Control (will be deleted)
-app.use(function (req, res, next) {
+app.use(function(req, res, next) {
   // Website you wish to allow to connect
-  var allowedOrigins = ["http://localhost:4200"];
+  var allowedOrigins = [
+    "http://localhost:4200",
+    "https://clientpanelprod-e52bd.firebaseapp.com"
+  ];
   var origin = req.headers.origin;
   if (allowedOrigins.indexOf(origin) > -1) {
     res.setHeader("Access-Control-Allow-Origin", origin);
   }
   // Request methods you wish to allow
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET, POST"
-  );
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST");
   // Request headers you wish to allow
   res.setHeader(
     "Access-Control-Allow-Headers",
@@ -48,7 +51,6 @@ app.use(function (req, res, next) {
   next();
 });
 
-
 //passport
 app.use(passport.initialize());
 
@@ -57,6 +59,7 @@ require("./config/passport")(passport);
 app.use("/api/users", users);
 app.use("/api/snippets", snippets);
 app.use("/api/references", references);
+app.use("/api/votes", votes);
 
 //万年历api
 app.use("/api/fengshui", fengshui);

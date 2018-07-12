@@ -19,7 +19,9 @@ import snippets from "./pages/snippets";
 import references from "./pages/references";
 import packages from "./pages/packages";
 import bazi from "./pages/demos/bazi";
+import voteentry from "./pages/demos/vote-entry";
 
+import vote from "./pages/demos/vote";
 // Check for token
 if (localStorage.jwtToken) {
   // Set auth token header auth
@@ -50,6 +52,8 @@ class App extends Component {
                 <Route path="/references" component={references} />
                 <Route path="/packages" component={packages} />
                 <Route path="/demos/bazi" component={bazi} />
+                <Route exact path="/demos/vote" component={voteentry} />
+                <Route path="/demos/vote/:id" component={vote} />
               </div>
             </main>
             <Footer />

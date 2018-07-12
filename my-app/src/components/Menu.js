@@ -126,6 +126,9 @@ class Navbar extends Component {
                   <Link className="dropdown-item" to="/demos/bazi">
                     生辰八字
                   </Link>
+                  <Link className="dropdown-item" to="/demos/vote">
+                    Public Voter
+                  </Link>
                 </div>
               </li>
               <li className="nav-item">
@@ -148,4 +151,7 @@ Navbar.propTypes = {
 const mapStateToProps = state => ({
   auth: state.auth
 });
-export default connect(mapStateToProps, { logoutUser })(Navbar);
+export default connect(
+  mapStateToProps,
+  { logoutUser }
+)(Navbar);
