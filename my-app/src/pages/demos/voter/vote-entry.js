@@ -24,7 +24,9 @@ class Voteentry extends Component {
         <div className="card m-4">
           <div className="card-body">
             <h4>Create a vote for any purpose?</h4>
-            <button className="btn btn-info ">Create a new vote</button>
+            <a className="btn btn-info " href="/demos/votecreate">
+              Create a new vote
+            </a>
           </div>
         </div>
         <div className="card m-4">

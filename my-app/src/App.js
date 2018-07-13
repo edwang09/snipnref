@@ -18,10 +18,12 @@ import setAuthToken from "./utils/setAuthToken";
 import snippets from "./pages/snippets";
 import references from "./pages/references";
 import packages from "./pages/packages";
-import bazi from "./pages/demos/bazi";
-import voteentry from "./pages/demos/vote-entry";
 
-import vote from "./pages/demos/vote";
+import bazi from "./pages/demos/bazi";
+import voteentry from "./pages/demos/voter/vote-entry";
+import vote from "./pages/demos/voter/vote";
+import votecreate from "./pages/demos/voter/vote-create";
+
 // Check for token
 if (localStorage.jwtToken) {
   // Set auth token header auth
@@ -53,7 +55,8 @@ class App extends Component {
                 <Route path="/packages" component={packages} />
                 <Route path="/demos/bazi" component={bazi} />
                 <Route exact path="/demos/vote" component={voteentry} />
-                <Route path="/demos/vote/:id" component={vote} />
+                <Route exact path="/demos/vote/:id" component={vote} />
+                <Route exact path="/demos/votecreate" component={votecreate} />
               </div>
             </main>
             <Footer />
