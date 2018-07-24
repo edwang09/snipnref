@@ -8,18 +8,17 @@ class Landing extends Component {
         <div className="container">
           <h1 className="display-4">Snippet and Reference</h1>
           <p className="lead">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Delectus
-            quaerat dolorum corrupti numquam libero accusantium laudantium
-            voluptate adipisci minima cumque quisquam eum fugiat reprehenderit
-            esse, molestiae, est ratione nesciunt! Natus.
+            Snippet and Reference is a personal website for documentation of
+            works of{" "}
+            <span>
+              <Link to="#">Jianan Wang</Link>
+            </span>{" "}
+            who is a enthusiast in all the area of application development,
+            technologies. This website contains works on code snippets,
+            references, code examples, package introductions, and code demos.
           </p>
           <hr className="my-4" />
-          <p>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Delectus
-            quaerat dolorum corrupti numquam libero accusantium laudantium
-            voluptate adipisci minima cumque quisquam eum fugiat reprehenderit
-            esse, molestiae, est ratione nesciunt! Natus.
-          </p>
+          <p>Learn and live.</p>
           <p className="lead">
             <Link className="btn btn-primary btn-lg" to="#">
               Learn more

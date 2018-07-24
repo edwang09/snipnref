@@ -8,6 +8,7 @@ import "./App.css";
 import Navbar from "./components/Menu";
 import Footer from "./components/Footer";
 import Landing from "./components/Landing";
+import About from "./components/About";
 import store from "./store";
 
 //actions
@@ -53,6 +54,7 @@ class App extends Component {
                 <Route path="/snippets" component={snippets} />
                 <Route path="/references" component={references} />
                 <Route path="/packages" component={packages} />
+                <Route path="/about" component={About} />
                 <Route path="/demos/bazi" component={bazi} />
                 <Route exact path="/demos/vote" component={voteentry} />
                 <Route exact path="/demos/vote/:id" component={vote} />

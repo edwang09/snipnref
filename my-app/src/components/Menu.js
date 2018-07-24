@@ -124,7 +124,7 @@ class Navbar extends Component {
                 </a>
                 <div className="dropdown-menu" aria-labelledby="authDropdown">
                   <Link className="dropdown-item" to="/demos/bazi">
-                    生辰八字
+                    Four Pillars of Destiny
                   </Link>
                   <Link className="dropdown-item" to="/demos/vote">
                     Public Voter
@@ -132,8 +132,8 @@ class Navbar extends Component {
                 </div>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="#">
-                  About
+                <Link className="nav-link" to="/about">
+                  About me
                 </Link>
               </li>
             </ul>
