@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Loadable from "react-loadable";
 import Sidenav from "../../commons/sidenav";
 import navlist from "./navlist";
+import loading from "../../commons/loading";
 
 export default class snippetsreactjs extends Component {
   componentDidMount() {}
@@ -9,7 +10,7 @@ export default class snippetsreactjs extends Component {
     const { cat } = this.props.match.params;
     const LoadableComponent = Loadable({
       loader: () => import("./contents/" + cat),
-      loading: "Loading"
+      loading: loading
     });
 
     return (

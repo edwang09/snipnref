@@ -15,49 +15,51 @@ class textfunctions extends Component {
         </p>
         <div className="col-md-12 col-lg-8">
           <table className="table">
-            <tr>
-              <td
-                data-toggle="tooltip"
-                title="number without thousand separators"
-              >
-                General Number
-              </td>
-              <td
-                data-toggle="tooltip"
-                title="thousand separators as well as two decimal places"
-              >
-                Currency
-              </td>
-              <td
-                data-toggle="tooltip"
-                title="at least one digit to the left of the decimal place and two digits to the right of the decimal place"
-              >
-                Fixed
-              </td>
-              <td
-                data-toggle="tooltip"
-                title="thousand separators, at least one digit to the left of the decimal place, and two digits to the right of the decimal place"
-              >
-                Standard
-              </td>
-            </tr>
-            <tr>
-              <td data-toggle="tooltip" title="percent value">
-                Percent
-              </td>
-              <td data-toggle="tooltip" title="Scientific notation">
-                Scientific
-              </td>
-              <td
-                data-toggle="tooltip"
-                title="Yes, true, on if the number is not 0"
-              >
-                Yes/No (True/False, On/Off)
-              </td>
-              <td data-toggle="tooltip" title="display date/time">
-                General(long, medium, short) Date(Time)
-              </td>
-            </tr>
+            <tbody>
+              <tr>
+                <td
+                  data-toggle="tooltip"
+                  title="number without thousand separators"
+                >
+                  General Number
+                </td>
+                <td
+                  data-toggle="tooltip"
+                  title="thousand separators as well as two decimal places"
+                >
+                  Currency
+                </td>
+                <td
+                  data-toggle="tooltip"
+                  title="at least one digit to the left of the decimal place and two digits to the right of the decimal place"
+                >
+                  Fixed
+                </td>
+                <td
+                  data-toggle="tooltip"
+                  title="thousand separators, at least one digit to the left of the decimal place, and two digits to the right of the decimal place"
+                >
+                  Standard
+                </td>
+              </tr>
+              <tr>
+                <td data-toggle="tooltip" title="percent value">
+                  Percent
+                </td>
+                <td data-toggle="tooltip" title="Scientific notation">
+                  Scientific
+                </td>
+                <td
+                  data-toggle="tooltip"
+                  title="Yes, true, on if the number is not 0"
+                >
+                  Yes/No (True/False, On/Off)
+                </td>
+                <td data-toggle="tooltip" title="display date/time">
+                  General(long, medium, short) Date(Time)
+                </td>
+              </tr>
+            </tbody>
           </table>
         </div>
         <p>Format can also take user defined values, see examples below:</p>
@@ -100,20 +102,22 @@ class textfunctions extends Component {
         </p>
         <div className="col-md-12 col-lg-8">
           <table className="table">
-            <tr>
-              <td
-                data-toggle="tooltip"
-                title="Performs a comparison using the setting of the Option Compare statement"
-              >
-                vbUseCompareOption (-1)
-              </td>
-              <td data-toggle="tooltip" title="Performs a binary comparison">
-                vbBinaryCompare (0)
-              </td>
-              <td data-toggle="tooltip" title="Performs a textual comparison">
-                vbTextCompare (1)
-              </td>
-            </tr>
+            <tbody>
+              <tr>
+                <td
+                  data-toggle="tooltip"
+                  title="Performs a comparison using the setting of the Option Compare statement"
+                >
+                  vbUseCompareOption (-1)
+                </td>
+                <td data-toggle="tooltip" title="Performs a binary comparison">
+                  vbBinaryCompare (0)
+                </td>
+                <td data-toggle="tooltip" title="Performs a textual comparison">
+                  vbTextCompare (1)
+                </td>
+              </tr>
+            </tbody>
           </table>
         </div>
         <h5>Examples</h5>
@@ -175,14 +179,16 @@ class textfunctions extends Component {
         </p>
         <div className="col-md-12 col-lg-8">
           <table className="table">
-            <tr>
-              <td data-toggle="tooltip" title="Performs a binary comparison">
-                vbBinaryCompare
-              </td>
-              <td data-toggle="tooltip" title="Performs a textual comparison">
-                vbTextCompare
-              </td>
-            </tr>
+            <tbody>
+              <tr>
+                <td data-toggle="tooltip" title="Performs a binary comparison">
+                  vbBinaryCompare
+                </td>
+                <td data-toggle="tooltip" title="Performs a textual comparison">
+                  vbTextCompare
+                </td>
+              </tr>
+            </tbody>
           </table>
         </div>
 
@@ -219,14 +225,16 @@ class textfunctions extends Component {
         </p>
         <div className="col-md-12 col-lg-8">
           <table className="table">
-            <tr>
-              <td data-toggle="tooltip" title="Performs a binary comparison">
-                vbBinaryCompare
-              </td>
-              <td data-toggle="tooltip" title="Performs a textual comparison">
-                vbTextCompare
-              </td>
-            </tr>
+            <tbody>
+              <tr>
+                <td data-toggle="tooltip" title="Performs a binary comparison">
+                  vbBinaryCompare
+                </td>
+                <td data-toggle="tooltip" title="Performs a textual comparison">
+                  vbTextCompare
+                </td>
+              </tr>
+            </tbody>
           </table>
         </div>
         <h5>Examples</h5>
@@ -248,20 +256,22 @@ class textfunctions extends Component {
         </p>
         <div className="col-md-12 col-lg-8">
           <table className="table">
-            <tr>
-              <td
-                data-toggle="tooltip"
-                title="Performs a comparison using the setting of the Option Compare statement"
-              >
-                vbUseCompareOption (-1)
-              </td>
-              <td data-toggle="tooltip" title="Performs a binary comparison">
-                vbBinaryCompare (0)
-              </td>
-              <td data-toggle="tooltip" title="Performs a textual comparison">
-                vbTextCompare (1)
-              </td>
-            </tr>
+            <tbody>
+              <tr>
+                <td
+                  data-toggle="tooltip"
+                  title="Performs a comparison using the setting of the Option Compare statement"
+                >
+                  vbUseCompareOption (-1)
+                </td>
+                <td data-toggle="tooltip" title="Performs a binary comparison">
+                  vbBinaryCompare (0)
+                </td>
+                <td data-toggle="tooltip" title="Performs a textual comparison">
+                  vbTextCompare (1)
+                </td>
+              </tr>
+            </tbody>
           </table>
         </div>
         <h5>Examples</h5>
@@ -288,35 +298,40 @@ class textfunctions extends Component {
         </p>
         <div>
           <table className="table">
-            <tr>
-              <td
-                data-toggle="tooltip"
-                title="Converts the string to all uppercase"
-              >
-                vbUpperCase (1)
-              </td>
-              <td
-                data-toggle="tooltip"
-                title="Converts the string to all lowercase"
-              >
-                vbLowerCase (2)
-              </td>
-              <td
-                data-toggle="tooltip"
-                title="Converts the first letter to every word to uppercase. All other characters are left as lowercase"
-              >
-                vbProperCase (3)
-              </td>
-              <td data-toggle="tooltip" title="Converts the string to Unicode">
-                vbUnicode (64)
-              </td>
-              <td
-                data-toggle="tooltip"
-                title="Converts the string from Unicode to the default code page of the system"
-              >
-                vbFromUnicode (128)
-              </td>
-            </tr>
+            <tbody>
+              <tr>
+                <td
+                  data-toggle="tooltip"
+                  title="Converts the string to all uppercase"
+                >
+                  vbUpperCase (1)
+                </td>
+                <td
+                  data-toggle="tooltip"
+                  title="Converts the string to all lowercase"
+                >
+                  vbLowerCase (2)
+                </td>
+                <td
+                  data-toggle="tooltip"
+                  title="Converts the first letter to every word to uppercase. All other characters are left as lowercase"
+                >
+                  vbProperCase (3)
+                </td>
+                <td
+                  data-toggle="tooltip"
+                  title="Converts the string to Unicode"
+                >
+                  vbUnicode (64)
+                </td>
+                <td
+                  data-toggle="tooltip"
+                  title="Converts the string from Unicode to the default code page of the system"
+                >
+                  vbFromUnicode (128)
+                </td>
+              </tr>
+            </tbody>
           </table>
         </div>
       </div>

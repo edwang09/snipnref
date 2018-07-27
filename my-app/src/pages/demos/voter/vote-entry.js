@@ -33,7 +33,7 @@ class Voteentry extends Component {
           <div className="card-body">
             <h4>Participate in an existing vote created by others?</h4>
             <div className="form-group">
-              <label HTMLfor="vote name">Vote name</label>
+              <label htmlFor="vote name">Vote name</label>
               <input
                 type="text"
                 className="form-control"
