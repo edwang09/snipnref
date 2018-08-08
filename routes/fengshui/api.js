@@ -9,22 +9,25 @@ const circularJSON = require("circular-json");
 router.post("/calendar", (req, res) => {
   const filename = `./routes/fengshui/past/${req.body.date}.json`;
   if (fs.existsSync(filename)) {
+    console.log("read file");
     var obj = JSON.parse(fs.readFileSync(filename));
     res.send(obj);
   } else {
-    const jiuweiurl = "https://open-api.9vdata.com/get_perpetual_calendar";
+    console.log("request api");
+    const juheURL = "http://v.juhe.cn/calendar/day";
     if (req.body.date && req.body.secret) {
       request.post(
         {
-          url: jiuweiurl,
+          url: juheURL,
           form: {
             date: req.body.date,
-            secret: req.body.secret
+            key: req.body.secret
           }
         },
         function(error, response, body) {
-          fs.writeFile(filename, body);
-          res.send(JSON.parse(body));
+          console.log(body);
+          fs.writeFile(filename, JSON.stringify(JSON.parse(body).result));
+          res.send(JSON.parse(body).result);
         }
       );
     } else {
