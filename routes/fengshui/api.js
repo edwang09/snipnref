@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const request = require("request");
 const fs = require("fs");
-const parse5 = require("parse5");
+const cheerio = require("cheerio");
 const circularJSON = require("circular-json");
 
 //万年历api
@@ -83,11 +83,12 @@ router.post("/birth", (req, res) => {
         //console.log(body.indexOf("<table", 548));
         //console.log(body.indexOf("/table>", 548));
         //console.log(body.substring(736, 4582));
-        const parsed = parse5.parse(body);
+        const parsed = cheerio.load(body.toString());
         //console.log(circularJSON.stringify(parsed));
         fs.writeFile("test.html", body);
-        //res.send(JSON.parse(circularJSON.stringify(parsed)));
-        res.send(body);
+        res.send(JSON.parse(circularJSON.stringify(parsed("#container"))));
+        //console.log(parsed("container"));
+        //res.send(parsed("container"));
       }
     );
   } else {
