@@ -46,11 +46,18 @@ router.post("/calendar", (req, res) => {
 router.post("/birth", (req, res) => {
   //http://www.zhycw.com/pp/bz.aspx
   const URL = "http://www.zhycw.com/pp/bz.aspx";
-  const { year, month, day, hour, min, gender } = req.body;
+  const {
+    birthplace,
+    longitute1,
+    longitute2,
+    year,
+    month,
+    day,
+    hour,
+    min,
+    gender
+  } = req.body;
   const Parameters = {
-    area: "沈阳",
-    jd1: "120",
-    jd2: "0",
     mode8: "1",
     dyp: "1",
     inp: "1",
@@ -67,11 +74,24 @@ router.post("/birth", (req, res) => {
     mode: "pmode8",
     submit: "开始排盘"
   };
-  if (year && month && day && hour && min && gender) {
+  if (
+    birthplace &&
+    longitute1 &&
+    longitute2 &&
+    year &&
+    month &&
+    day &&
+    hour &&
+    min &&
+    gender
+  ) {
     request.post(
       {
         url: URL,
         form: {
+          area: birthplace,
+          jd1: longitute1,
+          jd2: longitute2,
           y: year,
           m: month,
           d: day,
