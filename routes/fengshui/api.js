@@ -4,6 +4,10 @@ const request = require("request");
 const fs = require("fs");
 const cheerio = require("cheerio");
 const circularJSON = require("circular-json");
+const extractbasics = require("./functions/extractbasics");
+const extractqianzao = require("./functions/extractqianzao");
+const extracttiangan = require("./functions/extracttiangan");
+const extractdayun = require("./functions/extractdayun");
 
 //万年历api
 router.post("/calendar", (req, res) => {
@@ -44,7 +48,7 @@ router.post("/birth", (req, res) => {
   const URL = "http://www.zhycw.com/pp/bz.aspx";
   const { year, month, day, hour, min, gender } = req.body;
   const Parameters = {
-    area: "",
+    area: "沈阳",
     jd1: "120",
     jd2: "0",
     mode8: "1",
@@ -78,17 +82,29 @@ router.post("/birth", (req, res) => {
         }
       },
       function(error, response, body) {
-        //to be continued
-        //const parsed = parse5.parse(response.toJSON().body);
-        //console.log(body.indexOf("<table", 548));
-        //console.log(body.indexOf("/table>", 548));
-        //console.log(body.substring(736, 4582));
-        const parsed = cheerio.load(body.toString());
-        //console.log(circularJSON.stringify(parsed));
-        fs.writeFile("test.html", body);
-        res.send(JSON.parse(circularJSON.stringify(parsed("#container"))));
-        //console.log(parsed("container"));
-        //res.send(parsed("container"));
+        const $ = cheerio.load(
+          body
+            .toString()
+            .replace(/<br><br>/g, " twoline ")
+            .replace(/<br>/g, " newline ")
+        );
+        const contents = $("#container")
+          .text()
+          .replace(/\s\s+/g, " ")
+          .replace(/[\[\]:：＝]/g, " ")
+          .split(/\s+/g);
+        extractdayun;
+        const basic = extractbasics(contents);
+        const qianzao = extractqianzao(contents);
+        const tiangan = extracttiangan(contents);
+        const dayun = extractdayun(contents);
+        const result = {
+          ...basic,
+          ...qianzao,
+          tiangan,
+          ...dayun
+        };
+        res.send(JSON.parse(JSON.stringify(result)));
       }
     );
   } else {
