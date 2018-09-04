@@ -18,7 +18,7 @@ export default class snippetsvba extends Component {
           <div className="d-none d-md-block col-md-2">
             <Sidenav cat={cat} navlist={navlist} logo="vba.jpg" />
           </div>
-          <div className="col-md-9 col-sm-12 px-sm-5">
+          <div className="col-md-9 col-sm-12 my-5">
             <LoadableComponent />
           </div>
         </div>

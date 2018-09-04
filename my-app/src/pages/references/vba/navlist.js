@@ -1,6 +1,10 @@
 module.exports = [
   { name: "Home", link: "/references/vba/getstart", cat: "getstart" },
-  { name: "Basics", link: "/references/vba/basic", cat: "basic" },
+  {
+    name: "Basics (under construction)",
+    link: "/references/vba/basic",
+    cat: "basic"
+  },
   {
     name: "Text Functions",
     link: "/references/vba/text-functions",

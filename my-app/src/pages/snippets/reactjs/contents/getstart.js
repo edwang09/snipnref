@@ -4,25 +4,18 @@ export default class getstart extends Component {
   render() {
     return (
       <div>
-        <h1 className="lead">This is to get start</h1>
-        <h1 className="lead">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium
-          obcaecati tempora dignissimos deserunt vitae sed quasi eius, ratione
-          nulla enim quis. Atque suscipit obcaecati id consequatur itaque
-          recusandae molestias autem.
-        </h1>
-        <h1 className="lead">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium
-          obcaecati tempora dignissimos deserunt vitae sed quasi eius, ratione
-          nulla enim quis. Atque suscipit obcaecati id consequatur itaque
-          recusandae molestias autem.
-        </h1>
-        <h1 className="lead">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium
-          obcaecati tempora dignissimos deserunt vitae sed quasi eius, ratione
-          nulla enim quis. Atque suscipit obcaecati id consequatur itaque
-          recusandae molestias autem.
-        </h1>
+        <p className="h5">This is to get start</p>
+        <p className="">
+          In computing, React (also known as React.js or ReactJS) is a
+          JavaScript library for building user interfaces. It is maintained by
+          Facebook and a community of individual developers and companies.
+        </p>
+        <p className="">
+          React can be used as a base in the development of single-page or
+          mobile applications. Complex React applications usually require the
+          use of additional libraries for state management, routing, and
+          interaction with an API.
+        </p>
       </div>
     );
   }
