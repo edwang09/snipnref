@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import spongebob from "./spongebob.jpg";
 import axios from "axios";
+import Votecreatebutton from "./vote-create-button";
 
 class Vote extends Component {
   constructor(props) {
@@ -55,6 +56,7 @@ class Vote extends Component {
   }
 
   vote = (questionid, optionid) => e => {
+    e.preventDefault();
     const newanswer = this.state.votes
       .filter(vote => vote.questionid === questionid)[0]
       .answer.concat(optionid);
@@ -85,6 +87,7 @@ class Vote extends Component {
   };
 
   clearvote = questionid => e => {
+    e.preventDefault();
     const tickets = this.state.votes.filter(
       vote => vote.questionid === questionid
     )[0].answer.length;
@@ -110,20 +113,20 @@ class Vote extends Component {
   };
 
   submitVote = () => e => {
+    e.preventDefault();
     const { name, votes, comments } = this.state;
     const { _id } = this.state.vote;
     console.log({ name, comments, votes });
     axios
       .post("/api/votes/vote", { id: _id, name, comments, votes })
       .then(res => {
-        this.setState({ vote: res.data });
+        this.setState({ vote: res.data, showresult: true });
       })
       .catch(err => console.log(err));
   };
 
   render() {
-    const { vote } = this.state;
-    const { votes } = this.state;
+    const { vote, votes, showresult } = this.state;
     let questions;
     if (vote && vote.questions) {
       questions = vote.questions.map(question => {
@@ -146,6 +149,40 @@ class Vote extends Component {
                   : ""}
               </h5>
               <button
+                type="button"
+                className="btn btn-sm btn-info float-right mb-3"
+                onClick={this.clearvote(question.questionid)}
+              >
+                Tickets: {question ? question.tickets : ""}
+              </button>
+              {options}
+            </div>
+          </div>
+        );
+      });
+    }
+    if (vote && vote.questions && showresult) {
+      questions = vote.questions.map(question => {
+        const options = question.options.map(option => (
+          <button
+            className="btn btn-lg btn-light w-100 m-1 border text-left "
+            key={option.optionid}
+            onClick={this.vote(question.questionid, option.optionid)}
+          >
+            {option.optionname}
+            {this.countvote(votes, question.questionid, option.optionid)}
+          </button>
+        ));
+        return (
+          <div className="card" key={question.questionid}>
+            <div className="card-body">
+              <h5>
+                {question
+                  ? question.questionid + 1 + ". " + question.question
+                  : ""}
+              </h5>
+              <button
+                type="button"
                 className="btn btn-sm btn-info float-right mb-3"
                 onClick={this.clearvote(question.questionid)}
               >
@@ -164,7 +201,7 @@ class Vote extends Component {
           src={spongebob}
           width="160rem"
           className="float-right m-5 d-none d-md-block"
-          alt="not showing"
+          alt="Spongebob"
         />
 
         <p className="display-4">{vote ? vote.name : ""}</p>
@@ -172,45 +209,44 @@ class Vote extends Component {
 
         <p className="lead">{vote ? vote.description : ""}</p>
         <hr />
-        <div className="form-group">
-          <label htmlFor="votername">Your Name</label>
-          <input
-            type="text"
-            className="form-control"
-            id="votername"
-            placeholder="Enter your name"
-            value={this.state.name}
-            onChange={e => this.setState({ name: e.target.value })}
-          />
-        </div>
+
+        {!this.state.showresult && (
+          <form onSubmit={this.submitVote()}>
+            <div className="form-group">
+              <label htmlFor="votername">Your Name</label>
+              <input
+                type="text"
+                className="form-control"
+                id="votername"
+                placeholder="Enter your name"
+                value={this.state.name}
+                onChange={e => this.setState({ name: e.target.value })}
+                required
+              />
+            </div>
+            <hr />
+            {questions}
+            <hr />
+            <div className="form-group">
+              <label htmlFor="comments">Leave some comments below.</label>
+              <textarea
+                className="form-control"
+                id="comments"
+                placeholder="What else do you want to say"
+                rows="3"
+                value={this.state.comments}
+                onChange={e => this.setState({ comments: e.target.value })}
+              />
+            </div>
+            <hr />
+            <button className="btn btn-primary w-100 m-auto" type="submit">
+              Submit to view result
+            </button>
+          </form>
+        )}
+        {this.state.showresult && <p>showresult</p>}
         <hr />
-        {questions}
-        <hr />
-        <div className="form-group">
-          <label htmlFor="comments">Leave some comments below.</label>
-          <textarea
-            className="form-control"
-            id="comments"
-            placeholder="What else do you want to say"
-            rows="3"
-            value={this.state.comments}
-            onChange={e => this.setState({ comments: e.target.value })}
-          />
-        </div>
-        <hr />
-        <button
-          className="btn btn-primary w-100 m-auto"
-          onClick={this.submitVote()}
-        >
-          Submit to view result
-        </button>
-        <hr />
-        <div className="card m-4 mt-5">
-          <div className="card-body">
-            <h4>Create a vote for any purpose?</h4>
-            <button className="btn btn-info ">Create a new vote</button>
-          </div>
-        </div>
+        <Votecreatebutton />
       </div>
     );
   }

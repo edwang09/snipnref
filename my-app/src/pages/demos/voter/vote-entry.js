@@ -1,13 +1,44 @@
 import React, { Component } from "react";
 import spongebob from "./spongebob.jpg";
+import Votecreatebutton from "./vote-create-button";
+import { Link } from "react-router-dom";
+import axios from "axios";
 
 class Voteentry extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      votes: [{}]
+    };
   }
+  componentWillMount() {
+    axios
+      .get("/api/votes/all")
+      .then(res => {
+        this.setState({ votes: res.data });
+      })
+      .catch(err => console.log(err));
+  }
+
   render() {
+    const Votelist = this.state.votes.map((vote, index) => {
+      return (
+        <Link
+          key={index}
+          to={"vote/" + vote._id}
+          className="list-group-item list-group-item-action flex-column align-items-start "
+        >
+          <div className="d-flex justify-content-between">
+            <h5 className="mb-1">{vote.name}</h5>
+            <small>{vote.date}</small>
+          </div>
+          <p className="mb-1">{vote.description}</p>
+          <small>{vote._id}</small>
+        </Link>
+      );
+    });
+
     return (
       <div className="container">
         <img
@@ -21,15 +52,8 @@ class Voteentry extends Component {
           Spongebob Voter
           <span className="lead"> ———— A voter for any purpose.</span>
         </p>
-        <div className="card m-4">
-          <div className="card-body">
-            <h4>Create a vote for any purpose?</h4>
-            <a className="btn btn-info " href="/demos/votecreate">
-              Create a new vote (content under construction)
-            </a>
-          </div>
-        </div>
-        <div className="card m-4">
+        <Votecreatebutton />
+        <div className="card my-4">
           <div className="card-body">
             <h4>Participate in an existing vote created by others?</h4>
             <div className="form-group">
@@ -44,6 +68,8 @@ class Voteentry extends Component {
             <button className="btn btn-info ">Participate</button>
           </div>
         </div>
+
+        <div className="list-group">{Votelist}</div>
       </div>
     );
   }
