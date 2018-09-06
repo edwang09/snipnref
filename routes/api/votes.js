@@ -78,7 +78,7 @@ router.post("/create", (req, res) => {
   });
 });
 
-//@route   GET api/votes/vote
+//@route   POST api/votes/vote
 //@desc    execute a vote
 //@access  public
 router.post("/vote", (req, res) => {
@@ -91,6 +91,7 @@ router.post("/vote", (req, res) => {
   };
   console.log(req.body.votes);
   console.log(newVote);
+  console.log(id);
   Vote.findById(id)
     .then(vote => {
       if (!vote) {
@@ -98,21 +99,22 @@ router.post("/vote", (req, res) => {
         return res.status(400).json(errors);
       } else {
         vote.voters.unshift(newVote);
-        newVote.votes.forEach(function(question) {
-          question.answer.forEach(function(ticket) {
-            vote.question[question.questionid].options[
-              ticket
-            ].optiontickets += 1;
+        newVote.votes.map(question => {
+          question.answer.map(ticket => {
+            vote.questions
+              .filter(q => q.questionid === question.questionid)[0]
+              .options.filter(o => o.optionid === ticket)[0].optiontickets += 1;
           });
         });
         vote.save().then(vote => res.json(vote));
+        res.send("success");
       }
     })
-    .catch(err =>
+    .catch(err => {
       res.status(404).json({
         votenotfound: "No vote found"
-      })
-    );
+      });
+    });
 });
 
 //@route   DELETE api/votes/remove

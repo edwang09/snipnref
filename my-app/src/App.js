@@ -24,6 +24,7 @@ import packages from "./pages/packages";
 import bazi from "./pages/demos/bazi";
 import voteentry from "./pages/demos/voter/vote-entry";
 import vote from "./pages/demos/voter/vote";
+import VoteResult from "./pages/demos/voter/vote-result";
 import votecreate from "./pages/demos/voter/vote-create";
 
 // Check for token
@@ -59,6 +60,11 @@ class App extends Component {
                 <Route path="/demos/bazi" component={bazi} />
                 <Route exact path="/demos/vote" component={voteentry} />
                 <Route exact path="/demos/vote/:id" component={vote} />
+                <Route
+                  exact
+                  path="/demos/vote-result/:id"
+                  component={VoteResult}
+                />
                 <Route exact path="/demos/votecreate" component={votecreate} />
               </div>
             </main>

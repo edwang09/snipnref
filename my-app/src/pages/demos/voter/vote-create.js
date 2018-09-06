@@ -25,6 +25,7 @@ class Votecreate extends Component {
       description: ""
     };
   }
+
   submitVote = () => e => {
     e.preventDefault();
     const { user, isAuthenticated } = this.props.auth;

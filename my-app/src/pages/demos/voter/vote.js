@@ -128,6 +128,7 @@ class Vote extends Component {
   render() {
     const { vote, votes, showresult } = this.state;
     let questions;
+    let results;
     if (vote && vote.questions) {
       questions = vote.questions.map(question => {
         const options = question.options.map(option => (
@@ -161,17 +162,18 @@ class Vote extends Component {
         );
       });
     }
-    if (vote && vote.questions && showresult) {
-      questions = vote.questions.map(question => {
+    if (vote && showresult) {
+      results = vote.questions.map(question => {
         const options = question.options.map(option => (
-          <button
-            className="btn btn-lg btn-light w-100 m-1 border text-left "
+          <div
+            className="bg-light w-100 m-1 border d-flex justify-content-space-around"
             key={option.optionid}
             onClick={this.vote(question.questionid, option.optionid)}
+            disabled
           >
-            {option.optionname}
-            {this.countvote(votes, question.questionid, option.optionid)}
-          </button>
+            <p>{option.optionname}</p>
+            <p>{option.optiontickets}</p>
+          </div>
         ));
         return (
           <div className="card" key={question.questionid}>
@@ -244,7 +246,7 @@ class Vote extends Component {
             </button>
           </form>
         )}
-        {this.state.showresult && <p>showresult</p>}
+        {this.state.showresult && <div>{results}</div>}
         <hr />
         <Votecreatebutton />
       </div>
