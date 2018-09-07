@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import spongebob from "./spongebob.jpg";
 import axios from "axios";
 import Votecreatebutton from "./vote-create-button";
+import { withRouter } from "react-router-dom";
 
 class Vote extends Component {
   constructor(props) {
@@ -27,12 +28,26 @@ class Vote extends Component {
             answer: []
           };
         });
-        this.setState({ votes });
+        this.setState({
+          votes,
+          currentTickets: res.data.questions.map(q => {
+            return {
+              questionid: q.questionid,
+              tickets: q.tickets,
+              options: q.options.map(o => {
+                return {
+                  optionid: o.optionid,
+                  optiontickets: 0
+                };
+              })
+            };
+          })
+        });
       })
       .catch(err => console.log(err));
   }
 
-  countvote(votes, questionid, id) {
+  countvote(votes, questionid, optionid) {
     var i = 0;
     var count = 0;
     if (!votes) {
@@ -44,7 +59,7 @@ class Vote extends Component {
       return null;
     }
     while (i < answer.length) {
-      if (answer[i] === id) count += 1;
+      if (answer[i] === optionid) count += 1;
       i += 1;
     }
     let output = [];
@@ -57,13 +72,30 @@ class Vote extends Component {
 
   vote = (questionid, optionid) => e => {
     e.preventDefault();
-    const newanswer = this.state.votes
-      .filter(vote => vote.questionid === questionid)[0]
-      .answer.concat(optionid);
-    const tickets = this.state.vote.questions.filter(
-      question => question.questionid === questionid
+    const currentTickets = this.state.currentTickets.filter(
+      q => q.questionid === questionid
     )[0].tickets;
-    if (tickets > 0) {
+    console.log(currentTickets);
+    if (currentTickets > 0) {
+      const newCurrentTicket = this.state.currentTickets.map(q => {
+        if (q.questionid === questionid) {
+          return {
+            ...q,
+            options: q.options.map(o => {
+              if (o.optionid === optionid) {
+                console.log(o.optiontickets);
+                return { ...o, optiontickets: o.optiontickets + 1 };
+              }
+              return o;
+            }),
+            tickets: q.tickets - 1
+          };
+        }
+        return q;
+      });
+      const newanswer = this.state.votes
+        .filter(vote => vote.questionid === questionid)[0]
+        .answer.concat(optionid);
       this.setState({
         votes: this.state.votes.map(vote => {
           if (vote.questionid === questionid) {
@@ -72,25 +104,27 @@ class Vote extends Component {
             return vote;
           }
         }),
-        vote: {
-          ...this.state.vote,
-          questions: this.state.vote.questions.map(question => {
-            if (question.questionid === questionid) {
-              return { ...question, tickets: question.tickets - 1 };
-            } else {
-              return question;
-            }
-          })
-        }
+        currentTickets: newCurrentTicket
       });
     }
   };
 
   clearvote = questionid => e => {
     e.preventDefault();
-    const tickets = this.state.votes.filter(
-      vote => vote.questionid === questionid
-    )[0].answer.length;
+    const newCurrentTicket = this.state.currentTickets.map(q => {
+      if (q.questionid === questionid) {
+        return {
+          ...q,
+          options: q.options.map(o => {
+            return { ...o, optiontickets: 0 };
+          }),
+          tickets: this.state.vote.questions.filter(
+            q => q.questionid === questionid
+          )[0].tickets
+        };
+      }
+      return q;
+    });
     this.setState({
       votes: this.state.votes.map(vote => {
         if (vote.questionid === questionid) {
@@ -99,16 +133,7 @@ class Vote extends Component {
           return vote;
         }
       }),
-      vote: {
-        ...this.state.vote,
-        questions: this.state.vote.questions.map(question => {
-          if (question.questionid === questionid) {
-            return { ...question, tickets: tickets };
-          } else {
-            return question;
-          }
-        })
-      }
+      currentTickets: newCurrentTicket
     });
   };
 
@@ -120,76 +145,50 @@ class Vote extends Component {
     axios
       .post("/api/votes/vote", { id: _id, name, comments, votes })
       .then(res => {
-        this.setState({ vote: res.data, showresult: true });
+        this.props.history.push(`/demos/vote-result/${_id}`);
       })
       .catch(err => console.log(err));
   };
 
   render() {
-    const { vote, votes, showresult } = this.state;
+    const { vote, votes, currentTickets } = this.state;
     let questions;
-    let results;
-    if (vote && vote.questions) {
+    if (vote && vote.questions && currentTickets) {
       questions = vote.questions.map(question => {
         const options = question.options.map(option => (
-          <button
-            className="btn btn-lg btn-light w-100 m-1 border text-left "
-            key={option.optionid}
-            onClick={this.vote(question.questionid, option.optionid)}
-          >
-            {option.optionname}
-            {this.countvote(votes, question.questionid, option.optionid)}
-          </button>
-        ));
-        return (
-          <div className="card" key={question.questionid}>
-            <div className="card-body">
-              <h5>
-                {question
-                  ? question.questionid + 1 + ". " + question.question
-                  : ""}
-              </h5>
-              <button
-                type="button"
-                className="btn btn-sm btn-info float-right mb-3"
-                onClick={this.clearvote(question.questionid)}
-              >
-                Tickets: {question ? question.tickets : ""}
-              </button>
-              {options}
+          <div className="card mb-3" key={option.optionid}>
+            <div
+              className="card-header"
+              onClick={this.vote(question.questionid, option.optionid)}
+            >
+              {option.optionname}
+              {this.countvote(votes, question.questionid, option.optionid)}
             </div>
-          </div>
-        );
-      });
-    }
-    if (vote && showresult) {
-      results = vote.questions.map(question => {
-        const options = question.options.map(option => (
-          <div
-            className="bg-light w-100 m-1 border d-flex justify-content-space-around"
-            key={option.optionid}
-            onClick={this.vote(question.questionid, option.optionid)}
-            disabled
-          >
-            <p>{option.optionname}</p>
-            <p>{option.optiontickets}</p>
+            <div className="card-body">{option.optiondescription}</div>
           </div>
         ));
         return (
-          <div className="card" key={question.questionid}>
+          <div className="card mb-5" key={question.questionid}>
             <div className="card-body">
-              <h5>
-                {question
-                  ? question.questionid + 1 + ". " + question.question
-                  : ""}
-              </h5>
-              <button
-                type="button"
-                className="btn btn-sm btn-info float-right mb-3"
-                onClick={this.clearvote(question.questionid)}
-              >
-                Tickets: {question ? question.tickets : ""}
-              </button>
+              <div className="d-flex justify-content-between mb-4">
+                <h5>
+                  {question
+                    ? question.questionid + 1 + ". " + question.question
+                    : ""}
+                </h5>
+                <button
+                  type="button"
+                  className="btn btn-sm btn-info"
+                  onClick={this.clearvote(question.questionid)}
+                >
+                  Tickets:{" "}
+                  {
+                    currentTickets.filter(
+                      q => q.questionid === question.questionid
+                    )[0].tickets
+                  }
+                </button>
+              </div>
               {options}
             </div>
           </div>
@@ -212,45 +211,42 @@ class Vote extends Component {
         <p className="lead">{vote ? vote.description : ""}</p>
         <hr />
 
-        {!this.state.showresult && (
-          <form onSubmit={this.submitVote()}>
-            <div className="form-group">
-              <label htmlFor="votername">Your Name</label>
-              <input
-                type="text"
-                className="form-control"
-                id="votername"
-                placeholder="Enter your name"
-                value={this.state.name}
-                onChange={e => this.setState({ name: e.target.value })}
-                required
-              />
-            </div>
-            <hr />
-            {questions}
-            <hr />
-            <div className="form-group">
-              <label htmlFor="comments">Leave some comments below.</label>
-              <textarea
-                className="form-control"
-                id="comments"
-                placeholder="What else do you want to say"
-                rows="3"
-                value={this.state.comments}
-                onChange={e => this.setState({ comments: e.target.value })}
-              />
-            </div>
-            <hr />
-            <button className="btn btn-primary w-100 m-auto" type="submit">
-              Submit to view result
-            </button>
-          </form>
-        )}
-        {this.state.showresult && <div>{results}</div>}
+        <form onSubmit={this.submitVote()}>
+          <div className="form-group">
+            <label htmlFor="votername">Your Name</label>
+            <input
+              type="text"
+              className="form-control"
+              id="votername"
+              placeholder="Enter your name"
+              value={this.state.name}
+              onChange={e => this.setState({ name: e.target.value })}
+              required
+            />
+          </div>
+          <hr />
+          {questions}
+          <hr />
+          <div className="form-group">
+            <label htmlFor="comments">Leave some comments below.</label>
+            <textarea
+              className="form-control"
+              id="comments"
+              placeholder="What else do you want to say"
+              rows="3"
+              value={this.state.comments}
+              onChange={e => this.setState({ comments: e.target.value })}
+            />
+          </div>
+          <hr />
+          <button className="btn btn-primary w-100 m-auto" type="submit">
+            Submit to view result
+          </button>
+        </form>
         <hr />
         <Votecreatebutton />
       </div>
     );
   }
 }
-export default Vote;
+export default withRouter(Vote);

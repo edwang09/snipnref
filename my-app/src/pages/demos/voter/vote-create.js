@@ -28,7 +28,7 @@ class Votecreate extends Component {
 
   submitVote = () => e => {
     e.preventDefault();
-    const { user, isAuthenticated } = this.props.auth;
+    const { user } = this.props.auth;
     axios
       .post("/api/votes/create", {
         createrId: user.id,
@@ -116,7 +116,7 @@ class Votecreate extends Component {
     const questions = this.state.questions.map(question => {
       const optioins = question.options.map(option => {
         return (
-          <div className="card" key={option.optionid}>
+          <div className="card mb-5" key={option.optionid}>
             <div className="card-header d-flex w-100 justify-content-between">
               <p className="h6">Option {option.optionid + 1}</p>
               <button
@@ -141,9 +141,9 @@ class Votecreate extends Component {
                   onChange={e => {
                     var newquestions = this.state.questions.slice();
                     newquestions
-                      .filter(q => q.questionid == question.questionid)[0]
+                      .filter(q => q.questionid === question.questionid)[0]
                       .options.filter(
-                        o => o.optionid == option.optionid
+                        o => o.optionid === option.optionid
                       )[0].optionname = e.target.value;
                     this.setState({ questions: newquestions });
                   }}
@@ -161,9 +161,9 @@ class Votecreate extends Component {
                   onChange={e => {
                     var newquestions = this.state.questions.slice();
                     newquestions
-                      .filter(q => q.questionid == question.questionid)[0]
+                      .filter(q => q.questionid === question.questionid)[0]
                       .options.filter(
-                        o => o.optionid == option.optionid
+                        o => o.optionid === option.optionid
                       )[0].optiondescription = e.target.value;
                     this.setState({ questions: newquestions });
                   }}
@@ -175,7 +175,7 @@ class Votecreate extends Component {
         );
       });
       return (
-        <div key={question.questionid} className="card">
+        <div key={question.questionid} className="card mb-5">
           <div className="card-header d-flex w-100 justify-content-between">
             <p className="h6">Question {question.questionid + 1}</p>
             <button
@@ -197,7 +197,7 @@ class Votecreate extends Component {
                 onChange={e => {
                   var newquestions = this.state.questions.slice();
                   newquestions.filter(
-                    q => q.questionid == question.questionid
+                    q => q.questionid === question.questionid
                   )[0].question = e.target.value;
                   this.setState({ questions: newquestions });
                 }}
@@ -216,7 +216,7 @@ class Votecreate extends Component {
                 onChange={e => {
                   var newquestions = this.state.questions.slice();
                   newquestions.filter(
-                    q => q.questionid == question.questionid
+                    q => q.questionid === question.questionid
                   )[0].tickets = e.target.value;
                   this.setState({ questions: newquestions });
                 }}
