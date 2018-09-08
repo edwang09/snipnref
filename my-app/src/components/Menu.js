@@ -51,7 +51,7 @@ class Navbar extends Component {
       <nav className="navbar navbar-expand-sm bg-dark navbar-dark">
         <div className="container">
           <Link to="/" className="navbar-brand">
-            Snip and Ref
+            Yoshio Space
           </Link>
           <button
             className="navbar-toggler"

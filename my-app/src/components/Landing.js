@@ -6,7 +6,7 @@ class Landing extends Component {
     return (
       <div className="text-center landing p-md-5">
         <div className="container">
-          <h1 className="display-4">Snippet and Reference</h1>
+          <h1 className="display-4">Yoshio Space</h1>
           <p className="lead">
             Snippet and Reference is a personal website for documentation of
             works of{" "}
