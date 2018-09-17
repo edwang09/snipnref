@@ -17,7 +17,8 @@ import { setCurrentUser, logoutUser } from "./actions/authActions";
 import setAuthToken from "./utils/setAuthToken";
 
 //pages
-import snippets from "./pages/snippets";
+import blogs from "./pages/blogs/blogs";
+import blog from "./pages/blogs/blog";
 import references from "./pages/references";
 import packages from "./pages/packages";
 
@@ -53,7 +54,8 @@ class App extends Component {
             <main>
               <div className="main">
                 <Route exact path="/" component={Landing} />
-                <Route path="/snippets" component={snippets} />
+                <Route path="/blogs" component={blogs} />
+                <Route path="/blog/:id" component={blog} />
                 <Route path="/references" component={references} />
                 <Route path="/packages" component={packages} />
                 <Route path="/about" component={About} />

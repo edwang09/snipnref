@@ -63,25 +63,10 @@ class Navbar extends Component {
 
           <div className="collapse navbar-collapse" id="nav">
             <ul className="navbar-nav mr-auto">
-              <li className="nav-item dropdown">
-                <a
-                  className="nav-link dropdown-toggle"
-                  id="authDropdown"
-                  data-toggle="dropdown"
-                >
-                  <b>Snippets</b>
-                </a>
-                <div className="dropdown-menu" aria-labelledby="authDropdown">
-                  <Link className="dropdown-item" to="/snippets/vba/getstart">
-                    VBA
-                  </Link>
-                  <Link
-                    className="dropdown-item"
-                    to="/snippets/reactjs/getstart"
-                  >
-                    React.js
-                  </Link>
-                </div>
+              <li className="nav-item">
+                <Link className="nav-link" to="/blogs">
+                  Blogs
+                </Link>
               </li>
               <li className="nav-item dropdown">
                 <a
@@ -120,7 +105,7 @@ class Navbar extends Component {
                   id="authDropdown"
                   data-toggle="dropdown"
                 >
-                  <b>Business Demos</b>
+                  <b>Applications</b>
                 </a>
                 <div className="dropdown-menu" aria-labelledby="authDropdown">
                   <Link className="dropdown-item" to="/demos/bazi">
