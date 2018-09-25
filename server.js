@@ -31,7 +31,8 @@ app.use(function(req, res, next) {
   // Website you wish to allow to connect
   var allowedOrigins = [
     "http://localhost:4200",
-    "https://clientpanelprod-e52bd.firebaseapp.com"
+    "https://clientpanelprod-e52bd.firebaseapp.com"，
+    "https://www.amethystfs891.com"
   ];
   var origin = req.headers.origin;
   if (allowedOrigins.indexOf(origin) > -1) {

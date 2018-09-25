@@ -42,7 +42,7 @@ router.post("/calendar", (req, res) => {
   }
 });
 
-//万年历api
+//生辰八字api
 router.post("/birth", (req, res) => {
   //http://www.zhycw.com/pp/bz.aspx
   const URL = "http://www.zhycw.com/pp/bz.aspx";
