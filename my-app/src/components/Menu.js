@@ -17,9 +17,9 @@ class Navbar extends Component {
     const { auth } = this.props;
     const guestLink = (
       <ul className="navbar-nav">
-        <li className="nav-item">
-          <Login />
-        </li>
+        <Link className="nav-link" to="/login">
+          Login
+        </Link>
         <li className="nav-item">
           <Register />
         </li>
@@ -39,7 +39,9 @@ class Navbar extends Component {
             <b>{auth.user.name}</b>
           </a>
           <div className="dropdown-menu" aria-labelledby="authDropdown">
-            <a className="dropdown-item">Actions</a>
+            <Link className="dropdown-item" to="/dashboard">
+              Dashboard
+            </Link>
             <a className="dropdown-item" onClick={this.props.logoutUser}>
               Log out
             </a>

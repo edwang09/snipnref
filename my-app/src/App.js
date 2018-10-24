@@ -2,11 +2,12 @@ import React, { Component } from "react";
 import { BrowserRouter, Route } from "react-router-dom";
 import { Provider } from "react-redux";
 import jwt_decode from "jwt-decode";
-import "./css/main.css";
-import "./App.css";
+import "./main.css";
+//import "./App.css";
 
 //components
 import Navbar from "./components/Menu";
+import ModalContainer from "./components/modal/ModalContainer";
 import Footer from "./components/Footer";
 import Landing from "./components/Landing";
 import About from "./components/About";
@@ -21,6 +22,8 @@ import blogs from "./pages/blogs/blogs";
 import blog from "./pages/blogs/blog";
 import references from "./pages/references";
 import packages from "./pages/packages";
+import Dashboard from "./pages/dashboard/dashboard";
+import Login from "./pages/authentication/Login";
 
 import bazi from "./pages/demos/bazi";
 import voteentry from "./pages/demos/voter/vote-entry";
@@ -55,10 +58,12 @@ class App extends Component {
               <div className="main">
                 <Route exact path="/" component={Landing} />
                 <Route path="/blogs" component={blogs} />
+                <Route path="/login" component={Login} />
                 <Route path="/blog/:id" component={blog} />
                 <Route path="/references" component={references} />
                 <Route path="/packages" component={packages} />
                 <Route path="/about" component={About} />
+                <Route path="/dashboard" component={Dashboard} />
                 <Route path="/demos/bazi" component={bazi} />
                 <Route exact path="/demos/vote" component={voteentry} />
                 <Route exact path="/demos/vote/:id" component={vote} />
@@ -70,6 +75,7 @@ class App extends Component {
                 <Route exact path="/demos/votecreate" component={votecreate} />
               </div>
             </main>
+            <ModalContainer />
             <Footer />
           </div>
         </BrowserRouter>

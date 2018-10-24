@@ -118,7 +118,11 @@ input:invalid ~ small {
 `}</Highlight>
         <p>
           Detail example can be found{" "}
-          <a href="https://codesandbox.io/s/xryj938k5o" target="_blank">
+          <a
+            href="https://codesandbox.io/s/xryj938k5o"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             here
           </a>
         </p>

@@ -1,7 +1,267 @@
 
 @import "../node_modules/bootstrap/scss/bootstrap";
-@import "customVariable";
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+@keyframes animatetop {
+  from {top: -30px; opacity: 0}
+  to {top: 0; opacity: 1}
+} 
 body {
     color: #000;
     border:2px;
+    .mymodal{
+      .overlay {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        z-index: 1000;
+        background-color: rgba(0, 0, 0, .65);
+      }
+      .content {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 10000;
+        overflow: auto;
+        text-align: center;
+        padding: 4px;
+        cursor: pointer;
+        
+        &:after {
+          vertical-align: middle;
+          display: inline-block;
+          height: 100%;
+          margin-left: -.05em;
+          content: '';
+        }
+        .dialog {
+          position: relative;
+          background-color: #fefefe;
+          outline: 0;
+          width: 80%;
+          max-width: 800px;
+          border: 1px solid #888;
+          display: inline-block;
+          vertical-align: middle;
+          box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+          max-width: auto;
+          cursor: default;
+          border-radius: 4px;
+          animation-name: animatetop;
+          animation-duration: 0.4s;
+          .modal-header {
+            padding: 10px 16px;
+            position: relative;
+          }
+          .modal-body {
+            text-align: left;
+            padding: 10px 16px;
+            padding-bottom:3rem;
+          }
+        }
+      }
+    }
+
+
+
+
+
+    .dashboard {
+        border: 1px solid #ededed;
+        box-shadow:0 0 2px 2px #999;
+        padding:2rem 2rem;
+        color: #222;
+        .action{
+            color: blue;
+            font-size: 16px;
+            margin-left:1rem;
+            &:hover{
+              color: cadetblue;
+              cursor: pointer;
+            }
+        }
+        
+        span.status{
+          border: 1.5px solid orange;
+          border-radius: .5rem;
+          padding:0.1rem .5rem;
+          font-size:75%;
+          margin-left: 1rem;
+          &:hover{
+            color: cadetblue;
+            cursor: pointer;
+          }
+          &.todo {
+            border-color: red;
+          }
+          &.working {
+            border-color: orange;
+          }
+          &.done {
+            border-color: green;
+          }
+          &.skip {
+            border-color: blue;
+          }
+        }
+        .routines, .usefulsites, .projects{
+          border: 1px solid #ededed;
+          box-shadow:2px 2px 2px 2px #999;
+          border-radius: 1rem;
+          margin: 2rem 0;
+          padding:1rem 1rem;
+          h4{
+            color: #222;
+          }
+        }
+        .routines .routinelist {
+          border: 1px solid #ededed;
+          border-radius: 1rem;
+          background: #ededed;
+          width: 30%;
+          padding:1rem 1rem;
+          h5{
+            color: red;
+            display: inline;
+            margin-right:1rem;
+          }
+          .itemlist{
+            margin-top:1rem;
+            .item{
+              margin-bottom: 1rem;
+              p{
+                font-weight: 500;
+              }
+              p, small{
+                margin: 0;
+              }
+            }
+          }
+        }
+        .usefulsites{
+          .sitestab{
+            nav{
+              a{
+                font-weight:500;
+              }
+            }
+            .tab-content{
+              border-left: 1px solid #ddd;
+              border-right: 1px solid #ddd;
+              border-bottom: 1px solid #ddd;
+              padding:1rem;
+              .site{
+                a{
+                  display: block;
+                }
+                margin-bottom:1rem;
+
+              }
+            }
+
+          }
+        }
+        .projects{
+          .project{
+            border: 1px solid #ccc;
+            border-radius: 1rem;
+            margin: 1rem 1rem;
+            padding: 1rem 1rem;
+            .urls{
+              .site{
+                a{
+                  display: block;
+                }
+                margin-bottom:1rem;
+              }
+            }
+            .form-group{
+              display:block;
+              margin:auto 0
+            }
+            h5{
+              margin-bottom: 0
+            }
+          }
+        }
+    }
+}
+
+.main {
+  min-height: 85vh;
+}
+.taichi-icon{
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.taichi-icon:hover{
+  transform: scale(1.1);
+}
+.taichi-icon:active{
+  transform: scale(1.0);
+  transform: rotate(20deg);
+}
+.pillar-result{
+  font-family: STKaiti, "华文楷体","KaiTi", "楷体",Georgia, "Times New Roman",   serif;
+  font-size: 3rem;
+}
+.curser-pointer{
+  cursor: pointer;
+}
+.App {
+  margin:0;
+  padding:0;
+}
+.landing {
+  position: relative;
+  background: url('./img/showcase.jpg') no-repeat;
+  background-size: cover;
+  background-position: center;
+  min-height:85vh;
+}
+.side-nav {
+  position: relative;
+  float: left;
+  width: 160px;
+  z-index: 0.5;
+  overflow-x: hidden;
+  padding-top: 80px;
+}
+.snippet-content{
+  margin-left:160px; /* Same as the width of the sidenav */
+  padding: 0px 10px;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }

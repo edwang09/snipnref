@@ -8,7 +8,7 @@
     "server": "nodemon server",
     "client-install": "npm install --prefix my-app",
     "client": "npm run start --prefix my-app",
-    "css": "npm run css --prefix my-app",
+    "css": "",
     "dev": "concurrently \"npm run css\" \"npm run server\" \"npm run client \"",
     "git": "git add . && git commit -m \"update\" && git push origin master",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix my-app && npm run build --prefix my-app"
@@ -25,7 +25,6 @@
     "fs": "0.0.1-security",
     "jsonwebtoken": "^8.2.1",
     "mongoose": "^5.1.2",
-    "node-sass": "^4.9.2",
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
     "request": "^2.87.0",

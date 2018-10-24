@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /*!
  * Bootstrap v4.1.3 (https://getbootstrap.com/)
  * Copyright 2011-2018 The Bootstrap Authors
@@ -6312,6 +6313,215 @@ a.text-dark:hover, a.text-dark:focus {
     color: inherit;
     border-color: #dee2e6; } }
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; }
+
+@keyframes animatetop {
+  from {
+    top: -30px;
+    opacity: 0; }
+  to {
+    top: 0;
+    opacity: 1; } }
+
 body {
   color: #000;
   border: 2px; }
+  body .mymodal .overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 1000;
+    background-color: rgba(0, 0, 0, 0.65); }
+  body .mymodal .content {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 10000;
+    overflow: auto;
+    text-align: center;
+    padding: 4px;
+    cursor: pointer; }
+    body .mymodal .content:after {
+      vertical-align: middle;
+      display: inline-block;
+      height: 100%;
+      margin-left: -.05em;
+      content: ''; }
+    body .mymodal .content .dialog {
+      position: relative;
+      background-color: #fefefe;
+      outline: 0;
+      width: 80%;
+      max-width: 800px;
+      border: 1px solid #888;
+      display: inline-block;
+      vertical-align: middle;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      max-width: auto;
+      cursor: default;
+      border-radius: 4px;
+      animation-name: animatetop;
+      animation-duration: 0.4s; }
+      body .mymodal .content .dialog .modal-header {
+        padding: 10px 16px;
+        position: relative; }
+      body .mymodal .content .dialog .modal-body {
+        text-align: left;
+        padding: 10px 16px;
+        padding-bottom: 3rem; }
+  body .dashboard {
+    border: 1px solid #ededed;
+    box-shadow: 0 0 2px 2px #999;
+    padding: 2rem 2rem;
+    color: #222; }
+    body .dashboard .action {
+      color: blue;
+      font-size: 16px;
+      margin-left: 1rem; }
+      body .dashboard .action:hover {
+        color: cadetblue;
+        cursor: pointer; }
+    body .dashboard span.status {
+      border: 1.5px solid orange;
+      border-radius: .5rem;
+      padding: 0.1rem .5rem;
+      font-size: 75%;
+      margin-left: 1rem; }
+      body .dashboard span.status:hover {
+        color: cadetblue;
+        cursor: pointer; }
+      body .dashboard span.status.todo {
+        border-color: red; }
+      body .dashboard span.status.working {
+        border-color: orange; }
+      body .dashboard span.status.done {
+        border-color: green; }
+      body .dashboard span.status.skip {
+        border-color: blue; }
+    body .dashboard .routines, body .dashboard .usefulsites, body .dashboard .projects {
+      border: 1px solid #ededed;
+      box-shadow: 2px 2px 2px 2px #999;
+      border-radius: 1rem;
+      margin: 2rem 0;
+      padding: 1rem 1rem; }
+      body .dashboard .routines h4, body .dashboard .usefulsites h4, body .dashboard .projects h4 {
+        color: #222; }
+    body .dashboard .routines .routinelist {
+      border: 1px solid #ededed;
+      border-radius: 1rem;
+      background: #ededed;
+      width: 30%;
+      padding: 1rem 1rem; }
+      body .dashboard .routines .routinelist h5 {
+        color: red;
+        display: inline;
+        margin-right: 1rem; }
+      body .dashboard .routines .routinelist .itemlist {
+        margin-top: 1rem; }
+        body .dashboard .routines .routinelist .itemlist .item {
+          margin-bottom: 1rem; }
+          body .dashboard .routines .routinelist .itemlist .item p {
+            font-weight: 500; }
+          body .dashboard .routines .routinelist .itemlist .item p, body .dashboard .routines .routinelist .itemlist .item small {
+            margin: 0; }
+    body .dashboard .usefulsites .sitestab nav a {
+      font-weight: 500; }
+    body .dashboard .usefulsites .sitestab .tab-content {
+      border-left: 1px solid #ddd;
+      border-right: 1px solid #ddd;
+      border-bottom: 1px solid #ddd;
+      padding: 1rem; }
+      body .dashboard .usefulsites .sitestab .tab-content .site {
+        margin-bottom: 1rem; }
+        body .dashboard .usefulsites .sitestab .tab-content .site a {
+          display: block; }
+    body .dashboard .projects .project {
+      border: 1px solid #ccc;
+      border-radius: 1rem;
+      margin: 1rem 1rem;
+      padding: 1rem 1rem; }
+      body .dashboard .projects .project .urls .site {
+        margin-bottom: 1rem; }
+        body .dashboard .projects .project .urls .site a {
+          display: block; }
+      body .dashboard .projects .project .form-group {
+        display: block;
+        margin: auto 0; }
+      body .dashboard .projects .project h5 {
+        margin-bottom: 0; }
+
+.main {
+  min-height: 85vh; }
+
+.taichi-icon {
+  cursor: pointer;
+  transition: all 0.2s; }
+
+.taichi-icon:hover {
+  transform: scale(1.1); }
+
+.taichi-icon:active {
+  transform: scale(1);
+  transform: rotate(20deg); }
+
+.pillar-result {
+  font-family: STKaiti, "华文楷体","KaiTi", "楷体",Georgia, "Times New Roman",   serif;
+  font-size: 3rem; }
+
+.curser-pointer {
+  cursor: pointer; }
+
+.App {
+  margin: 0;
+  padding: 0; }
+
+.landing {
+  position: relative;
+  background: url("./img/showcase.jpg") no-repeat;
+  background-size: cover;
+  background-position: center;
+  min-height: 85vh; }
+
+.side-nav {
+  position: relative;
+  float: left;
+  width: 160px;
+  z-index: 0.5;
+  overflow-x: hidden;
+  padding-top: 80px; }
+
+.snippet-content {
+  margin-left: 160px;
+  /* Same as the width of the sidenav */
+  padding: 0px 10px; }
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px; }
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white; }
+
+.App-title {
+  font-size: 1.5em; }
+
+.App-intro {
+  font-size: large; }
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg); }
+  to {
+    transform: rotate(360deg); } }

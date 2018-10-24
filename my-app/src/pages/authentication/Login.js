@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { loginUser } from "../../actions/authActions";
-import { Popover } from "antd";
 import classnames from "classnames";
+import { withRouter } from "react-router-dom";
 
 class Login extends Component {
   constructor(props) {
@@ -21,11 +21,15 @@ class Login extends Component {
     e.preventDefault();
     this.props.loginUser(this.state);
   };
-
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.auth.isAuthenticated) {
+      this.props.history.push("/");
+    }
+  }
   render() {
     const { errors } = this.props;
-    const content = (
-      <div>
+    return (
+      <div className="container">
         <form onSubmit={this.onSubmit()}>
           <div className="form-group">
             <label htmlFor="exampleInputEmail1">Email address</label>
@@ -65,16 +69,6 @@ class Login extends Component {
         </form>
       </div>
     );
-    return (
-      <Popover
-        overlayStyle={{ width: "20rem" }}
-        content={content}
-        title="Login"
-        trigger="click"
-      >
-        <a className="nav-link">Login</a>
-      </Popover>
-    );
   }
 }
 
@@ -92,4 +86,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { loginUser }
-)(Login);
+)(withRouter(Login));
