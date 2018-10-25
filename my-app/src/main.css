@@ -6407,13 +6407,13 @@ body {
         border-color: green; }
       body .dashboard span.status.skip {
         border-color: blue; }
-    body .dashboard .routines, body .dashboard .usefulsites, body .dashboard .projects {
+    body .dashboard .routines, body .dashboard .usefulsites, body .dashboard .projects, body .dashboard .memos {
       border: 1px solid #ededed;
       box-shadow: 2px 2px 2px 2px #999;
       border-radius: 1rem;
       margin: 2rem 0;
       padding: 1rem 1rem; }
-      body .dashboard .routines h4, body .dashboard .usefulsites h4, body .dashboard .projects h4 {
+      body .dashboard .routines h4, body .dashboard .usefulsites h4, body .dashboard .projects h4, body .dashboard .memos h4 {
         color: #222; }
     body .dashboard .routines .routinelist {
       border: 1px solid #ededed;

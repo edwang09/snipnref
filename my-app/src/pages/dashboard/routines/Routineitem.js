@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { loadModal } from "../../../actions/modalActions";
 
-class Taskitem extends Component {
+class Routineitem extends Component {
   toggleStatus = () => e => {
     const { listkey, itemkey, item, updateRoutineStatus } = this.props;
     switch (item.status) {
@@ -40,7 +40,7 @@ class Taskitem extends Component {
           <span className="action">
             <small
               onClick={() =>
-                this.props.loadModal("CONFIRM_MODAL", {
+                loadModal("CONFIRM_MODAL", {
                   listkey,
                   itemkey
                 })
@@ -55,4 +55,4 @@ class Taskitem extends Component {
     );
   }
 }
-export default Taskitem;
+export default Routineitem;

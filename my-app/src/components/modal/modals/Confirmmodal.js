@@ -2,7 +2,10 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import Modal from "../Modal";
 import { hideModal } from "../../../actions/modalActions";
-import { removeRoutineItem } from "../../../actions/dashboardActions";
+import {
+  removeRoutineItem,
+  removeUsefulsiteItem
+} from "../../../actions/dashboardActions";
 
 export class Confirmmodal extends Component {
   constructor(props) {
@@ -13,8 +16,12 @@ export class Confirmmodal extends Component {
     this.props.hideModal();
   };
   Delete = () => e => {
-    const { listkey, itemkey } = this.props.modal.options;
-    this.props.removeRoutineItem(itemkey, listkey);
+    const { listkey, itemkey, tabkey, urlkey } = this.props.modal.options;
+    if (listkey !== undefined && itemkey !== undefined) {
+      this.props.removeRoutineItem(itemkey, listkey);
+    } else if (tabkey !== undefined && urlkey !== undefined) {
+      this.props.removeUsefulsiteItem(urlkey, tabkey);
+    }
     this.props.hideModal();
   };
 
@@ -45,5 +52,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { hideModal, removeRoutineItem }
+  { hideModal, removeRoutineItem, removeUsefulsiteItem }
 )(Confirmmodal);

@@ -98,7 +98,8 @@ router.get(
     const dashboard = {
       routines: user.routines,
       usefulsites: user.usefulsites,
-      projects: user.projects
+      projects: user.projects,
+      memos: user.memos
     };
     res.json(dashboard);
   }
@@ -250,6 +251,115 @@ router.post(
 //@desc    Return user dashboard
 //@access  Private
 router.post(
+  "/usefulsites/removeitem",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    const { urlkey, tabkey } = req.body;
+    const { _id } = req.user;
+    User.findById(_id, (err, user) => {
+      try {
+        const newusefulsites = user.usefulsites.map((tab, id) => {
+          if (id === tabkey) {
+            const newcontent = tab.content.filter((item, id) => id !== urlkey);
+            //console.log(newcontent);
+            return { ...tab, content: newcontent };
+          }
+          return tab;
+        });
+        user.usefulsites = newusefulsites;
+        user.save();
+        res.json(newusefulsites);
+      } catch (error) {
+        res.json(error);
+      }
+    });
+  }
+);
+//@route   GET api/users/dashboard
+//@desc    Return user dashboard
+//@access  Private
+router.post(
+  "/usefulsites/addsite",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    const { site, tabkey } = req.body;
+    const { _id } = req.user;
+    User.findById(_id, (err, user) => {
+      try {
+        const newusefulsites = user.usefulsites.map((tab, id) => {
+          if (id === tabkey) {
+            const newcontent = tab.content.concat(site);
+            //console.log(newcontent);
+            return { ...tab, content: newcontent };
+          }
+          return tab;
+        });
+        user.usefulsites = newusefulsites;
+        user.save();
+        res.json(newusefulsites);
+      } catch (error) {
+        res.json(error);
+      }
+    });
+  }
+);
+//@route   GET api/users/dashboard
+//@desc    Return user dashboard
+//@access  Private
+router.post(
+  "/usefulsites/edittab",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    const { category, tabkey } = req.body;
+    const { _id } = req.user;
+    User.findById(_id, (err, user) => {
+      try {
+        const newusefulsites = user.usefulsites.map((tab, id) => {
+          if (id === tabkey) {
+            //console.log(newcontent);
+            return {
+              ...tab,
+              name: category.name,
+              description: category.description
+            };
+          }
+          return tab;
+        });
+        user.usefulsites = newusefulsites;
+        user.save();
+        res.json(newusefulsites);
+      } catch (error) {
+        res.json(error);
+      }
+    });
+  }
+);
+
+//@route   GET api/users/dashboard
+//@desc    Return user dashboard
+//@access  Private
+router.post(
+  "/memos/update",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    const { memos } = req.body;
+    const { _id } = req.user;
+    User.findById(_id, (err, user) => {
+      try {
+        user.memos = memos;
+        user.save();
+        res.json(memos);
+      } catch (error) {
+        res.json(error);
+      }
+    });
+  }
+);
+
+//@route   GET api/users/dashboard
+//@desc    Return user dashboard
+//@access  Private
+router.post(
   "/projects/updatestatus",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
@@ -262,6 +372,92 @@ router.post(
             return { ...project, status };
           }
           return project;
+        });
+        user.projects = newprojects;
+        user.save();
+        res.json(newprojects);
+      } catch (error) {
+        res.json(error);
+      }
+    });
+  }
+);
+
+//@route   GET api/users/dashboard
+//@desc    Return user dashboard
+//@access  Private
+router.post(
+  "/projects/add",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    const { project } = req.body;
+    const { _id } = req.user;
+    User.findById(_id, (err, user) => {
+      try {
+        const newprojects = user.projects;
+        newprojects.unshift(project);
+        user.projects = newprojects;
+        user.save();
+        res.json(newprojects);
+      } catch (error) {
+        res.json(error);
+      }
+    });
+  }
+);
+
+//@route   GET api/users/dashboard
+//@desc    Return user dashboard
+//@access  Private
+router.post(
+  "/projects/update",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    const { project, projectkey } = req.body;
+    const { _id } = req.user;
+    User.findById(_id, (err, user) => {
+      try {
+        const newprojects = user.projects.map((proj, id) => {
+          if (id === projectkey) {
+            return {
+              ...proj,
+              name: project.name,
+              description: project.description,
+              urls: project.urls
+            };
+          } else {
+            return proj;
+          }
+        });
+        user.projects = newprojects;
+        user.save();
+        res.json(newprojects);
+      } catch (error) {
+        res.json(error);
+      }
+    });
+  }
+);
+//@route   GET api/users/dashboard
+//@desc    Return user dashboard
+//@access  Private
+router.post(
+  "/projects/updatenote",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    const { projectnote, projectkey } = req.body;
+    const { _id } = req.user;
+    User.findById(_id, (err, user) => {
+      try {
+        const newprojects = user.projects.map((proj, id) => {
+          if (id === projectkey) {
+            return {
+              ...proj,
+              note: projectnote
+            };
+          } else {
+            return proj;
+          }
         });
         user.projects = newprojects;
         user.save();

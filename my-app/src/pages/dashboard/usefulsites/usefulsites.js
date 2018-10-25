@@ -26,19 +26,33 @@ class Usefulsites extends Component {
           </a>
         );
       });
-      sitelistRender = sitelist.map((cat, id) => {
+      sitelistRender = sitelist.map((cat, tabid) => {
         let className;
-        if (id === 0) {
+        if (tabid === 0) {
           className = "tab-pane fade show active";
         } else {
           className = "tab-pane fade";
         }
-        const sites = cat.content.map(site => {
+        const sites = cat.content.map((site, urlid) => {
           return (
             <div className="site">
-              <a href={site.url} target="_blank">
-                <strong>{site.name}</strong>
-              </a>
+              <div>
+                <a href={site.url} target="_blank" className="d-inline">
+                  <strong>{site.name}</strong>
+                </a>
+                <span className="action">
+                  <small
+                    onClick={() =>
+                      this.props.loadModal("CONFIRM_MODAL", {
+                        tabkey: tabid,
+                        urlkey: urlid
+                      })
+                    }
+                  >
+                    <i class="far fa-trash-alt" />
+                  </small>
+                </span>
+              </div>
               <small>{site.description}</small>
             </div>
           );
@@ -50,7 +64,31 @@ class Usefulsites extends Component {
             role="tabpanel"
             aria-labelledby="nav-categoryone-tab"
           >
-            <p>{cat.description}</p>
+            <p>
+              {cat.description}
+              <span className="action">
+                <small
+                  onClick={() =>
+                    this.props.loadModal("EDITUSEFULSITETAB_MODAL", {
+                      tabkey: tabid
+                    })
+                  }
+                >
+                  <i class="far fa-edit" />
+                </small>
+              </span>
+              <span className="action">
+                <small
+                  onClick={() =>
+                    this.props.loadModal("ADDUSEFULSITEITEM_MODAL", {
+                      tabkey: tabid
+                    })
+                  }
+                >
+                  <i class="fas fa-plus" />
+                </small>
+              </span>
+            </p>
             {sites}
           </div>
         );

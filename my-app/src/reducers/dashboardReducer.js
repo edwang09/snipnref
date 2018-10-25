@@ -4,12 +4,14 @@ import {
   SET_USER_DASHBOARD,
   SET_USER_ROUTINES,
   SET_USER_PROJECTS,
-  SET_USER_USEFULSITES
+  SET_USER_USEFULSITES,
+  SET_USER_MEMOS
 } from "../actions/types";
 
 const initialState = {
   projects: {},
   routines: {},
+  memos: {},
   usefulsites: {}
 };
 
@@ -20,7 +22,8 @@ export default function(state = initialState, action) {
         ...state,
         projects: action.payload.projects,
         routines: action.payload.routines,
-        usefulsites: action.payload.usefulsites
+        usefulsites: action.payload.usefulsites,
+        memos: action.payload.memos
       };
     case SET_USER_ROUTINES:
       return {
@@ -36,6 +39,11 @@ export default function(state = initialState, action) {
       return {
         ...state,
         usefulsites: action.payload
+      };
+    case SET_USER_MEMOS:
+      return {
+        ...state,
+        memos: action.payload.memos
       };
     default:
       return state;

@@ -87,6 +87,20 @@ const UserSchema = new Schema({
       }
     }
   },
+  memos: {
+    type: "object",
+    properties: {
+      memo: {
+        type: "string"
+      },
+      idea: {
+        type: "string"
+      },
+      curiosity: {
+        type: "string"
+      }
+    }
+  },
   projects: {
     type: "array",
     items: {

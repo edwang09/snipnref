@@ -1,10 +1,9 @@
 import React, { Component } from "react";
-import Taskitem from "./taskitem";
-class Tasklist extends Component {
+import Routineitem from "./Routineitem";
+class Routinelist extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      adding: false,
       item: {
         name: "",
         note: ""
@@ -18,7 +17,7 @@ class Tasklist extends Component {
       itemlistRender = itemlist.map((item, id) => {
         if (id === 0) {
           return (
-            <Taskitem
+            <Routineitem
               item={item}
               itemkey={id}
               updateRoutineStatus={this.props.updateRoutineStatus}
@@ -30,7 +29,7 @@ class Tasklist extends Component {
         return (
           <div>
             <hr />
-            <Taskitem
+            <Routineitem
               item={item}
               itemkey={id}
               updateRoutineStatus={this.props.updateRoutineStatus}
@@ -41,35 +40,6 @@ class Tasklist extends Component {
         );
       });
     }
-    const addingRender = (
-      <form>
-        <div className="form-group">
-          <input
-            type="text"
-            className="form-control form-control-sm"
-            id="itemname"
-            placeholder="Item name"
-            value={this.state.item.name}
-            onChange={e =>
-              this.setState({
-                item: { ...this.state.item, name: e.target.value }
-              })
-            }
-          />
-          <textarea
-            id="note"
-            placeholder="notes"
-            className="form-control form-control-sm"
-            value={this.state.item.note}
-            onChange={e =>
-              this.setState({
-                item: { ...this.state.item, note: e.target.value }
-              })
-            }
-          />
-        </div>
-      </form>
-    );
     return (
       <div className="routinelist">
         <h5>{title}</h5>
@@ -80,9 +50,8 @@ class Tasklist extends Component {
           <i class="fas fa-plus" />
         </span>
         <div className="itemlist">{itemlistRender}</div>
-        {this.state.adding && addingRender}
       </div>
     );
   }
 }
-export default Tasklist;
+export default Routinelist;

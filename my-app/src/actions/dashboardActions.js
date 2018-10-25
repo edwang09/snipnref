@@ -5,7 +5,8 @@ import {
   SET_USER_DASHBOARD,
   SET_USER_ROUTINES,
   SET_USER_PROJECTS,
-  SET_USER_USEFULSITES
+  SET_USER_USEFULSITES,
+  SET_USER_MEMOS
 } from "./types";
 
 // Login - Get User Token
@@ -94,6 +95,74 @@ export const addUsefulsitetab = category => dispatch => {
       })
     );
 };
+
+export const removeUsefulsiteItem = (urlkey, tabkey) => dispatch => {
+  console.log("action", urlkey, tabkey);
+  axios
+    .post("/api/users/usefulsites/removeitem", { urlkey, tabkey })
+    .then(res => {
+      console.log(res);
+      const usefulsites = res.data;
+      dispatch(setUserUsefulsites(usefulsites));
+    })
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};
+
+export const addUsefulSite = (site, tabkey) => dispatch => {
+  console.log("action", site, tabkey);
+  axios
+    .post("/api/users/usefulsites/addsite", { site, tabkey })
+    .then(res => {
+      console.log(res);
+      const usefulsites = res.data;
+      dispatch(setUserUsefulsites(usefulsites));
+    })
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};
+
+export const editUsefulsitetab = (category, tabkey) => dispatch => {
+  console.log("action", category, tabkey);
+  axios
+    .post("/api/users/usefulsites/edittab", { category, tabkey })
+    .then(res => {
+      console.log(res);
+      const usefulsites = res.data;
+      dispatch(setUserUsefulsites(usefulsites));
+    })
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};
+
+export const updateMemos = memos => dispatch => {
+  console.log("action", memos);
+  axios
+    .post("/api/users/memos/update", { memos })
+    .then(res => {
+      console.log(res);
+      const memos = res.data;
+      dispatch(setUserMemos(memos));
+    })
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};
 export const updateProjectStatus = (projectkey, status) => dispatch => {
   console.log("action", projectkey, status);
   axios
@@ -111,6 +180,55 @@ export const updateProjectStatus = (projectkey, status) => dispatch => {
     );
 };
 
+export const addProject = project => dispatch => {
+  console.log("action", project);
+  axios
+    .post("/api/users/projects/add", { project })
+    .then(res => {
+      console.log(res);
+      const projects = res.data;
+      dispatch(setUserProjects(projects));
+    })
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};
+export const editProject = (project, projectkey) => dispatch => {
+  console.log("action", project, projectkey);
+  axios
+    .post("/api/users/projects/update", { project, projectkey })
+    .then(res => {
+      console.log(res);
+      const projects = res.data;
+      dispatch(setUserProjects(projects));
+    })
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};
+
+export const updateProjectNote = (projectnote, projectkey) => dispatch => {
+  console.log("action", projectnote, projectkey);
+  axios
+    .post("/api/users/projects/updatenote", { projectnote, projectkey })
+    .then(res => {
+      console.log(res);
+      const projects = res.data;
+      dispatch(setUserProjects(projects));
+    })
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};
 // Set user dashboard
 export const setUserDashboard = dashboard => {
   return {
@@ -130,6 +248,13 @@ export const setUserUsefulsites = usefulsites => {
   return {
     type: SET_USER_USEFULSITES,
     payload: usefulsites
+  };
+};
+// Set user routines
+export const setUserMemos = memos => {
+  return {
+    type: SET_USER_MEMOS,
+    payload: memos
   };
 };
 // Set user projects
