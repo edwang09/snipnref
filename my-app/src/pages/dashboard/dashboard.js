@@ -13,7 +13,7 @@ import {
 import { loadModal } from "../../actions/modalActions";
 
 import Routinelist from "./routines/Routinelist";
-import Usefulsites from "./usefulsites/Usefulsites";
+import Usefulsites from "./usefulsites/usefulsites";
 import Projects from "./projects/Projects";
 import Memos from "./memos/Memos";
 
