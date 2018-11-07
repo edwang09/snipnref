@@ -37,6 +37,10 @@ app.use(function(req, res, next) {
   var origin = req.headers.origin;
   if (allowedOrigins.indexOf(origin) > -1) {
     res.setHeader("Access-Control-Allow-Origin", origin);
+    console.log("allowed")
+  }else{
+    res.setHeader("Access-Control-Allow-Origin", origin);
+    console.log("not allowed")
   }
   // Request methods you wish to allow
   res.setHeader("Access-Control-Allow-Methods", "GET, POST");
