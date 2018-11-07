@@ -30,7 +30,7 @@ router.post("/calendar", (req, res) => {
         },
         function(error, response, body) {
           console.log(body);
-          fs.writeFile(filename, JSON.stringify(JSON.parse(body).result));
+          fs.writeFileSync(filename, JSON.stringify(JSON.parse(body).result));
           res.send(JSON.parse(body).result);
         }
       );
