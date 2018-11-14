@@ -25,7 +25,7 @@ class Memos extends Component {
         <h4>
           Memos
           <span className="action" onClick={this.savememos()}>
-            <i class="far fa-save" />
+            <i className="far fa-save" />
           </span>
         </h4>
         <div className="row">

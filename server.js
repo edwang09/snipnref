@@ -35,10 +35,10 @@ app.use(function(req, res, next) {
     "https://www.amethystfs891.com"
   ];
   var origin = req.headers.origin;
-  if (allowedOrigins.indexOf(origin) > -1) {
+  if (origin && allowedOrigins.indexOf(origin) > -1) {
     res.setHeader("Access-Control-Allow-Origin", origin);
     console.log("allowed")
-  }else{
+  }else if ( origin ){
     res.setHeader("Access-Control-Allow-Origin", origin);
     console.log("not allowed")
   }
