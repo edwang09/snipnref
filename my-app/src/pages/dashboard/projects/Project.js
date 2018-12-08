@@ -34,6 +34,12 @@ export default class Project extends Component {
     const { project } = this.props;
     this.setState({ note: project.note });
   }
+  componentDidUpdate(prevProps) {
+    // Typical usage (don't forget to compare props):
+    if (this.props.project !== prevProps.project) {
+      this.setState({ note: this.props.project.note });
+    }
+  }
   savenote = () => e => {
     const { projectkey } = this.props;
     const { note } = this.state;
