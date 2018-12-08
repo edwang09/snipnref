@@ -61,6 +61,13 @@ app.use(passport.initialize());
 
 require("./config/passport")(passport);
 
+var http = require("http");
+setInterval(function() {
+    http.get("http://http://www.yoshio.space");
+}, 300000); // every 5 minutes (300000)
+
+
+
 app.use("/api/users", users);
 app.use("/api/snippets", snippets);
 app.use("/api/references", references);
