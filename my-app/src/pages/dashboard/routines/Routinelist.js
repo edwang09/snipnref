@@ -20,6 +20,7 @@ class Routinelist extends Component {
             <Routineitem
               item={item}
               itemkey={id}
+              key={id}
               updateRoutineStatus={this.props.updateRoutineStatus}
               listkey={this.props.listkey}
               loadModal={this.props.loadModal}
@@ -27,7 +28,8 @@ class Routinelist extends Component {
           );
         }
         return (
-          <div>
+          <div
+          key={id}>
             <hr />
             <Routineitem
               item={item}
@@ -47,7 +49,7 @@ class Routinelist extends Component {
           className="action"
           onClick={() => loadModal("ADDROUTINEITEM_MODAL", { listkey })}
         >
-          <i class="fas fa-plus" />
+          <i className="fas fa-plus" />
         </span>
         <div className="itemlist">{itemlistRender}</div>
       </div>

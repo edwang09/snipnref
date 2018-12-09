@@ -73,10 +73,10 @@ export default class Project extends Component {
               this.props.loadModal("EDITPROJECT_MODAL", { projectkey })
             }
           >
-            <i class="far fa-edit" />
+            <i className="far fa-edit" />
           </span>
           <span className="action" onClick={this.savenote()}>
-            <i class="far fa-save" />
+            <i className="far fa-save" />
           </span>
         </h5>
         <small> created on: {project.createdate}</small>
@@ -84,7 +84,7 @@ export default class Project extends Component {
         <div className="row">
           <div className="col-md-3 urls">{urlRender}</div>
           <div className="col-md-9 form-group">
-            <label for="comment">Notes:</label>
+            <label htmlFor="comment">Notes:</label>
             <textarea
               className="form-control"
               rows="5"

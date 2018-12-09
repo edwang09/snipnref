@@ -16,6 +16,7 @@ class Usefulsites extends Component {
         }
         return (
           <a
+          key={id}
             className={className}
             data-toggle="tab"
             href={href}
@@ -35,7 +36,7 @@ class Usefulsites extends Component {
         }
         const sites = cat.content.map((site, urlid) => {
           return (
-            <div className="site">
+            <div className="site" key={urlid}>
               <div>
                 <a href={site.url} target="_blank" rel="noopener noreferrer" className="d-inline">
                   <strong>{site.name}</strong>
@@ -49,7 +50,7 @@ class Usefulsites extends Component {
                       })
                     }
                   >
-                    <i class="far fa-trash-alt" />
+                    <i className="far fa-trash-alt" />
                   </small>
                 </span>
               </div>
@@ -59,6 +60,7 @@ class Usefulsites extends Component {
         });
         return (
           <div
+            key={tabid}
             className={className}
             id={cat.name}
             role="tabpanel"
@@ -74,7 +76,7 @@ class Usefulsites extends Component {
                     })
                   }
                 >
-                  <i class="far fa-edit" />
+                  <i className="far fa-edit" />
                 </small>
               </span>
               <span className="action">
@@ -85,7 +87,7 @@ class Usefulsites extends Component {
                     })
                   }
                 >
-                  <i class="fas fa-plus" />
+                  <i className="fas fa-plus" />
                 </small>
               </span>
             </p>

@@ -44,7 +44,7 @@ class Routineitem extends Component {
                 })
               }
             >
-              <i class="far fa-trash-alt" />
+              <i className="far fa-trash-alt" />
             </small>
           </span>
         </p>

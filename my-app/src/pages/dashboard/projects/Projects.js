@@ -10,6 +10,7 @@ export default class Projects extends Component {
           <Project
             project={project}
             projectkey={id}
+            key={id}
             loadModal={this.props.loadModal}
             updateProjectStatus={this.props.updateProjectStatus}
             updateProjectNote={this.props.updateProjectNote}
