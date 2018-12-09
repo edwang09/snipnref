@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import { loadModal } from "../../../actions/modalActions";
-
 class Routineitem extends Component {
   toggleStatus = () => e => {
     const { listkey, itemkey, item, updateRoutineStatus } = this.props;

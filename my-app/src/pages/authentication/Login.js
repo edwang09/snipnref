@@ -23,14 +23,19 @@ class Login extends Component {
   };
   componentWillReceiveProps(nextProps) {
     if (nextProps.auth.isAuthenticated) {
-      this.props.history.push("/");
+      this.props.history.push("/dashboard");
     }
   }
   render() {
     const { errors } = this.props;
     return (
       <div className="container">
-        <form onSubmit={this.onSubmit()}>
+      <div className="authcard">
+      <div className="authlogo">
+      <i class="fas fa-shield-alt"></i>
+      Log in
+      </div>
+      <form onSubmit={this.onSubmit()}>
           <div className="form-group">
             <label htmlFor="exampleInputEmail1">Email address</label>
             <input
@@ -63,10 +68,12 @@ class Login extends Component {
               <div className="invalid-feedback">{errors.password}</div>
             )}
           </div>
+          <hr/>
           <button type="submit" className="btn btn-primary">
             Login
           </button>
         </form>
+        </div>
       </div>
     );
   }

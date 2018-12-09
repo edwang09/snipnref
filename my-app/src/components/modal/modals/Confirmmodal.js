@@ -8,10 +8,6 @@ import {
 } from "../../../actions/dashboardActions";
 
 export class Confirmmodal extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   onClose = () => e => {
     this.props.hideModal();
   };

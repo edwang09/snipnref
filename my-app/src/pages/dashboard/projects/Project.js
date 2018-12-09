@@ -50,7 +50,7 @@ export default class Project extends Component {
     const urlRender = project.urls.map(site => {
       return (
         <div className="site">
-          <a href={site.url} target="_blank">
+          <a href={site.url} target="_blank" rel="noopener noreferrer">
             <strong>{site.name}</strong>
           </a>
           <small>{site.description}</small>

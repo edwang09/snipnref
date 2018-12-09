@@ -18,9 +18,6 @@ import Projects from "./projects/Projects";
 import Memos from "./memos/Memos";
 
 class Dashboard extends Component {
-  constructor(props) {
-    super(props);
-  }
   componentWillMount() {
     // check if user has been logged in.
     const { auth } = this.props;
@@ -28,6 +25,11 @@ class Dashboard extends Component {
       this.props.history.push("/");
     }
     this.props.getUserDashboard();
+  }
+  componentWillReceiveProps(nextProps) {
+    if (!nextProps.auth.isAuthenticated) {
+      this.props.history.push("/login");
+    }
   }
 
   render() {

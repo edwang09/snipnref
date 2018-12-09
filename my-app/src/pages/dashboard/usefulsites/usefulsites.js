@@ -37,7 +37,7 @@ class Usefulsites extends Component {
           return (
             <div className="site">
               <div>
-                <a href={site.url} target="_blank" className="d-inline">
+                <a href={site.url} target="_blank" rel="noopener noreferrer" className="d-inline">
                   <strong>{site.name}</strong>
                 </a>
                 <span className="action">

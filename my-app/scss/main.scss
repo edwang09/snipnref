@@ -5,6 +5,9 @@
     padding: 0;
     box-sizing: border-box;
   }
+a{
+  cursor: pointer;
+}
 @keyframes animatetop {
   from {top: -30px; opacity: 0}
   to {top: 0; opacity: 1}
@@ -12,6 +15,19 @@
 body {
     color: #000;
     border:2px;
+    
+    .landing {
+      position: relative;
+      background: url('./img/showcase.jpg') no-repeat;
+      background-size: cover;
+      background-position: center;
+      min-height:85vh;
+      .intro{
+        max-width: 50rem;
+        margin:1rem auto;
+        color: #222
+      }
+    }
     .mymodal{
       .overlay {
         position: fixed;
@@ -71,8 +87,35 @@ body {
       }
     }
 
+    .authcard{
+      margin: 3rem auto;
+      width: 40rem;
+      border: 1px solid #f0f0f0;
+      background-color: #f0f0f0;
+      box-shadow:2px 2px 5px #999;
+      border-radius: 1rem;
+      padding: 2rem 2rem;
+      .authlogo{
+        font-size: 300%;
+        font-weight:400;
+        color: blue;
+        text-align: center;
+      }
+      form button{
+        width:50%;
+        margin: 2rem auto;
+        display:block;
+      }
+    }
 
-
+    .about{
+      p{
+        margin-bottom:1rem;
+      }
+      h4{
+        color:blue;
+      }
+    }
 
 
     .dashboard {
@@ -220,13 +263,6 @@ body {
 .App {
   margin:0;
   padding:0;
-}
-.landing {
-  position: relative;
-  background: url('./img/showcase.jpg') no-repeat;
-  background-size: cover;
-  background-position: center;
-  min-height:85vh;
 }
 .side-nav {
   position: relative;

@@ -1,5 +1,3 @@
-import isEmpty from "../utils/is-empty";
-
 import {
   SET_USER_DASHBOARD,
   SET_USER_ROUTINES,

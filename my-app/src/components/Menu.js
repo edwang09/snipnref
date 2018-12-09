@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import Login from "./auth/Login";
-import Register from "./auth/Register";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { logoutUser } from "../actions/authActions";
@@ -18,33 +16,30 @@ class Navbar extends Component {
     const guestLink = (
       <ul className="navbar-nav">
         <Link className="nav-link" to="/login">
-          Login
+          Owner Login
         </Link>
-        <li className="nav-item">
-          <Register />
-        </li>
       </ul>
     );
     const userLink = (
       <ul className="navbar-nav">
         <li className="nav-item">
-          <a className="nav-link"> Welcome back! </a>
+          <div className="nav-link"> Welcome back! </div>
         </li>
         <li className="nav-item dropdown">
-          <a
+          <div
             className="nav-link dropdown-toggle"
             id="authDropdown"
             data-toggle="dropdown"
           >
             <b>{auth.user.name}</b>
-          </a>
+          </div>
           <div className="dropdown-menu" aria-labelledby="authDropdown">
             <Link className="dropdown-item" to="/dashboard">
               Dashboard
             </Link>
-            <a className="dropdown-item" onClick={this.props.logoutUser}>
+            <div className="dropdown-item" onClick={this.props.logoutUser}>
               Log out
-            </a>
+            </div>
           </div>
         </li>
       </ul>
@@ -71,13 +66,13 @@ class Navbar extends Component {
                 </Link>
               </li>
               <li className="nav-item dropdown">
-                <a
+                <div
                   className="nav-link dropdown-toggle"
                   id="authDropdown"
                   data-toggle="dropdown"
                 >
                   <b>References</b>
-                </a>
+                </div>
                 <div className="dropdown-menu" aria-labelledby="authDropdown">
                   <Link className="dropdown-item" to="/references/vba/getstart">
                     VBA
@@ -85,13 +80,13 @@ class Navbar extends Component {
                 </div>
               </li>
               <li className="nav-item dropdown">
-                <a
+                <div
                   className="nav-link dropdown-toggle"
                   id="authDropdown"
                   data-toggle="dropdown"
                 >
                   <b>Packages</b>
-                </a>
+                </div>
                 <div className="dropdown-menu" aria-labelledby="authDropdown">
                   <Link
                     className="dropdown-item"
@@ -102,13 +97,13 @@ class Navbar extends Component {
                 </div>
               </li>
               <li className="nav-item dropdown">
-                <a
+                <div
                   className="nav-link dropdown-toggle"
                   id="authDropdown"
                   data-toggle="dropdown"
                 >
                   <b>Applications</b>
-                </a>
+                </div>
                 <div className="dropdown-menu" aria-labelledby="authDropdown">
                   <Link className="dropdown-item" to="/demos/bazi">
                     Four Pillars of Destiny

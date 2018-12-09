@@ -6318,6 +6318,9 @@ a.text-dark:hover, a.text-dark:focus {
   padding: 0;
   box-sizing: border-box; }
 
+a {
+  cursor: pointer; }
+
 @keyframes animatetop {
   from {
     top: -30px;
@@ -6329,6 +6332,16 @@ a.text-dark:hover, a.text-dark:focus {
 body {
   color: #000;
   border: 2px; }
+  body .landing {
+    position: relative;
+    background: url("./img/showcase.jpg") no-repeat;
+    background-size: cover;
+    background-position: center;
+    min-height: 85vh; }
+    body .landing .intro {
+      max-width: 50rem;
+      margin: 1rem auto;
+      color: #222; }
   body .mymodal .overlay {
     position: fixed;
     top: 0;
@@ -6378,6 +6391,27 @@ body {
         text-align: left;
         padding: 10px 16px;
         padding-bottom: 3rem; }
+  body .authcard {
+    margin: 3rem auto;
+    width: 40rem;
+    border: 1px solid #f0f0f0;
+    background-color: #f0f0f0;
+    box-shadow: 2px 2px 5px #999;
+    border-radius: 1rem;
+    padding: 2rem 2rem; }
+    body .authcard .authlogo {
+      font-size: 300%;
+      font-weight: 400;
+      color: blue;
+      text-align: center; }
+    body .authcard form button {
+      width: 50%;
+      margin: 2rem auto;
+      display: block; }
+  body .about p {
+    margin-bottom: 1rem; }
+  body .about h4 {
+    color: blue; }
   body .dashboard {
     border: 1px solid #ededed;
     box-shadow: 0 0 2px 2px #999;
@@ -6483,13 +6517,6 @@ body {
 .App {
   margin: 0;
   padding: 0; }
-
-.landing {
-  position: relative;
-  background: url("./img/showcase.jpg") no-repeat;
-  background-size: cover;
-  background-position: center;
-  min-height: 85vh; }
 
 .side-nav {
   position: relative;
