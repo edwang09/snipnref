@@ -61,9 +61,9 @@ app.use(passport.initialize());
 
 require("./config/passport")(passport);
 
-var http = require("http");
-setInterval(function() {
-    http.get("http://http://www.yoshio.space");
+var request = require("request");
+setInterval(async function() {
+  await request.get("http://www.yoshio.space");
 }, 300000); // every 5 minutes (300000)
 
 
