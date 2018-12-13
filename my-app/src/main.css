@@ -6319,7 +6319,13 @@ a.text-dark:hover, a.text-dark:focus {
   box-sizing: border-box; }
 
 a {
-  cursor: pointer; }
+  cursor: pointer;
+  text-decoration: none;
+  color: black; }
+
+.container {
+  max-width: 800px;
+  margin: 0 auto; }
 
 @keyframes animatetop {
   from {
@@ -6329,18 +6335,117 @@ a {
     top: 0;
     opacity: 1; } }
 
+nav.navbar {
+  margin: 0 auto;
+  padding: 1rem;
+  color: white;
+  font-family: sans-serif;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+  background: transparent; }
+  nav.navbar .open-slide {
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    cursor: pointer; }
+  nav.navbar .navbar-brand {
+    text-align: center;
+    display: block;
+    width: 12rem;
+    color: #222;
+    border: 3px solid #333;
+    border-radius: 1rem;
+    padding: 0.5rem 1rem;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: 500;
+    font-size: 150%;
+    margin-right: 1rem; }
+    nav.navbar .navbar-brand:hover {
+      background-color: #bbbbbb;
+      cursor: pointer; }
+  nav.navbar .navbar-menu {
+    width: 0;
+    height: 100%;
+    position: fixed;
+    flex-direction: column;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    opacity: 0.9;
+    overflow-x: hidden;
+    background-color: #ededed;
+    padding-top: 60px;
+    transition: 0.5s; }
+    nav.navbar .navbar-menu .navbar-nav, nav.navbar .navbar-menu .navbar-auth {
+      list-style: none; }
+      nav.navbar .navbar-menu .navbar-nav .nav-item, nav.navbar .navbar-menu .navbar-auth .nav-item {
+        line-height: 40px;
+        display: inline-block;
+        width: 100%;
+        text-align: center;
+        transition: all 0.2s; }
+        nav.navbar .navbar-menu .navbar-nav .nav-item a, nav.navbar .navbar-menu .navbar-auth .nav-item a {
+          color: #222;
+          font-weight: 600; }
+        nav.navbar .navbar-menu .navbar-nav .nav-item:hover, nav.navbar .navbar-menu .navbar-auth .nav-item:hover {
+          cursor: pointer; }
+          nav.navbar .navbar-menu .navbar-nav .nav-item:hover a, nav.navbar .navbar-menu .navbar-auth .nav-item:hover a {
+            color: #333; }
+      nav.navbar .navbar-menu .navbar-nav .btn-close, nav.navbar .navbar-menu .navbar-auth .btn-close {
+        display: inline;
+        position: absolute;
+        top: 0;
+        right: 22px;
+        font-size: 36px;
+        margin-left: 50px;
+        color: #222;
+        text-decoration: none; }
+        nav.navbar .navbar-menu .navbar-nav .btn-close:hover, nav.navbar .navbar-menu .navbar-auth .btn-close:hover {
+          color: #555;
+          cursor: pointer; }
+  nav.navbar .sidebar-open {
+    width: 250px; }
+  @media (min-width: 992px) {
+    nav.navbar .open-slide {
+      display: none; }
+    nav.navbar .navbar-menu {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      width: auto;
+      position: relative;
+      background: transparent;
+      padding: 0 0; }
+      nav.navbar .navbar-menu .navbar-nav, nav.navbar .navbar-menu .navbar-auth {
+        flex-direction: row;
+        display: flex;
+        width: 40rem;
+        align-items: center;
+        justify-content: space-between;
+        margin: 0 1rem; }
+        nav.navbar .navbar-menu .navbar-nav .btn-close, nav.navbar .navbar-menu .navbar-auth .btn-close {
+          display: none; }
+      nav.navbar .navbar-menu .navbar-auth {
+        width: 15rem; } }
+
 body {
   color: #000;
   border: 2px; }
   body .landing {
-    position: relative;
-    background: url("./img/showcase.jpg") no-repeat;
+    background: linear-gradient(rgba(238, 238, 238, 0.4), rgba(238, 238, 238, 0.4)), url("./img/showcase.jpg") no-repeat;
     background-size: cover;
     background-position: center;
-    min-height: 85vh; }
+    min-height: 85vh;
+    padding: 1rem; }
     body .landing .intro {
+      position: relative;
+      top: 5rem;
       max-width: 50rem;
-      margin: 1rem auto;
       color: #222; }
   body .mymodal .overlay {
     position: fixed;

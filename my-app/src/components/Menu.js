@@ -3,115 +3,86 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { logoutUser } from "../actions/authActions";
+import classNames from 'classnames';
 
 class Navbar extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      slideOpen: false
+    };
+  }
+
+  toggleSlide = () => (e) => {
+    console.log(this.state.slideOpen)
+    this.setState({slideOpen:!this.state.slideOpen})
   }
 
   render() {
     const { auth } = this.props;
     const guestLink = (
-      <ul className="navbar-nav">
+      <ul className="navbar-auth">
+      <li className="nav-item">
         <Link className="nav-link" to="/login">
           Owner Login
         </Link>
+        </li>
       </ul>
     );
     const userLink = (
-      <ul className="navbar-nav">
+      <ul className="navbar-auth">
         <li className="nav-item">
-          <div className="nav-link"> Welcome back! </div>
-        </li>
-        <li className="nav-item dropdown">
-          <div
-            className="nav-link dropdown-toggle"
-            id="authDropdown"
-            data-toggle="dropdown"
-          >
-            <b>{auth.user.name}</b>
-          </div>
-          <div className="dropdown-menu" aria-labelledby="authDropdown">
-            <Link className="dropdown-item" to="/dashboard">
+            <Link className="nav-link" to="/dashboard">
               Dashboard
             </Link>
-            <div className="dropdown-item" onClick={this.props.logoutUser}>
-              Log out
-            </div>
-          </div>
+        </li>
+        <li className="nav-item">
+          <a className="nav-link" onClick={this.props.logoutUser}>
+            Log out
+          </a>
         </li>
       </ul>
     );
     return (
-      <nav className="navbar navbar-expand-sm bg-dark navbar-dark">
-        <div className="container">
+      <nav className="navbar">
+          <div className="open-slide" onClick={this.toggleSlide()}>
+                <svg width="30" height="30">
+                    <path d="M0,5 30,5" stroke="#333" strokeWidth="5"/>
+                    <path d="M0,14 30,14" stroke="#333" strokeWidth="5"/>
+                    <path d="M0,23 30,23" stroke="#333" strokeWidth="5"/>
+                </svg>
+          </div>
           <Link to="/" className="navbar-brand">
             Yoshio Space
           </Link>
-          <button
-            className="navbar-toggler"
-            data-toggle="collapse"
-            data-target="#nav"
-          >
-            <span className="navbar-toggler-icon" />
-          </button>
-
-          <div className="collapse navbar-collapse" id="nav">
-            <ul className="navbar-nav mr-auto">
+          <div className={classNames("navbar-menu",{"sidebar-open":this.state.slideOpen})}>
+            <ul className="navbar-nav">
+              <a  className="btn-close" onClick={this.toggleSlide()}>&times;</a>
               <li className="nav-item">
                 <Link className="nav-link" to="/blogs">
                   Blogs
                 </Link>
               </li>
-              <li className="nav-item dropdown">
-                <div
-                  className="nav-link dropdown-toggle"
-                  id="authDropdown"
-                  data-toggle="dropdown"
-                >
-                  <b>References</b>
-                </div>
-                <div className="dropdown-menu" aria-labelledby="authDropdown">
-                  <Link className="dropdown-item" to="/references/vba/getstart">
-                    VBA
-                  </Link>
-                </div>
+              <li className="nav-item">
+                <Link className="nav-link" to="/references/vba/getstart">
+                  References
+                </Link>
               </li>
-              <li className="nav-item dropdown">
-                <div
-                  className="nav-link dropdown-toggle"
-                  id="authDropdown"
-                  data-toggle="dropdown"
-                >
-                  <b>Packages</b>
-                </div>
-                <div className="dropdown-menu" aria-labelledby="authDropdown">
-                  <Link
-                    className="dropdown-item"
-                    to="/packages/reactjs/getstart"
-                  >
-                    React.js
+              <li className="nav-item">
+                  <Link className="nav-link" to="/packages/reactjs/getstart">
+                    Packages
                   </Link>
-                </div>
               </li>
-              <li className="nav-item dropdown">
-                <div
-                  className="nav-link dropdown-toggle"
-                  id="authDropdown"
-                  data-toggle="dropdown"
-                >
-                  <b>Applications</b>
-                </div>
-                <div className="dropdown-menu" aria-labelledby="authDropdown">
-                  <Link className="dropdown-item" to="/demos/bazi">
-                    Four Pillars of Destiny
+              <li className="nav-item">
+                  <Link className="nav-link" to="/demos/vote">
+                    Voter App
                   </Link>
-                  <Link className="dropdown-item" to="/demos/vote">
-                    Public Voter
+              </li>
+              <li className="nav-item">
+                  <Link className="nav-link" to="/demos/bazi">
+                   Destiny App
                   </Link>
-                </div>
               </li>
               <li className="nav-item">
                 <Link className="nav-link" to="/about">
@@ -121,7 +92,6 @@ class Navbar extends Component {
             </ul>
             {auth.isAuthenticated ? userLink : guestLink}
           </div>
-        </div>
       </nav>
     );
   }
