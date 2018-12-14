@@ -22,7 +22,7 @@ class Navbar extends Component {
   render() {
     const { auth } = this.props;
     const guestLink = (
-      <ul className="navbar-auth">
+      <ul className="navbar__auth">
       <li className="nav-item">
         <Link className="nav-link" to="/login">
           Owner Login
@@ -31,7 +31,7 @@ class Navbar extends Component {
       </ul>
     );
     const userLink = (
-      <ul className="navbar-auth">
+      <ul className="navbar__auth">
         <li className="nav-item">
             <Link className="nav-link" to="/dashboard">
               Dashboard
@@ -46,18 +46,18 @@ class Navbar extends Component {
     );
     return (
       <nav className="navbar">
-          <div className="open-slide" onClick={this.toggleSlide()}>
+          <div className="navbar__toggle" onClick={this.toggleSlide()}>
                 <svg width="30" height="30">
                     <path d="M0,5 30,5" stroke="#333" strokeWidth="5"/>
                     <path d="M0,14 30,14" stroke="#333" strokeWidth="5"/>
                     <path d="M0,23 30,23" stroke="#333" strokeWidth="5"/>
                 </svg>
           </div>
-          <Link to="/" className="navbar-brand">
+          <Link to="/" className="navbar__brand">
             Yoshio Space
           </Link>
-          <div className={classNames("navbar-menu",{"sidebar-open":this.state.slideOpen})}>
-            <ul className="navbar-nav">
+          <div className={classNames("navbar__menu",{"sidebar-open":this.state.slideOpen})}>
+            <ul className="navbar__nav">
               <a  className="btn-close" onClick={this.toggleSlide()}>&times;</a>
               <li className="nav-item">
                 <Link className="nav-link" to="/blogs">

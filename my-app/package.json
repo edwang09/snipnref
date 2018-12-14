@@ -22,7 +22,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "css": "npx node-sass scss/main.scss  src/main.css -w",
+    "css": "npx node-sass scss/main.scss  src/main.css --watch=scss/",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"

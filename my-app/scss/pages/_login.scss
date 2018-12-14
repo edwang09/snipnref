@@ -1,0 +1,21 @@
+
+    .authcard{
+        margin: 3rem auto;
+        width: 40rem;
+        border: 1px solid #f0f0f0;
+        background-color: #f0f0f0;
+        box-shadow:2px 2px 5px #999;
+        border-radius: 1rem;
+        padding: 2rem 2rem;
+        .authlogo{
+          font-size: 300%;
+          font-weight:400;
+          color: blue;
+          text-align: center;
+        }
+        form button{
+          width:50%;
+          margin: 2rem auto;
+          display:block;
+        }
+      }

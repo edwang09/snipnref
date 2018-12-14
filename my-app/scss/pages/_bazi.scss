@@ -1,0 +1,15 @@
+.taichi-icon{
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .taichi-icon:hover{
+    transform: scale(1.1);
+  }
+  .taichi-icon:active{
+    transform: scale(1.0);
+    transform: rotate(20deg);
+  }
+  .pillar-result{
+    font-family: STKaiti, "华文楷体","KaiTi", "楷体",Georgia, "Times New Roman",   serif;
+    font-size: 3rem;
+  }

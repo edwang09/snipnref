@@ -32,7 +32,7 @@ export default class Modal extends Component {
   }
   render() {
     return (
-      <div className="mymodal">
+      <div className="modal">
         <div className="overlay" />
         <div className="content" onClick={this.onOverlayClick.bind(this)}>
           <div className="dialog" onClick={this.onDialogClick}>

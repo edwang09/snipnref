@@ -4,13 +4,12 @@ import { Link } from "react-router-dom";
 class Landing extends Component {
   render() {
     return (
-      <div className="text-center landing p-md-5">
-        <div className="container">
+      <div className="landing">
+        <div className="landing__container">
         <div className="intro">
-        
-          <h1 className="display-4">Yoshio Space</h1>
-            <p className="h4">
-            Yoshio Space is a personal website for documentation of
+          <h1 className="intro__title">Yoshio Space</h1>
+            <p className="intro__content">
+              Yoshio Space is a personal website for documentation of
               works of{" "}
               <strong>Ed Wang
               </strong>{" "}
@@ -18,15 +17,11 @@ class Landing extends Component {
               technologies. This website contains works on code snippets,
               references, code examples, package introductions, and code demos.
             </p>
-            <hr className="my-4" />
-            <p>Learn and live.</p>
-            <p className="lead">
-              <Link className="btn btn-primary btn-lg" to="/about">
-                Learn more
-              </Link>
-            </p>
-        
-        
+            <hr/>
+            <p className="intro__subcontent">Learn and live.</p>
+            <Link className="intro__button" to="/about">
+              Learn more
+            </Link>
         </div>
         </div>
       </div>
