@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { DatePicker, Card } from "antd";
 import taichi from "./taichi.png";
-import isEmpty from "../../utils/is-empty";
+import isEmpty from "../../../utils/is-empty";
+import BaziInfo from "./baziInfo"
 
 class Bazi extends Component {
   constructor(props) {
@@ -9,154 +10,11 @@ class Bazi extends Component {
 
     this.state = {
       dateString: "",
-      tiangan: ["癸", "甲", "乙", "丙", "丁", "戊", "己", "庚", "辛", "壬"],
-      dizhimonthref: [
-        [
-          "癸",
-          "甲",
-          "乙",
-          "甲",
-          "乙",
-          "丙",
-          "丁",
-          "戊",
-          "己",
-          "庚",
-          "辛",
-          "壬"
-        ],
-        [
-          "乙",
-          "丙",
-          "丁",
-          "丙",
-          "丁",
-          "戊",
-          "己",
-          "庚",
-          "辛",
-          "壬",
-          "癸",
-          "甲"
-        ],
-        [
-          "丁",
-          "戊",
-          "己",
-          "戊",
-          "己",
-          "庚",
-          "辛",
-          "壬",
-          "癸",
-          "甲",
-          "乙",
-          "丙"
-        ],
-        [
-          "己",
-          "庚",
-          "辛",
-          "庚",
-          "辛",
-          "壬",
-          "癸",
-          "甲",
-          "乙",
-          "丙",
-          "丁",
-          "戊"
-        ],
-        ["辛", "壬", "癸", "壬", "癸", "甲", "乙", "丙", "丁", "戊", "己", "庚"]
-      ],
-      dizhihourref: [
-        [
-          "癸",
-          "壬",
-          "癸",
-          "甲",
-          "乙",
-          "丙",
-          "丁",
-          "戊",
-          "己",
-          "庚",
-          "辛",
-          "壬"
-        ],
-        [
-          "乙",
-          "甲",
-          "乙",
-          "丙",
-          "丁",
-          "戊",
-          "己",
-          "庚",
-          "辛",
-          "壬",
-          "癸",
-          "甲"
-        ],
-        [
-          "丁",
-          "丙",
-          "丁",
-          "戊",
-          "己",
-          "庚",
-          "辛",
-          "壬",
-          "癸",
-          "甲",
-          "乙",
-          "丙"
-        ],
-        [
-          "己",
-          "戊",
-          "己",
-          "庚",
-          "辛",
-          "壬",
-          "癸",
-          "甲",
-          "乙",
-          "丙",
-          "丁",
-          "戊"
-        ],
-        [
-          "辛",
-          "庚",
-          "辛",
-          "壬",
-          "癸",
-          "甲",
-          "乙",
-          "丙",
-          "丁",
-          "戊",
-          "己",
-          "庚"
-        ],
-        ["癸", "壬", "癸", "甲", "乙", "丙", "丁", "戊", "己", "庚", "辛", "壬"]
-      ],
-      dizhi: [
-        "亥",
-        "子",
-        "丑",
-        "寅",
-        "卯",
-        "辰",
-        "巳",
-        "午",
-        "未",
-        "申",
-        "酉",
-        "戌"
-      ],
-      monthfixer: [6, 4, 6, 5, 6, 6, 7, 8, 8, 8, 7, 7],
+      tiangan: BaziInfo.tiangan,
+      dizhimonthref: BaziInfo.dizhimonthref,
+      dizhihourref: BaziInfo.dizhihourref,
+      dizhi: BaziInfo.dizhi,
+      monthfixer: BaziInfo.monthfixer,
       pillars: {
         yearPillar: "暂无",
         monthPillar: "暂无",

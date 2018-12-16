@@ -60,21 +60,6 @@ class Navbar extends Component {
             <ul className="navbar__nav">
               <a  className="btn-close" onClick={this.toggleSlide()}>&times;</a>
               <li className="nav-item">
-                <Link className="nav-link" to="/blogs">
-                  Blogs
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/references/vba/getstart">
-                  References
-                </Link>
-              </li>
-              <li className="nav-item">
-                  <Link className="nav-link" to="/packages/reactjs/getstart">
-                    Packages
-                  </Link>
-              </li>
-              <li className="nav-item">
                   <Link className="nav-link" to="/demos/vote">
                     Voter App
                   </Link>

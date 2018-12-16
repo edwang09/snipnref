@@ -1,5 +1,5 @@
 @import "lib/libs";
-@import "lib/normalize";
+@import "lib/normalized";
 @import "abstracts/mixins";
 @import "abstracts/variables";
 @import "base/base";
@@ -7,9 +7,12 @@
 @import "pages/dashboard";
 @import "pages/bazi";
 @import "pages/voter";
+@import "pages/about";
 @import "pages/landing";
 @import "pages/login";
 @import "components/modal";
 @import "components/sidenav";
+@import "components/button";
+@import "components/form";
 @import "layouts/header";
 @import "layouts/footer";

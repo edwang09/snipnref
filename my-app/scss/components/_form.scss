@@ -1,0 +1,32 @@
+.form {
+    padding: 0.5rem;
+    .formgroup{
+      width: 100%;
+      label{
+        font-size: 130%;
+        font-family: Verdana;
+        display: block;
+        margin-top: 16px;
+      }
+      input[type=text], input[type=password], select, textarea{
+        width:100%;
+        padding:0.5rem;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        margin-top: 10px;
+        margin-bottom: 16px;
+      }
+      .is-invalid{
+        border-color: red !important;
+      }
+      
+      .invalid-feedback{
+        font-size: 75%;
+        color:red;
+      }
+    }
+    button, input[type=submit]{
+      display: block;
+      margin:16px auto;
+    }
+  }

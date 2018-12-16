@@ -1,0 +1,32 @@
+@mixin button {
+    @include shadow;
+    color: white;
+    text-align: center;
+    padding: 0.5rem;
+    border: 0;
+    background: none;
+    font-size:120%;
+}
+.button{
+    &--success {
+        @include button;
+        background-color: rgb(28, 184, 65); /* this is a green */
+    }
+
+    &--error {
+        @include button;
+        background-color: rgb(202, 60, 60); /* this is a maroon */
+    }
+
+    &--warning {
+        @include button;
+        background-color: rgb(223, 117, 20); /* this is an orange */
+    }
+
+    &--secondary {
+        @include button;
+        background-color: rgb(66, 184, 221); /* this is a light blue */
+    }
+}
+
+        

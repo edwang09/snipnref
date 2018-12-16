@@ -47,4 +47,15 @@
   };
   @mixin computer {
     @media(min-width: 1024px){@content}
+  };
+
+  ///Shadow mixins
+  @mixin shadow($depth:1) {
+    box-shadow:$depth*1px $depth*1px $depth*2*2px rgb(117, 117, 117);
+  }
+  ///Container mixins
+  @mixin container($width:1100) {
+    max-width: $width;
+    margin-left: auto;
+    margin-right: auto;
   }

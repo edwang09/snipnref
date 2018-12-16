@@ -9,8 +9,6 @@ import "./main.css";
 import Navbar from "./components/Menu";
 import ModalContainer from "./components/modal/ModalContainer";
 import Footer from "./components/Footer";
-import Landing from "./components/Landing";
-import About from "./components/About";
 import store from "./store";
 
 //actions
@@ -18,14 +16,11 @@ import { setCurrentUser, logoutUser } from "./actions/authActions";
 import setAuthToken from "./utils/setAuthToken";
 
 //pages
-import blogs from "./pages/blogs/blogs";
-import blog from "./pages/blogs/blog";
-import references from "./pages/references";
-import packages from "./pages/packages";
 import Dashboard from "./pages/dashboard/dashboard";
 import Login from "./pages/authentication/Login";
-
-import bazi from "./pages/demos/bazi";
+import Landing from "./pages/Landing";
+import About from "./pages/About";
+import bazi from "./pages/demos/bazi/bazi";
 import voteentry from "./pages/demos/voter/vote-entry";
 import vote from "./pages/demos/voter/vote";
 import VoteResult from "./pages/demos/voter/vote-result";
@@ -57,11 +52,7 @@ class App extends Component {
             <main>
               <div className="main">
                 <Route exact path="/" component={Landing} />
-                <Route path="/blogs" component={blogs} />
                 <Route path="/login" component={Login} />
-                <Route path="/blog/:id" component={blog} />
-                <Route path="/references" component={references} />
-                <Route path="/packages" component={packages} />
                 <Route path="/about" component={About} />
                 <Route path="/dashboard" component={Dashboard} />
                 <Route path="/demos/bazi" component={bazi} />
