@@ -1,15 +1,67 @@
-.taichi-icon{
-    cursor: pointer;
-    transition: all 0.2s;
+.bazi{
+  @include container;
+  @include shadow;
+  padding:2rem 4rem;
+  h1{
+    line-height: 2;
+    font-weight: normal;
+    font-family: Arial, Helvetica, sans-serif;
+
   }
-  .taichi-icon:hover{
-    transform: scale(1.1);
+
+  form#baziform{
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    .formgroup{
+      width: 14rem;
+      label{
+        display: inline;
+        margin: 0 .5rem;
+        font-size:120%;
+      }
+      select{
+        display: inline-block;
+        width: 8rem;
+      }
+    }
   }
-  .taichi-icon:active{
-    transform: scale(1.0);
-    transform: rotate(20deg);
+  
+  .submit{
+    margin:2rem auto;
+    text-align: center;
+    .taichi{
+      cursor: pointer;
+      transition: all 0.2s;
+      &:hover{
+        transform: scale(1.1);
+      }
+      &:active{
+        transform: scale(1.0);
+      }
+    }
   }
-  .pillar-result{
-    font-family: STKaiti, "华文楷体","KaiTi", "楷体",Georgia, "Times New Roman",   serif;
-    font-size: 3rem;
+  .result{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-top: 15px;
+    text-align: center;
+    &__pillar{
+      margin: 0.25rem;
+      width:13rem;
+      @include shadow;
+      background-color: antiquewhite;
+      padding: 0.5rem;
+      line-height: 1.5;
+    }
+    &__text{
+      font-family: STKaiti, "华文楷体","KaiTi", "楷体",Georgia, "Times New Roman",   serif;
+      font-size: 3rem;
+      line-height: 1.5;
+    }
   }
+
+}
+
+
