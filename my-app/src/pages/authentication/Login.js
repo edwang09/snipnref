@@ -32,7 +32,7 @@ class Login extends Component {
       <div className="login">
       <div className="login__card">
       <div className="login__title">
-      <i class="fas fa-shield-alt"></i>
+      <i className="fas fa-shield-alt"></i>
       Log in
       </div>
       <form onSubmit={this.onSubmit()} className="form login__form">

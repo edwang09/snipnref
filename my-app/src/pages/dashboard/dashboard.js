@@ -12,7 +12,7 @@ import {
 } from "../../actions/dashboardActions";
 import { loadModal } from "../../actions/modalActions";
 
-import Routinelist from "./routines/Routinelist";
+import Routinecard from "./routines/Routinecard";
 import Usefulsites from "./usefulsites/usefulsites";
 import Projects from "./projects/Projects";
 import Memos from "./memos/Memos";
@@ -34,16 +34,16 @@ class Dashboard extends Component {
 
   render() {
     const { dashboard } = this.props;
-    let routinelistRender;
+    let routinecardRender;
     if (dashboard.routines.length) {
-      routinelistRender = dashboard.routines.map((routine, idx) => {
+      routinecardRender = dashboard.routines.map((routine, idx) => {
         return (
-          <Routinelist
+          <Routinecard
             key={routine.name}
             name={routine.name}
-            listkey={idx}
+            cardkey={idx}
             title={routine.title}
-            itemlist={routine.content}
+            itemcard={routine.content}
             updateRoutineStatus={this.props.updateRoutineStatus}
             loadModal={this.props.loadModal}
           />
@@ -51,16 +51,16 @@ class Dashboard extends Component {
       });
     }
     return (
-      <div className="container dashboard">
+      <div className="dashboard">
         <h2> Dashboard</h2>
-
-        <div className="routines">
-          <h4>Routines</h4>
-          <div className="d-flex justify-content-around">
-            {dashboard && routinelistRender}
+        <div className="routine">
+          <h3>Routines</h3>
+          <div className="routine__row">
+            {dashboard && routinecardRender}
           </div>
         </div>
-        <div className="memos">
+
+        <div className="memo">
           {dashboard && (
             <Memos
               memos={dashboard.memos}
@@ -69,8 +69,8 @@ class Dashboard extends Component {
           )}
         </div>
 
-        <div className="usefulsites">
-          <h4>
+        <div className="usefulsite">
+          <h3>
             Useful Sites
             <span
               className="action"
@@ -78,7 +78,7 @@ class Dashboard extends Component {
             >
               <i className="fas fa-plus" />
             </span>
-          </h4>
+          </h3>
 
           <p>
             This is a list of websites that can be useful in different senerios
@@ -91,16 +91,16 @@ class Dashboard extends Component {
           )}
         </div>
 
-        <div className="projects">
-          <h4>
+        <div className="project">
+          <h3>
             Ongoing Projects
             <span
-              className="action"
+              className="add"
               onClick={() => this.props.loadModal("ADDPROJECT_MODAL")}
             >
               <i className="fas fa-plus" />
             </span>
-          </h4>
+          </h3>
           {dashboard && (
             <Projects
               projectlist={dashboard.projects}

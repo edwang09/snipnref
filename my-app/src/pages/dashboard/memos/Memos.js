@@ -22,49 +22,40 @@ class Memos extends Component {
   render() {
     return (
       <div>
-        <h4>
+        <h3>
           Memos
-          <span className="action" onClick={this.savememos()}>
+          <span className="save" onClick={this.savememos()}>
             <i className="far fa-save" />
           </span>
-        </h4>
-        <div className="row">
-          <div className="col-md-4 item">
-            <h5>Memo</h5>
-            <div className="form-group">
+        </h3>
+        <div className="memo__row">
+          <div  className="memo__card">
+            <h4>Memo</h4>
               <textarea
-                className="form-control"
-                rows="5"
+                rows="9"
                 id="memo"
                 value={this.state.memo}
                 onChange={e => this.setState({ memo: e.target.value })}
               />
-            </div>
           </div>
-          <div className="col-md-4 item">
-            <h5>Idea</h5>
-            <div className="form-group">
+          <div  className="memo__card">
+            <h4>Idea</h4>
               <textarea
-                className="form-control"
-                rows="5"
+                rows="9"
                 id="idea"
                 value={this.state.idea}
                 onChange={e => this.setState({ idea: e.target.value })}
               />
-            </div>
           </div>
-          <div className="col-md-4 item">
-            <h5>Curiosity</h5>
-            <div className="form-group">
+          <div  className="memo__card">
+            <h4>Curiosity</h4>
               <textarea
-                className="form-control"
-                rows="5"
+                rows="9"
                 id="curiosity"
                 value={this.state.curiosity}
                 onChange={e => this.setState({ curiosity: e.target.value })}
               />
             </div>
-          </div>
         </div>
       </div>
     );

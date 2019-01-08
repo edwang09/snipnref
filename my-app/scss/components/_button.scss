@@ -6,8 +6,11 @@
     border: 0;
     background: none;
     font-size:120%;
+    display: block;
+    margin: 0.5rem 1rem;
 }
 .button{
+    @include button;
     &--success {
         @include button;
         background-color: rgb(28, 184, 65); /* this is a green */

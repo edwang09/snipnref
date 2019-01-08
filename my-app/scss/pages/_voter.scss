@@ -1,0 +1,17 @@
+.voter{
+    @include container;
+    @include shadow;
+    &__search{
+        padding: 1rem 2rem;
+        form button.voter__button{
+            margin-left: 0.5rem;
+            display: inline;
+        }
+    }
+    &__create{
+        padding: 1rem 2rem;
+        a.voter__createbutton{
+            width: 30%;
+        }
+    }
+}

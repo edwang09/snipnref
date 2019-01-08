@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Routineitem from "./Routineitem";
-class Routinelist extends Component {
+class Routinecard extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -11,10 +11,10 @@ class Routinelist extends Component {
     };
   }
   render() {
-    const { itemlist, title, loadModal, listkey } = this.props;
-    let itemlistRender;
-    if (itemlist.length) {
-      itemlistRender = itemlist.map((item, id) => {
+    const { itemcard, title, loadModal, cardkey } = this.props;
+    let itemcardRender;
+    if (itemcard.length) {
+      itemcardRender = itemcard.map((item, id) => {
         if (id === 0) {
           return (
             <Routineitem
@@ -43,17 +43,18 @@ class Routinelist extends Component {
       });
     }
     return (
-      <div className="routinelist">
-        <h5>{title}</h5>
+      <div
+      className="routine__card">
+        <h4>{title}</h4>
         <span
-          className="action"
-          onClick={() => loadModal("ADDROUTINEITEM_MODAL", { listkey })}
+          className="routine__add"
+          onClick={() => loadModal("ADDROUTINEITEM_MODAL", { cardkey })}
         >
           <i className="fas fa-plus" />
         </span>
-        <div className="itemlist">{itemlistRender}</div>
+        <div className="routine__list">{itemcardRender}</div>
       </div>
     );
   }
 }
-export default Routinelist;
+export default Routinecard;

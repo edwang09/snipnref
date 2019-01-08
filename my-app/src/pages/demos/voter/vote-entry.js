@@ -40,36 +40,40 @@ class Voteentry extends Component {
     });
 
     return (
-      <div className="container">
-        <img
+      <div className="voter">
+        {/*<img
           src={spongebob}
           width="160rem"
           className="d-block float-right m-5"
-          alt="not showing"
-        />
-        <p className="display-4">
-          {" "}
+          alt="spongebob"
+        />*/}
+        <h1>
           Spongebob Voter
-          <span className="lead"> ———— A voter for any purpose.</span>
-        </p>
-        <Votecreatebutton />
-        <div className="card my-4">
-          <div className="card-body">
-            <h4>Participate in an existing vote created by others?</h4>
-            <div className="form-group">
-              <label htmlFor="vote name">Vote name</label>
+        </h1>
+        <p > Spongebob Voter is a voter for almost any purpose. You can create questions and decide how many tickets will be given to each voter. Choose approperiate number of tickets to reduce bias.</p>
+        <hr/>
+        <div className="voter__search">
+          <h3>Search for an existing vote created by others?</h3>
+          <form className="form">
+            <div className="formgroup--inline">
+              <label htmlFor="votename">Vote name:</label>
               <input
                 type="text"
-                className="form-control"
-                id="vote name"
+                id="votename"
                 placeholder="Enter vote name"
               />
+              <button className="button--success voter__button">Participate</button>
             </div>
-            <button className="btn btn-info ">Participate</button>
-          </div>
+          </form>
         </div>
 
-        <div className="list-group">{Votelist}</div>
+        <div className="voter__list">{Votelist}</div>
+        <div className="voter__create">
+          <h3>Create a vote for any purpose?</h3>
+          <a className="button--success voter__createbutton" href="/demos/votecreate">
+            Create a new vote
+          </a>
+      </div>
       </div>
     );
   }

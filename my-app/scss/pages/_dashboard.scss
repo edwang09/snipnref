@@ -1,76 +1,113 @@
+@mixin dashboardsection {
+  @include shadow;
+  margin-top: 2rem;
+  padding: 1rem 2rem;
+}
 .dashboard {
-    border: 1px solid #ededed;
-    box-shadow:0 0 2px 2px #999;
-    padding:2rem 2rem;
-    color: #222;
-    .action{
-        color: blue;
-        font-size: 16px;
-        margin-left:1rem;
-        &:hover{
-          color: cadetblue;
-          cursor: pointer;
-        }
+  @include container;
+  @include shadow;
+  .routine {
+    @include dashboardsection;
+    &__row{
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
     }
     
-    span.status{
-      border: 1.5px solid orange;
-      border-radius: .5rem;
-      padding:0.1rem .5rem;
-      font-size:75%;
-      margin-left: 1rem;
-      &:hover{
-        color: cadetblue;
-        cursor: pointer;
-      }
-      &.todo {
-        border-color: red;
-      }
-      &.working {
-        border-color: orange;
-      }
-      &.done {
-        border-color: green;
-      }
-      &.skip {
-        border-color: blue;
-      }
-    }
-    .routines, .usefulsites, .projects, .memos{
-      border: 1px solid #ededed;
-      box-shadow:2px 2px 2px 2px #999;
-      border-radius: 1rem;
-      margin: 2rem 0;
-      padding:1rem 1rem;
-      h4{
-        color: #222;
-      }
-    }
-    .routines .routinelist {
-      border: 1px solid #ededed;
-      border-radius: 1rem;
-      background: #ededed;
-      width: 30%;
-      padding:1rem 1rem;
-      h5{
+    &__card{
+      width: 17rem;
+      background-color: #ddd;
+      padding: 0.5rem 1.5rem;
+      border-radius: 0.5rem;
+      margin-bottom: 2rem;
+      h4 {
+        display: inline-block;
+        margin-right: .5rem;
         color: red;
-        display: inline;
-        margin-right:1rem;
       }
-      .itemlist{
-        margin-top:1rem;
-        .item{
-          margin-bottom: 1rem;
-          p{
-            font-weight: 500;
-          }
-          p, small{
-            margin: 0;
-          }
+      .routine__add {
+        color: blue;
+      }
+    }
+
+    &__list{
+      margin-top:1rem;
+    }
+    
+    &__item{
+      margin-bottom: 1rem;
+      .item__title{
+        font-weight: bold;
+      }
+      .routine__toggle {
+        border-width: 1.5px;
+        border-style: solid;
+        border-radius: .5rem;
+        display: inline-block;
+        margin-left:0.5rem;
+        margin-right: 0.5rem;
+        padding:.1rem 0.5rem;
+        font-size:75%;
+        font-weight: bold;
+        cursor: pointer;
+        &.todo {
+          border-color: red;
+          color: red;
+        }
+        &.working {
+          border-color: orange;
+          color: orange;
+        }
+        &.done {
+          border-color: green;
+          color: green;
+        }
+        &.skip {
+          border-color: blue;
+          color: blue;
         }
       }
+      .routine__delete {
+        color: blue;
+      }
     }
-    .usefulsites{
+  }
+
+  .memo{
+    @include dashboardsection;
+    i{
+      color: blue;
+      margin-left: 1rem;
+    }
+    &__row{
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+
+    }
+    &__card{
+      width: 17rem;
+      border-radius: 0.5rem;
+      margin-bottom: 2rem;
+      h4{
+        color: red;
+      }
+      textarea{
+        width: 90%;
+        margin: .5rem auto;
+      }
+    }
+  }
+
+
+    
+    
+    .usefulsite{
+      @include dashboardsection;
+      i{
+        color: blue;
+        margin-left: 1rem;
+      }
       .sitestab{
         nav{
           a{
@@ -93,27 +130,36 @@
 
       }
     }
-    .projects{
-      .project{
-        border: 1px solid #ccc;
-        border-radius: 1rem;
-        margin: 1rem 1rem;
-        padding: 1rem 1rem;
-        .urls{
-          .site{
-            a{
-              display: block;
-            }
-            margin-bottom:1rem;
-          }
-        }
-        .form-group{
-          display:block;
-          margin:auto 0
-        }
-        h5{
-          margin-bottom: 0
-        }
+    
+  .project{
+    @include dashboardsection;
+    i{
+      color: blue;
+      margin-left: 1rem;
+    }
+    &__row{
+      margin-top: 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+
+    }
+    &__url{
+      width: 15rem;
+      padding: 0.5rem 1rem;
+      background-color: #ddd;
+    } 
+    &__note{
+      width: 35rem;
+      h4{
+        color: red;
+      }
+      label{
+        display: block;
+      }
+      textarea{
+        width: 100%;
       }
     }
+  }
 }

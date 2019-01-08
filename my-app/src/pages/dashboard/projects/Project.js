@@ -59,7 +59,7 @@ export default class Project extends Component {
     });
     return (
       <div className="project">
-        <h5>
+        <h4>
           {project.name}
           <span
             className={"status " + project.status}
@@ -68,26 +68,30 @@ export default class Project extends Component {
             {project.status}
           </span>
           <span
-            className="action"
+            className="edit"
             onClick={() =>
               this.props.loadModal("EDITPROJECT_MODAL", { projectkey })
             }
           >
             <i className="far fa-edit" />
           </span>
-          <span className="action" onClick={this.savenote()}>
+          <span className="save" onClick={this.savenote()}>
             <i className="far fa-save" />
           </span>
-        </h5>
+        </h4>
         <small> created on: {project.createdate}</small>
         <p>{project.description}</p>
-        <div className="row">
-          <div className="col-md-3 urls">{urlRender}</div>
-          <div className="col-md-9 form-group">
+        <div className="project__row">
+          <div className="project__url">
+          <h4>
+            Related URLs
+          </h4>
+          {urlRender}
+          </div>
+          <div className="project__note">
             <label htmlFor="comment">Notes:</label>
             <textarea
-              className="form-control"
-              rows="5"
+              rows="9"
               id="note"
               value={this.state.note}
               onChange={e => this.setState({ note: e.target.value })}

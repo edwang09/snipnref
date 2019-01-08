@@ -26,16 +26,16 @@ class Routineitem extends Component {
   render() {
     const { item, loadModal, listkey, itemkey } = this.props;
     return (
-      <div className="item">
-        <p>
+      <div className="routine__item">
+        <p className="item__title">
           {item.name}
           <span
-            className={"status " + item.status}
+            className={"routine__toggle " + item.status}
             onClick={this.toggleStatus()}
           >
             {item.status}
           </span>
-          <span className="action">
+          <span className="routine__delete">
             <small
               onClick={() =>
                 loadModal("CONFIRM_MODAL", {
@@ -48,7 +48,7 @@ class Routineitem extends Component {
             </small>
           </span>
         </p>
-        <small>{item.note}</small>
+        <p>{item.note}</p>
       </div>
     );
   }
