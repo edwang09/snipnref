@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { withRouter } from "react-router-dom";
 import axios from "axios";
 class Votecreate extends Component {
   constructor(props) {
@@ -28,19 +29,23 @@ class Votecreate extends Component {
 
   submitVote = () => e => {
     e.preventDefault();
-    const { user } = this.props.auth;
-    axios
-      .post("/api/votes/create", {
-        createrId: user.id,
-        createrName: user.name,
-        name: this.state.name,
-        description: this.state.description,
-        questions: this.state.questions
-      })
-      .then(res => {
-        console.log("success");
-      })
-      .catch(err => console.log(err));
+    const { user, isAuthenticated } = this.props.auth;
+    if (isAuthenticated){
+      axios
+        .post("/api/votes/create", {
+          createrId: user.id,
+          createrName: user.name,
+          name: this.state.name,
+          description: this.state.description,
+          questions: this.state.questions
+        })
+        .then(res => {
+          this.props.history.push("/demos/vote");
+        })
+        .catch(err => console.log(err));
+    }else{
+      this.props.history.push("/login");
+    }
   };
 
   deleteQuestion = questionid => e => {
@@ -116,11 +121,11 @@ class Votecreate extends Component {
     const questions = this.state.questions.map(question => {
       const optioins = question.options.map(option => {
         return (
-          <div className="card mb-5" key={option.optionid}>
-            <div className="card-header d-flex w-100 justify-content-between">
-              <p className="h6">Option {option.optionid + 1}</p>
+          <div className="option" key={option.optionid}>
+            <div className="option__header">
+              <h4>Option {option.optionid + 1}</h4>
               <button
-                className="btn btn-danger btn-sm text-right"
+                className="button--error deletebutton"
                 onClick={this.deleteOption(
                   question.questionid,
                   option.optionid
@@ -129,12 +134,11 @@ class Votecreate extends Component {
                 Delete option
               </button>
             </div>
-            <div className="card-body">
-              <div className="form-group">
+            <div className="option__body">
+              <div className="formgroup">
                 <label htmlFor="optionname">Option Name</label>
                 <input
                   type="text"
-                  className="form-control"
                   id="optionname"
                   placeholder="Enter a name for this option"
                   value={option.optionname}
@@ -150,11 +154,10 @@ class Votecreate extends Component {
                   required
                 />
               </div>
-              <div className="form-group">
+              <div className="formgroup">
                 <label htmlFor="optiondescription">Option Description</label>
                 <textarea
-                  row="3"
-                  className="form-control"
+                  row="5"
                   id="optiondescription"
                   placeholder="Enter a description for this option"
                   value={option.optiondescription}
@@ -175,22 +178,21 @@ class Votecreate extends Component {
         );
       });
       return (
-        <div key={question.questionid} className="card mb-5">
-          <div className="card-header d-flex w-100 justify-content-between">
-            <p className="h6">Question {question.questionid + 1}</p>
+        <div key={question.questionid} className="question">
+          <div className="question__header">
+            <h3 className="h6">Question {question.questionid + 1}</h3>
             <button
-              className="btn btn-danger btn-sm text-right"
+              className="button--error deletebutton"
               onClick={this.deleteQuestion(question.questionid)}
             >
               Delete question
             </button>
           </div>
-          <div className="card-body">
-            <div className="form-group">
-              <label htmlFor="question">Question</label>
-              <input
-                type="text"
-                className="form-control"
+          <hr/>
+          <div className="question__body">
+            <div className="formgroup">
+              <label htmlFor="question">Question : </label>
+              <textarea
                 id="question"
                 placeholder="Enter the question"
                 value={question.question}
@@ -205,11 +207,10 @@ class Votecreate extends Component {
               />
             </div>
 
-            <div className="form-group">
+            <div className="formgroup--inline">
               <label htmlFor="tickets">Available tickets</label>
               <input
                 type="number"
-                className="form-control"
                 id="tickets"
                 placeholder="Enter amount of ticket per voter"
                 value={question.tickets}
@@ -223,15 +224,15 @@ class Votecreate extends Component {
                 required
               />
             </div>
-            <p className="h5">
+            <h4>
               Options{" "}
               <button
-                className="btn btn-success btn-sm"
+                className="button--success addbutton"
                 onClick={this.addOption(question.questionid)}
               >
                 Add option
               </button>
-            </p>
+            </h4>
             {optioins}
           </div>
         </div>
@@ -239,14 +240,13 @@ class Votecreate extends Component {
     });
 
     return (
-      <div className="container">
-        <p className="display-4">Create Vote</p>
+      <div className="vote-create">
+        <h2>Create Vote</h2>
         <form onSubmit={this.submitVote()}>
-          <div className="form-group">
+          <div className="formgroup--inline">
             <label htmlFor="title">Survey Title</label>
             <input
               type="text"
-              className="form-control"
               id="title"
               placeholder="Enter a title for the survey"
               value={this.state.name}
@@ -255,11 +255,10 @@ class Votecreate extends Component {
             />
           </div>
 
-          <div className="form-group">
+          <div className="formgroup">
             <label htmlFor="description">Survey description</label>
             <textarea
-              row="3"
-              className="form-control"
+              row="5"
               id="description"
               placeholder="Enter a description for the survey"
               value={this.state.description}
@@ -270,13 +269,14 @@ class Votecreate extends Component {
           <hr />
           {questions}
           <button
-            className="btn btn-success btn-sm"
+
+            className="button--success"
             onClick={this.addQuestion()}
           >
             Add question
           </button>
           <hr />
-          <button className="btn btn-primary w-100 m-auto" type="submit">
+          <button className="button--success" type="submit">
             Create Survey
           </button>
         </form>
@@ -294,4 +294,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   {}
-)(Votecreate);
+)(withRouter(Votecreate));

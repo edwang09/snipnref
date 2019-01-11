@@ -29,22 +29,22 @@ class VoteResult extends Component {
       results = vote.questions.map(question => {
         const options = question.options.map(option => (
           <div
-            className="bg-light w-100 m-1 p-2 border d-flex  justify-content-between"
+            className="option"
             key={option.optionid}
             disabled
           >
-            <p className="h5">{option.optionname}</p>
-            <p className="h5">{option.optiontickets}</p>
+            <span className = "option__name">{option.optionname}</span>
+            <span className = "option__count">{option.optiontickets}</span>
           </div>
         ));
         return (
-          <div className="card" key={question.questionid}>
-            <div className="card-body">
-              <h5>
+          <div className="question" key={question.questionid}>
+            <div className="question__header">
+              <h4>
                 {question
                   ? question.questionid + 1 + ". " + question.question
                   : ""}
-              </h5>
+              </h4>
               {options}
             </div>
           </div>
@@ -53,18 +53,17 @@ class VoteResult extends Component {
     }
 
     return (
-      <div className="container">
-        <img
+      <div className="vote-result">
+        {/*<img
           src={spongebob}
           width="160rem"
           className="float-right m-5 d-none d-md-block"
           alt="Spongebob"
-        />
+        />*/}
 
-        <p className="display-4">{vote ? vote.name : ""}</p>
-        <p className="text-right"> ———— Powered by Spongebob Voter.</p>
+        <h3>{vote ? vote.name : ""}</h3>
 
-        <p className="lead">{vote ? vote.description : ""}</p>
+        <h4>{vote ? vote.description : ""}</h4>
         <hr />
         <div>{results}</div>
         <hr />

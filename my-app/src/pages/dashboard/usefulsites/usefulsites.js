@@ -1,27 +1,32 @@
 import React, { Component } from "react";
 
 class Usefulsites extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      currenttab : 0
+    };
+  }
+  switchtab = (id)=>(e)=>{
+    this.setState({currenttab:id})
+  }
   render() {
     const { sitelist } = this.props;
     let sitenavRender;
     let sitelistRender;
-    if (sitelist.length) {
+    if ( sitelist.length > 0 ) {
       sitenavRender = sitelist.map((cat, id) => {
-        const href = "#" + cat.name;
         let className;
-        if (id === 0) {
-          className = "nav-item nav-link active";
+        if (id === this.state.currenttab) {
+          className = "tab-item active";
         } else {
-          className = "nav-item nav-link";
+          className = "tab-item";
         }
         return (
           <a
-          key={id}
+            key={id}
             className={className}
-            data-toggle="tab"
-            href={href}
-            role="tab"
-            aria-controls="nav-categoryone"
+            onClick={this.switchtab(id)}
           >
             {cat.name}
           </a>
@@ -29,16 +34,16 @@ class Usefulsites extends Component {
       });
       sitelistRender = sitelist.map((cat, tabid) => {
         let className;
-        if (tabid === 0) {
-          className = "tab-pane fade show active";
+        if (tabid === this.state.currenttab) {
+          className = "tab-pane show";
         } else {
-          className = "tab-pane fade";
+          className = "tab-pane";
         }
         const sites = cat.content.map((site, urlid) => {
           return (
             <div className="site" key={urlid}>
               <div>
-                <a href={site.url} target="_blank" rel="noopener noreferrer" className="d-inline">
+                <a href={site.url} target="_blank" rel="noopener noreferrer">
                   <strong>{site.name}</strong>
                 </a>
                 <span className="action">
@@ -63,10 +68,8 @@ class Usefulsites extends Component {
             key={tabid}
             className={className}
             id={cat.name}
-            role="tabpanel"
-            aria-labelledby="nav-categoryone-tab"
           >
-            <p>
+            <p className="description" >
               {cat.description}
               <span className="action">
                 <small
@@ -99,7 +102,7 @@ class Usefulsites extends Component {
     return (
       <div className="sitestab">
         <nav>
-          <div className="nav nav-tabs" id="nav-tab" role="tablist">
+          <div className="tab-nav" id="nav-tab" role="tablist">
             {sitenavRender}
           </div>
         </nav>

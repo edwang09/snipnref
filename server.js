@@ -31,16 +31,17 @@ app.use(function(req, res, next) {
   // Website you wish to allow to connect
   var allowedOrigins = [
     "http://localhost:4200",
+    "http://localhost:3000",
     "https://clientpanelprod-e52bd.firebaseapp.com",
     "https://www.amethystfs891.com"
   ];
   var origin = req.headers.origin;
   if (origin && allowedOrigins.indexOf(origin) > -1) {
     res.setHeader("Access-Control-Allow-Origin", origin);
-    console.log("allowed")
+    console.log(origin + "allowed")
   }else if ( origin ){
     res.setHeader("Access-Control-Allow-Origin", origin);
-    console.log("not allowed")
+    console.log(origin + "not allowed")
   }
   // Request methods you wish to allow
   res.setHeader("Access-Control-Allow-Methods", "GET, POST");

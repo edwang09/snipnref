@@ -156,29 +156,25 @@ class Vote extends Component {
     if (vote && vote.questions && currentTickets) {
       questions = vote.questions.map(question => {
         const options = question.options.map(option => (
-          <div className="card mb-3" key={option.optionid}>
-            <div
-              className="card-header"
-              onClick={this.vote(question.questionid, option.optionid)}
-            >
-              {option.optionname}
+          <div className="option" key={option.optionid}
+          onClick={this.vote(question.questionid, option.optionid)}>
+            <div className="option__header">
+              {option.optionname} 
               {this.countvote(votes, question.questionid, option.optionid)}
             </div>
-            <div className="card-body">{option.optiondescription}</div>
+            <div className="option__body">{option.optiondescription}</div>
           </div>
         ));
         return (
-          <div className="card mb-5" key={question.questionid}>
-            <div className="card-body">
-              <div className="d-flex justify-content-between mb-4">
-                <h5>
+          <div className="question" key={question.questionid}>
+            <div className="question__header">
+                <h4>
                   {question
                     ? question.questionid + 1 + ". " + question.question
                     : ""}
-                </h5>
+                </h4>
                 <button
-                  type="button"
-                  className="btn btn-sm btn-info"
+                  className="button--success ticketbutton"
                   onClick={this.clearvote(question.questionid)}
                 >
                   Tickets:{" "}
@@ -188,7 +184,6 @@ class Vote extends Component {
                     )[0].tickets
                   }
                 </button>
-              </div>
               {options}
             </div>
           </div>
@@ -197,26 +192,23 @@ class Vote extends Component {
     }
 
     return (
-      <div className="container">
-        <img
+      <div className="vote">
+        {/*<img
           src={spongebob}
           width="160rem"
           className="float-right m-5 d-none d-md-block"
           alt="Spongebob"
-        />
+        />*/}
 
-        <p className="display-4">{vote ? vote.name : ""}</p>
-        <p className="text-right"> ———— Powered by Spongebob Voter.</p>
-
-        <p className="lead">{vote ? vote.description : ""}</p>
+        <h3>{vote ? vote.name : ""}</h3>
+        <h4>{vote ? vote.description : ""}</h4>
         <hr />
 
         <form onSubmit={this.submitVote()}>
-          <div className="form-group">
+          <div className="formgroup">
             <label htmlFor="votername">Your Name</label>
             <input
               type="text"
-              className="form-control"
               id="votername"
               placeholder="Enter your name"
               value={this.state.name}
@@ -227,10 +219,9 @@ class Vote extends Component {
           <hr />
           {questions}
           <hr />
-          <div className="form-group">
+          <div className="formgroup">
             <label htmlFor="comments">Leave some comments below.</label>
             <textarea
-              className="form-control"
               id="comments"
               placeholder="What else do you want to say"
               rows="3"
@@ -239,7 +230,7 @@ class Vote extends Component {
             />
           </div>
           <hr />
-          <button className="btn btn-primary w-100 m-auto" type="submit">
+          <button className="button--success" type="submit">
             Submit to view result
           </button>
         </form>

@@ -109,9 +109,21 @@
         margin-left: 1rem;
       }
       .sitestab{
-        nav{
-          a{
-            font-weight:500;
+        margin-top: 2rem;
+        .tab-nav{
+          .tab-item{
+            border: 1px solid #ddd;
+            border-radius: 0.2rem;
+            padding: 0.2rem .5rem;
+            color: #222;
+            cursor: pointer;
+            &:hover{
+              text-decoration: none;
+            }
+            &.active{
+              color: red;
+              border-bottom: none;
+            }
           }
         }
         .tab-content{
@@ -119,15 +131,23 @@
           border-right: 1px solid #ddd;
           border-bottom: 1px solid #ddd;
           padding:1rem;
-          .site{
-            a{
+          .tab-pane{
+            display:none;
+            .description{
+              margin-bottom:1rem;
+            }
+            .site{
+              margin-bottom: 1rem;
+              a{
+                display: inline;
+              }
+            }
+            &.show{
               display: block;
             }
-            margin-bottom:1rem;
 
           }
         }
-
       }
     }
     

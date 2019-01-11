@@ -16,6 +16,7 @@ class Voteentry extends Component {
     axios
       .get("/api/votes/all")
       .then(res => {
+        console.log(res.data)
         this.setState({ votes: res.data });
       })
       .catch(err => console.log(err));
@@ -24,18 +25,17 @@ class Voteentry extends Component {
   render() {
     const Votelist = this.state.votes.map((vote, index) => {
       return (
-        <Link
+        <tr
           key={index}
-          to={"vote/" + vote._id}
-          className="list-group-item list-group-item-action flex-column align-items-start "
         >
-          <div className="d-flex justify-content-between">
-            <h5 className="mb-1">{vote.name}</h5>
+          <td >
+            <h4 >{vote.name}</h4>
             <small>{vote.date}</small>
-          </div>
-          <p className="mb-1">{vote.description}</p>
-          <small>{vote._id}</small>
-        </Link>
+          </td>
+          <td >{vote.description}</td>
+          <td>{vote._id}</td>
+          <td><Link to={"vote/" + vote._id}>Participate</Link></td>
+        </tr>
       );
     });
 
@@ -67,7 +67,20 @@ class Voteentry extends Component {
           </form>
         </div>
 
-        <div className="voter__list">{Votelist}</div>
+        <div className="voter__list">
+          <div className="list__header">Votes</div>
+          <table>
+            <tbody>
+            <tr>
+              <th>name</th>
+              <th>description</th>
+              <th>id</th>
+              <th>action</th>
+            </tr>
+            {Votelist}
+            </tbody>
+          </table>
+        </div>
         <div className="voter__create">
           <h3>Create a vote for any purpose?</h3>
           <a className="button--success voter__createbutton" href="/demos/votecreate">

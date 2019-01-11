@@ -8,10 +8,158 @@
             display: inline;
         }
     }
+    &__list{
+        margin-bottom: 2rem;
+        .list__header{
+            background-color: darken(#398B93, 5%);
+            color: white;
+            font-size: 1.25em;
+            padding: 1rem;
+            text-align: center;
+            text-transform: uppercase;
+        }
+        table{
+            width: 100%;
+            td, th { 
+                color: darken(#398B93, 10%);
+                padding: 1rem; 
+            }
+            td {
+                text-align: center;
+                vertical-align: middle;
+                
+                &:last-child {
+                font-size: 0.95em;
+                line-height: 1.4;
+                text-align: left;
+                }
+            }
+            
+            th { 
+                background-color: lighten(#398B93, 50%);
+                font-weight: 300;
+            }
+            tr {     
+                &:nth-child(2n) { background-color: white; }
+                &:nth-child(2n+1) { background-color: lighten(#398B93, 55%) }
+            }
+        }
+    }
     &__create{
         padding: 1rem 2rem;
         a.voter__createbutton{
             width: 30%;
+        }
+    }
+}
+
+.vote-create{
+    @include shadow;
+    @include container;
+    .question{
+        @include shadow;
+        padding:1rem 2rem;
+        margin-bottom:2rem;
+        &__header{
+            width: 100%;
+            h3{
+                display: inline;
+            }
+            .deletebutton{
+                display: inline;
+                font-size: 80%;
+            }
+
+        }
+        h4{
+            display: inline;
+        }
+        .addbutton{
+            display: inline;
+            font-size: 80%;
+        }
+    }
+    .option{
+        @include shadow;
+        padding:1rem 2rem;
+        margin-bottom: 1rem;
+        &__header{
+            width: 100%;
+            h4{
+                display: inline;
+            }
+            .deletebutton{
+                display: inline;
+                font-size: 80%;
+            }
+
+        }
+    }
+}
+.vote{
+    @include shadow;
+    @include container;
+    .question{
+        @include shadow;
+        padding:1rem 2rem;
+        margin-bottom:2rem;
+        &__header{
+            width: 100%;
+            h4{
+                display: inline;
+            }
+            .ticketbutton{
+                display: inline;
+                font-size: 80%;
+            }
+
+        }
+    }
+    .option{
+        @include shadow;
+        padding:1rem 2rem;
+        margin-bottom: 1rem;
+        &__header{
+            width: 100%;
+            font-size:110%;
+            font-weight: bold;
+            h4{
+                display: inline;
+            }
+            .deletebutton{
+                display: inline;
+                font-size: 80%;
+            }
+
+        }
+        &:hover{
+            background-color:#eee;
+        }
+    }
+
+}
+.vote-result{
+
+    @include shadow;
+    @include container;
+    .question{
+        @include shadow;
+        padding:1rem 2rem;
+        margin-bottom:2rem;
+        &__header{
+            width: 100%;
+        }
+    }
+    .option{
+        .option__name{
+            display: inline;
+
+        }
+        .option__count{
+            display: inline-block;
+            margin-left:1rem;
+            color: red;
+            font-weight: bold;
         }
     }
 }
