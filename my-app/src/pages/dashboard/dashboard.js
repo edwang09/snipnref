@@ -52,9 +52,9 @@ class Dashboard extends Component {
     }
     return (
       <div className="dashboard">
-        <h2> Dashboard</h2>
+        <h1> Dashboard</h1>
         <div className="routine">
-          <h3>Routines</h3>
+          <h2>Routines</h2>
           <div className="routine__row">
             {dashboard && routinecardRender}
           </div>
@@ -70,7 +70,7 @@ class Dashboard extends Component {
         </div>
 
         <div className="usefulsite">
-          <h3>
+          <h2>
             Useful Sites
             <span
               className="action"
@@ -78,7 +78,7 @@ class Dashboard extends Component {
             >
               <i className="fas fa-plus" />
             </span>
-          </h3>
+          </h2>
 
           <p>
             This is a list of websites that can be useful in different senerios
@@ -92,7 +92,7 @@ class Dashboard extends Component {
         </div>
 
         <div className="project">
-          <h3>
+          <h2>
             Ongoing Projects
             <span
               className="add"
@@ -100,7 +100,7 @@ class Dashboard extends Component {
             >
               <i className="fas fa-plus" />
             </span>
-          </h3>
+          </h2>
           {dashboard && (
             <Projects
               projectlist={dashboard.projects}

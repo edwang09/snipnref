@@ -450,8 +450,7 @@ a {
   color: #e50050;
   text-decoration: none; }
   a:hover, a:active, a:focus {
-    color: #222222;
-    text-decoration: underline; }
+    text-decoration: none; }
 
 .main {
   min-height: 85vh; }
@@ -682,10 +681,11 @@ a {
       .voter__list table td {
         text-align: center;
         vertical-align: middle; }
-        .voter__list table td:last-child {
-          font-size: 0.95em;
-          line-height: 1.4;
-          text-align: left; }
+        .voter__list table td .actions {
+          text-align: center; }
+          .voter__list table td .actions .actionbutton {
+            font-size: 100%;
+            display: inline; }
       .voter__list table th {
         background-color: #daeff1;
         font-weight: 300; }
@@ -755,6 +755,7 @@ a {
     margin-bottom: 1rem; }
     .vote .option__header {
       width: 100%;
+      line-height: 150%;
       font-size: 110%;
       font-weight: bold; }
       .vote .option__header h4 {
@@ -764,6 +765,12 @@ a {
         font-size: 80%; }
     .vote .option:hover {
       background-color: #eee; }
+    .vote .option .ticket {
+      color: Green;
+      margin-left: 1rem;
+      font-size: 120%; }
+  .vote .createnew__button {
+    width: 12rem; }
 
 .vote-result {
   box-shadow: 1px 1px 4px #757575;
@@ -791,17 +798,14 @@ a {
   margin-right: auto;
   padding: 2rem 4rem;
   box-shadow: 1px 1px 4px #757575;
-  padding: 5rem;
-  margin-top: 2rem;
+  padding: 2rem 5rem;
   color: #333;
   background-color: #eee; }
   .about h2 {
-    margin-bottom: 10px; }
-  .about h3 {
     color: #666;
     margin-bottom: 10px; }
-  .about h4 {
-    margin-bottom: 8px; }
+  .about h3 {
+    margin-top: 10px; }
 
 .landing {
   margin-top: -7rem;
@@ -841,8 +845,12 @@ a {
     font-weight: 400;
     color: blue;
     text-align: center; }
-  .login .login__card .login__form button {
-    width: 50%; }
+  .login .login__card .login__form {
+    padding: 1rem 2rem; }
+    .login .login__card .login__form input {
+      width: 100%; }
+    .login .login__card .login__form button {
+      width: 50%; }
 
 .modal .overlay {
   position: fixed;
@@ -925,6 +933,9 @@ a {
     margin: 0.5rem 1rem;
     background-color: #1cb841;
     /* this is a green */ }
+    .button--success:hover {
+      transform: scale(1.03);
+      background-color: #29de54; }
   .button--error {
     box-shadow: 1px 1px 4px #757575;
     color: white;
@@ -937,6 +948,9 @@ a {
     margin: 0.5rem 1rem;
     background-color: #ca3c3c;
     /* this is a maroon */ }
+    .button--error:hover {
+      transform: scale(1.03);
+      background-color: #d56464; }
   .button--warning {
     box-shadow: 1px 1px 4px #757575;
     color: white;
@@ -949,6 +963,9 @@ a {
     margin: 0.5rem 1rem;
     background-color: #df7514;
     /* this is an orange */ }
+    .button--warning:hover {
+      transform: scale(1.03);
+      background-color: #ed8f39; }
   .button--secondary {
     box-shadow: 1px 1px 4px #757575;
     color: white;
@@ -961,6 +978,9 @@ a {
     margin: 0.5rem 1rem;
     background-color: #42b8dd;
     /* this is a light blue */ }
+    .button--secondary:hover {
+      transform: scale(1.03);
+      background-color: #6dc8e5; }
 
 form {
   padding: 0.5rem; }

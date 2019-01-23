@@ -1,19 +1,15 @@
 .about{
     @include container;
     @include shadow;
-    padding:5rem;
-    margin-top: 2rem;
+    padding:2rem 5rem;
     color: #333;
     background-color: #eee;
     h2{
-        margin-bottom:10px;
-    }
-    h3{
         color: #666;
         margin-bottom: 10px;
     }
-    h4{
-        margin-bottom: 8px;
+    h3{
+        margin-top: 10px;
     }
     
 

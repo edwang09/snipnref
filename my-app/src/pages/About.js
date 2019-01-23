@@ -3,7 +3,7 @@ class About extends Component {
   render() {
     return (
       <div className="about">
-        <h2 >About Jianan Wang</h2>
+        <h1 >About Jianan Wang</h1>
         <p>
           <a href="mailto:edwang09@gmail.com" target="_blank"  rel="noopener noreferrer">
             <i className="fa fa-envelope fa-lg" /> edwang09@gmail.com
@@ -24,28 +24,28 @@ class About extends Component {
               references, code examples, package introductions, and code demos.
         </p>
         <hr/>
-        <h3>
+        <h2>
           Education
-        </h3>
-        <h4>
+        </h2>
+        <h3>
         Master of Science in Mathematical Finance
-        </h4>
+        </h3>
         <p>University of North Carolina at Charlotte</p>
-        <h4>
+        <h3>
         Bachelor of Engineering in Engineering Science
-        </h4>
+        </h3>
         <p>Kyoto University</p>
         <hr/>
-        <h3>
+        <h2>
           Experience
-        </h3>
-        <h4>
+        </h2>
+        <h3>
         Data Analyst
-        </h4>
+        </h3>
         <p>LPL Financial</p>
-        <h4>
+        <h3>
         Freelancing Developer
-        </h4>
+        </h3>
       </div>
     );
   }

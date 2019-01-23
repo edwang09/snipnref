@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import spongebob from "./spongebob.jpg";
 import axios from "axios";
-import Votecreatebutton from "./vote-create-button";
 
 class VoteResult extends Component {
   constructor(props) {
@@ -61,13 +60,13 @@ class VoteResult extends Component {
           alt="Spongebob"
         />*/}
 
-        <h3>{vote ? vote.name : ""}</h3>
 
-        <h4>{vote ? vote.description : ""}</h4>
+        <h1>{vote ? vote.name : ""}</h1>
+
+        <p>{vote ? vote.description : ""}</p>
         <hr />
         <div>{results}</div>
         <hr />
-        <Votecreatebutton />
       </div>
     );
   }

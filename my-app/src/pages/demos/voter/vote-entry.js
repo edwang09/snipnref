@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import spongebob from "./spongebob.jpg";
-import Votecreatebutton from "./vote-create-button";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
@@ -33,8 +32,16 @@ class Voteentry extends Component {
             <small>{vote.date}</small>
           </td>
           <td >{vote.description}</td>
-          <td>{vote._id}</td>
-          <td><Link to={"vote/" + vote._id}>Participate</Link></td>
+          <td>
+            <div className="actions">
+              <Link to={"vote/" + vote._id} className="button--success actionbutton">
+              participate
+              </Link>
+              <Link to={"vote-result/" + vote._id} className="button--success actionbutton">
+              view result
+              </Link>            
+            </div>
+          </td>
         </tr>
       );
     });
@@ -53,8 +60,8 @@ class Voteentry extends Component {
         <p > Spongebob Voter is a voter for almost any purpose. You can create questions and decide how many tickets will be given to each voter. Choose approperiate number of tickets to reduce bias.</p>
         <hr/>
         <div className="voter__search">
-          <h3>Search for an existing vote created by others?</h3>
-          <form className="form">
+          <h3>Looking for an existing vote created by others?</h3>
+          {/* <form className="form">
             <div className="formgroup--inline">
               <label htmlFor="votename">Vote name:</label>
               <input
@@ -64,7 +71,7 @@ class Voteentry extends Component {
               />
               <button className="button--success voter__button">Participate</button>
             </div>
-          </form>
+          </form> */}
         </div>
 
         <div className="voter__list">
@@ -74,7 +81,6 @@ class Voteentry extends Component {
             <tr>
               <th>name</th>
               <th>description</th>
-              <th>id</th>
               <th>action</th>
             </tr>
             {Votelist}

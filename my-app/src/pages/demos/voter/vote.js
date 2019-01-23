@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import spongebob from "./spongebob.jpg";
 import axios from "axios";
-import Votecreatebutton from "./vote-create-button";
 import { withRouter } from "react-router-dom";
 
 class Vote extends Component {
@@ -64,7 +63,7 @@ class Vote extends Component {
     }
     let output = [];
     while (count > 0) {
-      output.push(<i className="fa fa-ticket-alt m-1" key={count} />);
+      output.push(<i className="fa fa-ticket-alt ticket" key={count} />);
       count -= 1;
     }
     return <span>{output}</span>;
@@ -200,8 +199,8 @@ class Vote extends Component {
           alt="Spongebob"
         />*/}
 
-        <h3>{vote ? vote.name : ""}</h3>
-        <h4>{vote ? vote.description : ""}</h4>
+        <h1>{vote ? vote.name : ""}</h1>
+        <p>{vote ? vote.description : ""}</p>
         <hr />
 
         <form onSubmit={this.submitVote()}>
@@ -235,7 +234,12 @@ class Vote extends Component {
           </button>
         </form>
         <hr />
-        <Votecreatebutton />
+        <div className="createnew">
+          <h4>Create a vote for any purpose?</h4>
+          <a className="button--success createnew__button" href="/demos/votecreate">
+            Create a new vote
+          </a>
+        </div>
       </div>
     );
   }

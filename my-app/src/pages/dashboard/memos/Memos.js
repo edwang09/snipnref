@@ -22,12 +22,12 @@ class Memos extends Component {
   render() {
     return (
       <div>
-        <h3>
+        <h2>
           Memos
           <span className="save" onClick={this.savememos()}>
             <i className="far fa-save" />
           </span>
-        </h3>
+        </h2>
         <div className="memo__row">
           <div  className="memo__card">
             <h4>Memo</h4>

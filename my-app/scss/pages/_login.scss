@@ -13,6 +13,10 @@
       text-align: center;
     }
     .login__form {
+      padding: 1rem 2rem;
+      input{
+        width:100%;
+      }
       button{
         width:50%;
       }
