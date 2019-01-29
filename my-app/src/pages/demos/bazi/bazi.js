@@ -18,10 +18,10 @@ class Bazi extends Component {
       dizhi: BaziInfo.dizhi,
       monthfixer: BaziInfo.monthfixer,
       pillars: {
-        yearPillar: "暂无",
-        monthPillar: "暂无",
-        dayPillar: "暂无",
-        hourPillar: "暂无"
+        yearPillar: "--",
+        monthPillar: "--",
+        dayPillar: "--",
+        hourPillar: "--"
       }
     };
   }
@@ -178,6 +178,10 @@ class Bazi extends Component {
               </p>
           </div>
         </div>
+        <hr/>
+        <p>
+          All calculations are based on algorithm provided by Mian Yin who is a Fengshui Consultant in North Carolina. Please visit her <a href="www.amethystfs891.com" target="_blank">site</a> for further information and interpretation.
+        </p>
       </div>
     );
   }

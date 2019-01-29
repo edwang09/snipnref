@@ -6,6 +6,7 @@
 .dashboard {
   @include container;
   @include shadow;
+  margin-bottom: 5rem;
   .routine {
     @include dashboardsection;
     &__row{

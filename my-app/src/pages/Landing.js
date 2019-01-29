@@ -11,16 +11,16 @@ class Landing extends Component {
             <p className="intro__content">
               Yoshio Space is a personal website for documentation of
               works of{" "}
-              <strong>Ed Wang
+              <strong>Jianan Wang
               </strong>{" "}
               who is an enthusiast in all the area of application development,
               technologies. This website contains works on code snippets,
-              references, code examples, package introductions, and code demos.
+              mini Application and will include more interesting stuffs.
             </p>
             <hr/>
-            <p className="intro__subcontent">Learn and live.</p>
+            <p className="intro__subcontent">This website is built using MERN Stack(MongoDB, Express, ReactJS, Node). It also serves as a backend server for other applications.</p>
             <Link className="intro__button" to="/about">
-              Learn more
+              About Jianan
             </Link>
         </div>
         </div>

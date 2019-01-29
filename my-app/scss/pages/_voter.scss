@@ -1,8 +1,8 @@
 .voter{
     @include container;
     @include shadow;
+    margin-bottom: 5rem;
     &__search{
-        padding: 1rem 2rem;
         form button.voter__button{
             margin-left: 0.5rem;
             display: inline;
@@ -28,10 +28,10 @@
                 text-align: center;
                 vertical-align: middle;
                 .actions{
-                    text-align: center;
-                    .actionbutton{
-                        font-size: 100%;
-                        display: inline;
+                    a{
+                        margin-right:1rem;
+                        margin-left:1rem;
+                        font-size: 130%;
                     }
                 }
             }
@@ -47,7 +47,6 @@
         }
     }
     &__create{
-        padding: 1rem 2rem;
         a.voter__createbutton{
             width: 30%;
         }
@@ -57,6 +56,7 @@
 .vote-create{
     @include shadow;
     @include container;
+    margin-bottom: 5rem;
     .question{
         @include shadow;
         padding:1rem 2rem;
@@ -100,6 +100,7 @@
 .vote{
     @include shadow;
     @include container;
+    margin-bottom: 5rem;
     .question{
         @include shadow;
         padding:1rem 2rem;
@@ -153,6 +154,7 @@
 
     @include shadow;
     @include container;
+    margin-bottom: 5rem;
     .question{
         @include shadow;
         padding:1rem 2rem;

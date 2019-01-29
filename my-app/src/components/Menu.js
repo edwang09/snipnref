@@ -10,14 +10,21 @@ class Navbar extends Component {
     super(props);
 
     this.state = {
-      slideOpen: false
+      slideOpen: false,
+      applicationDropdownOpen: false
     };
   }
 
   toggleSlide = () => (e) => {
     console.log(this.state.slideOpen)
     this.setState({slideOpen:!this.state.slideOpen})
+  }  
+  toggleDropdown = (dropdown) => (e) => {
+    if (dropdown==="applications"){
+      this.setState({applicationDropdownOpen:!this.state.applicationDropdownOpen})
+    }
   }
+
 
   render() {
     const { auth } = this.props;
@@ -56,18 +63,30 @@ class Navbar extends Component {
           <Link to="/" className="navbar__brand">
             Yoshio Space
           </Link>
+          {/* <div class="dropdown">
+            <button class="dropbtn">Applications</button>
+            <div class="dropdown-content">
+              <Link className="nav-link" to="/demos/vote">
+                Voter App
+              </Link>
+              <Link className="nav-link" to="/demos/bazi">
+                Destiny App
+              </Link>
+            </div>
+          </div> */}
           <div className={classNames("navbar__menu",{"sidebar-open":this.state.slideOpen})}>
             <ul className="navbar__nav">
               <a  className="btn-close" onClick={this.toggleSlide()}>&times;</a>
-              <li className="nav-item">
+              <li className="nav-item dropdown">
+                <p className="nav-link" onClick={this.toggleDropdown("applications")}>Applications</p>
+                <div className={classNames("dropdown-content",{"dropdown-open":this.state.applicationDropdownOpen})}>
                   <Link className="nav-link" to="/demos/vote">
                     Voter App
                   </Link>
-              </li>
-              <li className="nav-item">
                   <Link className="nav-link" to="/demos/bazi">
-                   Destiny App
+                    Destiny App
                   </Link>
+                </div>
               </li>
               <li className="nav-item">
                 <Link className="nav-link" to="/about">

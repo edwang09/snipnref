@@ -34,12 +34,18 @@ class Voteentry extends Component {
           <td >{vote.description}</td>
           <td>
             <div className="actions">
-              <Link to={"vote/" + vote._id} className="button--success actionbutton">
-              participate
+              <Link to={"vote/" + vote._id} className="popup">
+                <i className="far fa-hand-paper"></i>
+                <div className="popup-text">
+                  Participate
+                </div>
               </Link>
-              <Link to={"vote-result/" + vote._id} className="button--success actionbutton">
-              view result
-              </Link>            
+              <Link to={"vote-result/" + vote._id} className="popup">
+                <i className="fas fa-poll"></i>
+                <div className="popup-text">
+                view result
+                </div>
+              </Link>         
             </div>
           </td>
         </tr>
@@ -57,10 +63,11 @@ class Voteentry extends Component {
         <h1>
           Spongebob Voter
         </h1>
-        <p > Spongebob Voter is a voter for almost any purpose. You can create questions and decide how many tickets will be given to each voter. Choose approperiate number of tickets to reduce bias.</p>
+        <p > Spongebob Voter is a voter for almost any purpose. You can create questions and decide how many tickets will be given to each voter. Choose approperiate number of tickets to reduce bias. Most other voting app only allow one vote per question per person, which may not be ideal for votings such as deciding where to go for holiday, since someone could have a much stronger opinion while others dont really care about the destination.</p>
         <hr/>
         <div className="voter__search">
           <h3>Looking for an existing vote created by others?</h3>
+          <p>Participate or view results of existing votes. All votes are public currently, so anyone can participate or view result on any votes. All votes are anonymous.</p>
           {/* <form className="form">
             <div className="formgroup--inline">
               <label htmlFor="votename">Vote name:</label>
@@ -87,8 +94,11 @@ class Voteentry extends Component {
             </tbody>
           </table>
         </div>
+        <hr/>
         <div className="voter__create">
           <h3>Create a vote for any purpose?</h3>
+          <p> You will be required to create question, options and how many ticket will each person be granted.</p>
+
           <a className="button--success voter__createbutton" href="/demos/votecreate">
             Create a new vote
           </a>

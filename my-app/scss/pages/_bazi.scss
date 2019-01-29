@@ -1,6 +1,7 @@
 .bazi{
   @include container;
   @include shadow;
+  margin-bottom: 5rem;
   
 
   form#baziform{
@@ -45,7 +46,6 @@
       margin: 0.25rem;
       width:13rem;
       @include shadow;
-      background-color: antiquewhite;
       padding: 0.5rem;
       line-height: 1.5;
     }

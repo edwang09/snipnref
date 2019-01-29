@@ -9,14 +9,11 @@
     min-height: 95vh;
     padding: 1rem;
     .landing__container{
-      margin:auto;
-      max-width: 900px;
+      @include container;
       .intro{
         position: relative;
         top: 5rem;
-        max-width: 50rem;
         text-align: center;
-        line-height: 1.5;
         color: #222;
         .intro__title{
           font-size: 400%;
@@ -29,6 +26,11 @@
         }
         .intro__subcontent{
           font-size: 100%;
+        }
+        .intro__button{
+          display: block;
+          margin: 2rem auto;
+          font-size: 120%;
         }
       }
     }

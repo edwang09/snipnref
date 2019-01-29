@@ -19,9 +19,15 @@ class About extends Component {
         </p>
         <hr/>
         <p className="lead">
-        Greetings! I am an enthusiast in all the area of application development,
-              technologies. This website contains works on code snippets,
-              references, code examples, package introductions, and code demos.
+        Hi,
+        My name is Jianan Wang and I am a part-time web developing freelancer.
+        I have my day job working as a office app developer and data analyst in one of the largest broker dealer in US. 
+        As a freelancer, I have also helped my clients build node js apps that use Oauth and API from Microsoft, Dropbox, Google, etc. 
+        I also created websites using various Javascript Frameworks including React-Redux and Angular 6+.
+        Most importantly, I love coding, that is why I enjoy working so much. 
+        </p>
+        <p className="lead">
+        If you need help building a website for your business or want to hire somebody to help you build your application, feel free to reach out to me, I would be more than happly to help you. 
         </p>
         <hr/>
         <h2>
@@ -43,9 +49,15 @@ class About extends Component {
         Data Analyst
         </h3>
         <p>LPL Financial</p>
+        <hr/>
+        <h2>
+          Portfolios
+        </h2>
         <h3>
-        Freelancing Developer
+        <a href="www.amethystfs891.com" target="_blank">Amethyst Fengshui Consulting</a>
         </h3>
+        <p>Host Website for Amethyst Fengshui Consulting. A Fengshui Consulting service business.</p>
+
       </div>
     );
   }
