@@ -34,7 +34,7 @@ app.use(function(req, res, next) {
     "http://localhost:3000/",
     "http://localhost:8080/",
     "https://clientpanelprod-e52bd.firebaseapp.com/",
-    "https://www.amethystfs891.com/"
+    "https://www.amethystfs891.com"
   ];
   var origin = req.headers.origin;
   if (origin && allowedOrigins.indexOf(origin) > -1) {
