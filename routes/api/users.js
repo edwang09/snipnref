@@ -6,6 +6,50 @@ const jwt = require("jsonwebtoken");
 const passport = require("passport");
 const JWTkey = require("../../config/keys").JWTkey;
 const validateRegisterInput = require("../../validation/register");
+const dashboardTemplate = {
+  "routines": [
+    {
+      "name": "dailylist",
+      "title": "Daily List",
+      "content": [
+      ]
+    },
+    {
+      "name": "weeklylist",
+      "title": "Weekly List",
+      "content": [
+      ]
+    },
+    {
+      "name": "monthlylist",
+      "title": "Monthly List",
+      "content": [
+      ]
+    }
+  ],
+  "usefulsites": [
+    {
+      "name": "Personal Management",
+      "description": "Personal Management inluding all calendars",
+      "content": [
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "Project example",
+      "description": "this is an example project",
+      "status": "todo",
+      "urls": [],
+      "note": ""
+    }
+  ],
+  "memos": {
+    "memo": "Put some memo here",
+    "idea": "Record your idea here",
+    "curiosity": "What are you interested in?"
+  }
+}
 //@route   GET api/users/test
 //@desc    Test users route
 //@access  Public
@@ -31,7 +75,11 @@ router.post("/register", (req, res) => {
         name: req.body.name,
         email: req.body.email,
         password: req.body.password,
-        role: "user"
+        role: "user",
+        routines: dashboardTemplate.routines,
+        usefulsites: dashboardTemplate.usefulsites,
+        projects: dashboardTemplate.projects,
+        memos: dashboardTemplate.memos
       });
       bcrypt.genSalt(10, (err, salt) => {
         bcrypt.hash(newUser.password, salt, (err, hash) => {
@@ -73,6 +121,97 @@ router.post("/login", (req, res) => {
         return res.status(400).json({ password: "password incorrect" });
       }
     });
+  });
+});
+
+
+//@route   POST api/users/logingoogle
+//@desc    Login Google User / Returning JWT Token
+//@access  Public
+router.post("/logingoogle", (req, res) => {
+  const email = "GOOGLE:" + req.body.googleId;
+  const name = req.body.w3.ig;
+  const password = req.body.w3.Eea;
+  User.findOne({ email }).then(user => {
+    if (!user) {
+      const newUser = new User({
+        name: name,
+        email : email,
+        password: password,
+        role: "user",
+        routines: dashboardTemplate.routines,
+        usefulsites: dashboardTemplate.usefulsites,
+        projects: dashboardTemplate.projects,
+        memos: dashboardTemplate.memos
+      });
+      console.log(newUser)
+      newUser
+            .save()
+            .then(user => {
+              const payload = { id: user.id, name: user.name, role: user.role };
+              jwt.sign(payload, JWTkey, { expiresIn: 7200 }, (err, token) => {
+                res.json({
+                  success: true,
+                  token: "Bearer " + token
+                });
+              });
+            })
+            .catch(err => console.log(err));
+    }else{
+      const payload = { id: user.id, name: user.name, role: user.role };
+      jwt.sign(payload, JWTkey, { expiresIn: 7200 }, (err, token) => {
+        res.json({
+          success: true,
+          token: "Bearer " + token
+        });
+      });
+    }
+      
+  });
+});
+
+//@route   POST api/users/loginfacebook
+//@desc    Login Facebook User / Returning JWT Token
+//@access  Public
+router.post("/loginfacebook", (req, res) => {
+  const email = "FACEBOOK:" + req.body.userID;
+  const name = req.body.name;
+  const password = req.body.userID;
+  User.findOne({ email }).then(user => {
+    if (!user) {
+      const newUser = new User({
+        name: name,
+        email : email,
+        password: password,
+        role: "user",
+        routines: dashboardTemplate.routines,
+        usefulsites: dashboardTemplate.usefulsites,
+        projects: dashboardTemplate.projects,
+        memos: dashboardTemplate.memos
+      });
+      console.log(newUser)
+      newUser
+            .save()
+            .then(user => {
+              const payload = { id: user.id, name: user.name, role: user.role };
+              jwt.sign(payload, JWTkey, { expiresIn: 7200 }, (err, token) => {
+                res.json({
+                  success: true,
+                  token: "Bearer " + token
+                });
+              });
+            })
+            .catch(err => console.log(err));
+    }else{
+      const payload = { id: user.id, name: user.name, role: user.role };
+      jwt.sign(payload, JWTkey, { expiresIn: 7200 }, (err, token) => {
+        res.json({
+          success: true,
+          token: "Bearer " + token
+        });
+      });
+    }
+      
   });
 });
 

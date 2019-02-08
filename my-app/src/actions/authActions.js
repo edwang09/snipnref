@@ -9,11 +9,12 @@ export const registerUser = (userData, history) => dispatch => {
   axios
     .post("/api/users/register", userData)
     .then(res => history.push("/login"))
-    .catch(err =>
+    .catch(err =>{
+      console.log(err)
       dispatch({
         type: GET_ERRORS,
         payload: err.response.data
-      })
+      })}
     );
 };
 
@@ -41,6 +42,54 @@ export const loginUser = userData => dispatch => {
     );
 };
 
+// Google Login - Get User Token
+export const loginGoogleUser = userData => dispatch => {
+  console.log(userData)
+  axios
+    .post("/api/users/logingoogle", userData)
+    .then(res => {
+      // Save to localStorage
+      const { token } = res.data;
+      // Set token to ls
+      localStorage.setItem("jwtToken", token);
+      // Set token to Auth header
+      setAuthToken(token);
+      // Decode token to get user data
+      const decoded = jwt_decode(token);
+      // Set current user
+      dispatch(setCurrentUser(decoded));
+    })
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};
+// Facebook Login - Get User Token
+export const loginFacebookUser = userData => dispatch => {
+  console.log(userData)
+  axios
+    .post("/api/users/loginfacebook", userData)
+    .then(res => {
+      // Save to localStorage
+      const { token } = res.data;
+      // Set token to ls
+      localStorage.setItem("jwtToken", token);
+      // Set token to Auth header
+      setAuthToken(token);
+      // Decode token to get user data
+      const decoded = jwt_decode(token);
+      // Set current user
+      dispatch(setCurrentUser(decoded));
+    })
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};
 // Login - Get User Token
 export const getUserDashboard = () => dispatch => {
   axios
@@ -78,6 +127,34 @@ export const setUserDashboard = dashboard => {
 
 // Log user out
 export const logoutUser = () => dispatch => {
+  if (window.gapi) {
+    const auth2 = window.gapi.auth2.getAuthInstance()
+    if (auth2 != null) {
+      auth2.signOut().then(auth2.disconnect().then(()=>{
+        console.log("logged out google")
+      }))
+    }
+  }
+  console.log(window.FB)
+  if (window.FB) {
+    console.log("facebook found")
+    window.FB.getLoginStatus((response)=>{
+      console.log(response)
+    })
+    window.FB.logout(function(response) {
+      console.log("facebook log out")
+      console.log(response)
+   })
+    
+    // window.FB.getLoginStatus((response)=>{
+    //   console.log(response)
+    //   if (response.status==='connected'){
+    //     window.FB.logout()
+    //     console.log("facebook log out")
+    //   }
+    // }
+    // )
+  }
   // Remove token from localStorage
   localStorage.removeItem("jwtToken");
   // Remove auth header for future requests

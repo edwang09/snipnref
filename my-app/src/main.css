@@ -854,8 +854,18 @@ a {
     padding: 1rem 2rem; }
     .login .login__card .login__form input {
       width: 100%; }
-    .login .login__card .login__form button {
-      width: 50%; }
+    .login .login__card .login__form .login-button {
+      width: 10rem;
+      margin: 1rem auto;
+      margin-right: 3rem; }
+    .login .login__card .login__form .thirdparty-links {
+      margin: 1rem auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-around; }
+      .login .login__card .login__form .thirdparty-links span {
+        vertical-align: middle;
+        margin-left: .5rem; }
 
 .popup {
   display: inline-block;

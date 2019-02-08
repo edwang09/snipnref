@@ -17,8 +17,20 @@
       input{
         width:100%;
       }
-      button{
-        width:50%;
+      .login-button{
+        width:10rem;
+        margin: 1rem auto;
+        margin-right: 3rem;
+      }
+      .thirdparty-links{
+        margin: 1rem auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        span{
+          vertical-align: middle;
+          margin-left:.5rem;
+        }
       }
     }
   }

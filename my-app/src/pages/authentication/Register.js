@@ -1,20 +1,19 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { loginUser, loginGoogleUser, loginFacebookUser } from "../../actions/authActions";
+import { registerUser } from "../../actions/authActions";
 import classnames from "classnames";
-import GoogleLogin from 'react-google-login';
-import FacebookLogin from 'react-facebook-login';
 import { withRouter, Link } from "react-router-dom";
-const keys = require('../../client_id.json');
 
 class Login extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      email: "",
-      password: ""
+        name: "",
+        email: "",
+        password: "",
+        password2: ""
     };
   }
   onChange = () => e => {
@@ -22,25 +21,14 @@ class Login extends Component {
   };
   onSubmit = () => e => {
     e.preventDefault();
-    this.props.loginUser(this.state);
+    this.props.registerUser(this.state, this.props.history);
   };
   componentWillReceiveProps(nextProps) {
     if (nextProps.auth.isAuthenticated) {
       this.props.history.push("/dashboard");
     }
   }
-  responseFacebook = () => (response)=>{
-    console.log("success")
-    this.props.loginFacebookUser(response)
-  }
-  responseSuccessGoogle = () => (response)=>{
-    console.log("success")
-    this.props.loginGoogleUser(response)
-  }
-  responseFailGoogle = () => (response)=>{
-    console.log("fail")
-    console.log(response)
-  }
+
   render() {
     const { errors } = this.props;
     return (
@@ -48,9 +36,25 @@ class Login extends Component {
       <div className="login__card">
       <div className="login__title">
       <i className="fas fa-shield-alt"></i>
-      Log in
+      Register
       </div>
       <form onSubmit={this.onSubmit()} className="form login__form">
+        <div className="formgroup">
+            <label htmlFor="email">Nickname</label>
+            <input
+              type="text"
+              name="name"
+              className={classnames("formcontrol", {
+                "is-invalid": errors.email
+              })}
+              value={this.state.name}
+              onChange={this.onChange()}
+              placeholder="Enter your nickname"
+            />
+            {errors.name && (
+              <div className="invalid-feedback">{errors.name}</div>
+            )}
+          </div>
           <div className="formgroup">
             <label htmlFor="email">Email address</label>
             <input
@@ -83,32 +87,28 @@ class Login extends Component {
               <div className="invalid-feedback">{errors.password}</div>
             )}
           </div>
-          <hr/>
-          Do not have an account right now? <Link to="/register">Register</Link> now!!
-          <button type="submit" className="button--success login-button">
-            Login
-          </button>
-          <hr/>
-          <p>Log in with third-party accounts?</p>
-          <div className="thirdparty-links">
-          <GoogleLogin
-            clientId="637487796198-j2rgfbme47eioo2lusoop68fkfd98qav.apps.googleusercontent.com"
-            onSuccess={this.responseSuccessGoogle()}
-            onFailure={this.responseFailGoogle()}
-            uxMode = "popup"
-          />
-          <FacebookLogin
-            appId="384791348986446"
-            autoLoad={false}
-            size="small"
-            fields="name"
-            callback={this.responseFacebook()}
-          />
-            {/* <a href="www.facebook.com" target="_blank">
-            <i className="fab fa-facebook"></i><span>FaceBook</span> 
-            </a> */}
-          </div>
           
+          <div className="formgroup">
+            <label htmlFor="password2">Confirm Password</label>
+            <input
+              type="password"
+              name="password2"
+              className={classnames("formcontrol", {
+                "is-invalid": errors.password2
+              })}
+              value={this.state.password2}
+              onChange={this.onChange()}
+              placeholder="Confirm Password"
+            />
+            {errors.password2 && (
+              <div className="invalid-feedback">{errors.password2}</div>
+            )}
+          </div>
+          <hr/>
+          Already have an account? <Link to="/login">Sign in</Link> now!!
+          <button type="submit" className="button--success login-button">
+            Register
+          </button>
         </form>
         </div>
       </div>
@@ -117,9 +117,7 @@ class Login extends Component {
 }
 
 Login.propTypes = {
-  loginUser: PropTypes.func.isRequired,
-  loginGoogleUser: PropTypes.func.isRequired,
-  loginFacebookUser:PropTypes.func.isRequired,
+  registerUser: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired
 };
@@ -131,5 +129,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { loginUser, loginGoogleUser, loginFacebookUser }
+  { registerUser }
 )(withRouter(Login));

@@ -11,7 +11,8 @@ class Navbar extends Component {
 
     this.state = {
       slideOpen: false,
-      applicationDropdownOpen: false
+      applicationDropdownOpen: false,
+      authDropdownOpen: false
     };
   }
 
@@ -22,6 +23,8 @@ class Navbar extends Component {
   toggleDropdown = (dropdown) => (e) => {
     if (dropdown==="applications"){
       this.setState({applicationDropdownOpen:!this.state.applicationDropdownOpen})
+    }else if (dropdown==="auth"){
+      this.setState({authDropdownOpen:!this.state.authDropdownOpen})
     }
   }
 
@@ -39,7 +42,21 @@ class Navbar extends Component {
     );
     const userLink = (
       <ul className="navbar__auth">
-        <li className="nav-item">
+
+
+        <li className="nav-item dropdown">
+          <p className="nav-link" onClick={this.toggleDropdown("applications")}>{auth.user.name}</p>
+          <div className={classNames("dropdown-content",{"dropdown-open":this.state.applicationDropdownOpen})}>
+            <Link className="nav-link" to="/dashboard">
+              Dashboard
+            </Link>
+            <a className="nav-link" onClick={this.props.logoutUser}>
+              Log out
+            </a>
+          </div>
+        </li>
+
+        {/* <li className="nav-item">
             <Link className="nav-link" to="/dashboard">
               Dashboard
             </Link>
@@ -48,7 +65,7 @@ class Navbar extends Component {
           <a className="nav-link" onClick={this.props.logoutUser}>
             Log out
           </a>
-        </li>
+        </li> */}
       </ul>
     );
     return (
