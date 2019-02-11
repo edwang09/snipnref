@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import taichi from "./taichi.png";
-import isEmpty from "../../../utils/is-empty";
 import BaziInfo from "./baziInfo"
 
 class Bazi extends Component {

@@ -22,6 +22,7 @@ import Register from "./pages/authentication/Register";
 import Landing from "./pages/Landing";
 import About from "./pages/About";
 import bazi from "./pages/demos/bazi/bazi";
+import LunarCalendar from './pages/demos/lunar-calendar/lunarcalendar'
 import voteentry from "./pages/demos/voter/vote-entry";
 import vote from "./pages/demos/voter/vote";
 import VoteResult from "./pages/demos/voter/vote-result";
@@ -58,6 +59,7 @@ class App extends Component {
                 <Route path="/about" component={About} />
                 <Route path="/dashboard" component={Dashboard} />
                 <Route path="/demos/bazi" component={bazi} />
+                <Route path="/demos/lunarcalendar" component={LunarCalendar} />
                 <Route exact path="/demos/vote" component={voteentry} />
                 <Route exact path="/demos/vote/:id" component={vote} />
                 <Route

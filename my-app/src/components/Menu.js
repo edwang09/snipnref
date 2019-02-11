@@ -55,17 +55,6 @@ class Navbar extends Component {
             </a>
           </div>
         </li>
-
-        {/* <li className="nav-item">
-            <Link className="nav-link" to="/dashboard">
-              Dashboard
-            </Link>
-        </li>
-        <li className="nav-item">
-          <a className="nav-link" onClick={this.props.logoutUser}>
-            Log out
-          </a>
-        </li> */}
       </ul>
     );
     return (
@@ -80,17 +69,6 @@ class Navbar extends Component {
           <Link to="/" className="navbar__brand">
             Yoshio Space
           </Link>
-          {/* <div class="dropdown">
-            <button class="dropbtn">Applications</button>
-            <div class="dropdown-content">
-              <Link className="nav-link" to="/demos/vote">
-                Voter App
-              </Link>
-              <Link className="nav-link" to="/demos/bazi">
-                Destiny App
-              </Link>
-            </div>
-          </div> */}
           <div className={classNames("navbar__menu",{"sidebar-open":this.state.slideOpen})}>
             <ul className="navbar__nav">
               <a  className="btn-close" onClick={this.toggleSlide()}>&times;</a>
@@ -102,6 +80,9 @@ class Navbar extends Component {
                   </Link>
                   <Link className="nav-link" to="/demos/bazi">
                     Destiny App
+                  </Link>
+                  <Link className="nav-link" to="/demos/lunarcalendar">
+                    Lunar Calendar
                   </Link>
                 </div>
               </li>

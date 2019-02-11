@@ -135,16 +135,16 @@ export const logoutUser = () => dispatch => {
       }))
     }
   }
-  console.log(window.FB)
-  if (window.FB) {
-    console.log("facebook found")
-    window.FB.getLoginStatus((response)=>{
-      console.log(response)
-    })
-    window.FB.logout(function(response) {
-      console.log("facebook log out")
-      console.log(response)
-   })
+  // console.log(window.FB)
+  // if (window.FB) {
+  //   console.log("facebook found")
+  //   window.FB.getLoginStatus((response)=>{
+  //     console.log(response)
+  //   })
+  //   window.FB.logout(function(response) {
+  //     console.log("facebook log out")
+  //     console.log(response)
+  //  })
     
     // window.FB.getLoginStatus((response)=>{
     //   console.log(response)
@@ -154,7 +154,7 @@ export const logoutUser = () => dispatch => {
     //   }
     // }
     // )
-  }
+  // }
   // Remove token from localStorage
   localStorage.removeItem("jwtToken");
   // Remove auth header for future requests

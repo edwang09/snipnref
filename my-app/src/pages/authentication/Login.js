@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { loginUser, loginGoogleUser, loginFacebookUser } from "../../actions/authActions";
 import classnames from "classnames";
 import GoogleLogin from 'react-google-login';
-import FacebookLogin from 'react-facebook-login';
+//import FacebookLogin from 'react-facebook-login';
 import { withRouter, Link } from "react-router-dom";
 const keys = require('../../client_id.json');
 
@@ -97,13 +97,13 @@ class Login extends Component {
             onFailure={this.responseFailGoogle()}
             uxMode = "popup"
           />
-          <FacebookLogin
+          {/* <FacebookLogin
             appId="384791348986446"
             autoLoad={false}
             size="small"
             fields="name"
             callback={this.responseFacebook()}
-          />
+          /> */}
             {/* <a href="www.facebook.com" target="_blank">
             <i className="fab fa-facebook"></i><span>FaceBook</span> 
             </a> */}

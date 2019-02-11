@@ -1,0 +1,103 @@
+.lunarcalendar{
+    @include shadow;
+    @include container;
+    
+  form#calendarform{
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    .formgroup{
+      width: 13rem;
+      label{
+        display: inline;
+        margin: 0 .5rem;
+        font-size:120%;
+      }
+      select{
+        display: inline-block;
+        width: 7rem;
+      }
+    }
+    .submitbutton{
+        width: 8rem;
+    }
+  }
+  .lunarcalendar__result{
+    display: flex;
+    .previousdate,  .nextdate{
+      margin: 2rem auto;
+      background-color: #eee;
+      height: 30rem;
+      width: 10rem;
+      text-align: center;
+      font-size: 3rem;
+      color:#ccc;
+      padding-top: 12.5rem;
+      &:hover{
+        background-color: #ddd;
+        color:#bbb;
+      }
+    }
+    .lunarcalendar__date{
+      margin: 2rem auto;
+      padding: 1rem 2rem;
+      border: 1px solid #aaaaaa;
+      border-radius: 2rem;
+      height: 30rem;
+      width: 25rem;
+      hr{
+          color: #bbb;
+      }
+      .western{
+          padding: .5rem;
+          font-weight: 400;
+          display: flex;
+          .month{
+              width: 50%;
+              p{
+                font-size: 3rem;
+              }
+          }
+          .date{
+            width: 50%;
+            p{
+              font-size: 6rem;
+              text-align: right;
+            }
+        }
+      }
+      .lunar{
+        .lunartag{
+          background-color: blue;
+          color: white;
+          margin-right: 1rem;
+          padding: .2rem .5rem;
+          border-radius: .2rem;
+        }
+      }
+      .suit{
+        margin: 2rem 0;
+        line-height: 150%;
+        .suittag{
+          background-color: green;
+          color: white;
+          margin-right: 1rem;
+          padding: .2rem .5rem;
+          border-radius: .2rem;
+        }
+      }
+      .avoid{
+        margin: 2rem 0;
+        line-height: 150%;
+        .avoidtag{
+          background-color: red;
+          color: white;
+          margin-right: 1rem;
+          padding: .2rem .5rem;
+          border-radius: .2rem;
+        }
+      }
+  }
+  }
+  
+}
