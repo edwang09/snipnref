@@ -68,6 +68,7 @@ class Karaokehost extends Component {
       }
     },200)
   }
+  
   reactplayerReady = () => e =>{
     this.setState({reactplayerReady:true})
   }
