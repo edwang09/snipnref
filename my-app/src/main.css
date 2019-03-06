@@ -942,7 +942,6 @@ a {
     margin: 2rem auto; }
 
 .karaoke-host {
-  box-shadow: 1px 1px 4px #757575;
   max-width: 1100px;
   margin-left: auto;
   margin-right: auto;
@@ -951,11 +950,15 @@ a {
     position: absolute;
     left: 0; }
     .karaoke-host .youtubecontainer .youtubeplayer {
-      height: 90vh;
+      height: 96vh;
       bottom: 0;
-      width: 99vw; }
+      width: 100vw; }
   .karaoke-host .control {
-    display: flex; }
+    display: flex;
+    justify-content: space-around; }
+    .karaoke-host .control .optionbutton {
+      font-size: 75%;
+      margin-bottom: 0.1rem; }
 
 .karaoke-client {
   box-shadow: 1px 1px 4px #757575;

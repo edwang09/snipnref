@@ -12,19 +12,23 @@
 
 
 .karaoke-host{
-    @include shadow;
     @include container;
     .youtubecontainer{
         position: absolute;
         left:0;
         .youtubeplayer{
-            height: 90vh;
+            height: 96vh;
             bottom:0;
-            width: 99vw;
+            width: 100vw;
         }
     }
     .control{
         display:flex;
+        justify-content: space-around;
+        .optionbutton{
+            font-size:75%;
+            margin-bottom: 0.1rem;
+        }
     }
 }
 

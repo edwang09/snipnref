@@ -7,7 +7,6 @@ import ReactPlayer from 'react-player'
 class Karaokehost extends Component {
   constructor(props) {
     super(props);
-
     this.youtubeplayer = React.createRef();
     this.reactplayer = React.createRef();
     this.state = {
@@ -25,7 +24,7 @@ class Karaokehost extends Component {
         roomid: this.state.roomid
       })
       console.log(res.data.current)
-      if (res.data.current && res.data.current !== "placeholder"){
+      if (res.data.current && res.data.current.link !== "placeholder"){
         this.setState({current:res.data.current})
         clearInterval(fetchCurrent)
       }
@@ -48,7 +47,7 @@ class Karaokehost extends Component {
       const res = await axios.post("/api/karaokes/room",{
         roomid: this.state.roomid
       })
-      if (res.data.current && res.data.current !== "placeholder"){
+      if (res.data.current && res.data.current.link !== "placeholder"){
         this.setState({current : res.data.current, queue : res.data.queue})
         clearInterval(fetchCurrent)
       }
@@ -94,14 +93,14 @@ class Karaokehost extends Component {
     axios.post("/api/karaokes/next",{
       roomid: this.state.roomid
     }).then(res=>{
-      console.log("play next: " + res.data.current)
+      console.log("play next: " + res.data.current.title)
       if (res.data.current && res.data.current === this.state.current ){
         console.log("same song")
         this.setState({current:"placeholder"})
         setTimeout(
           this.setState({current : res.data.current, queue : res.data.queue}),1000
         )
-      }else if(res.data.current !== "placeholder"){
+      }else if(res.data.current.link !== "placeholder"){
         console.log("new song")
         this.setState({current : res.data.current, queue : res.data.queue})
       }else{
@@ -111,7 +110,7 @@ class Karaokehost extends Component {
             roomid: this.state.roomid
           })
           console.log(res.data.current)
-          if (res.data.current && res.data.current !== "placeholder"){
+          if (res.data.current && res.data.current.link !== "placeholder"){
             this.setState({current : res.data.current, queue : res.data.queue})
             clearInterval(fetchCurrent)
           }
@@ -136,44 +135,49 @@ class Karaokehost extends Component {
         <h1>
             Welcome to Karaoke room {this.state.roomid}
         </h1>
-        <form >
+        {/* <form >
           <div className="formgroup--inline">
             <label htmlFor="roomid">Roomid:</label>
             <input name="roomid" type = "text" value={this.state.changeroom} onChange={this.roomChange()}/>
           </div>
           <button className="button--success" onClick={this.changeRoom()}>switch room</button>
-        </form>
-        <h5>
-          current:
-        </h5>
+        </form> */}
+        <h4>
+          Current:
+        </h4>
         <p>
-          {this.state.current}
+          {this.state.current && this.state.current.title}
         </p>
-        <h5>
-          queue:
-        </h5>
-          {this.state.queue && this.state.queue.length && this.state.queue.map(item=>{return (
-            <p>
-              {item}
+        <h4>
+          Queue:
+        </h4>
+          {this.state.queue && this.state.queue.length > 0 && this.state.queue.map((item,idx)=>{return (
+            <p key={idx}>
+              {item.title}
             </p>
           )})}
+          {!this.state.queue || this.state.queue.length === 0 && 
+            <p>
+              Nothing in queue
+            </p>
+          }
           <div className="control">
-          <button className="button--success optionbutton" onClick={this.switchOnVocal()}>With Vocal</button>
-          <button className="button--success optionbutton" onClick={this.switchOffVocal()}>No Vocal</button>
-          <button className="button--success optionbutton" onClick={this.next()}>Next Song</button>
+          <button className="button--secondary optionbutton" onClick={this.switchOnVocal()}>With Vocal</button>
+          <button className="button--secondary optionbutton" onClick={this.switchOffVocal()}>No Vocal</button>
+          <button className="button--secondary optionbutton" onClick={this.next()}>Next Song</button>
           </div>
         {this.state.current && this.state.current!=="placeholder" && 
          <div>
           <YouTube
               className="youtubeplayer"
               containerClassName="youtubecontainer"
-              videoId={this.state.current}
+              videoId={this.state.current.link}
               onReady = {this.play()}
               onStateChange={this.neworder()}
               onEnd={this.next()}
               ref={this.youtubeplayer}
             />
-            <ReactPlayer url={"http://localhost:8080/api/karaokes/audio/"+this.state.current} 
+            <ReactPlayer url={"http://localhost:8080/api/karaokes/audio/"+this.state.current.link} 
             playing
               onError = {this.playerError()}
               onReady = {this.reactplayerReady()}

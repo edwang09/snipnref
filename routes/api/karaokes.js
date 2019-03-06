@@ -5,7 +5,7 @@ const ytdl = require('ytdl-core');
 const fs = require('fs');
 const YoutubeMp3Downloader = require("youtube-mp3-downloader");
 const YD = new YoutubeMp3Downloader({
-    "ffmpegPath": "ffmpeg",        // Where is the FFmpeg binary located?
+    "ffmpegPath": "./ffmpegwin/bin/ffmpeg",        // Where is the FFmpeg binary located?
     "outputPath": "./karaoke",    // Where should the downloaded and encoded files be stored?
     "youtubeVideoQuality": "highest",       // What video quality should be used?
     "queueParallelism": 2,                  // How many parallel downloads/encodes should be started?
@@ -13,6 +13,11 @@ const YD = new YoutubeMp3Downloader({
 });
 const sox = require('sox-stream');
 
+const placeholder = {
+    link: "placeholder",
+    title: "placeholder",
+    img: "https://designshack.net/wp-content/uploads/placehold.jpg"
+}
 //@route   GET api/karaoke/all
 //@desc    Test karaoke route
 //@access  Public
@@ -36,7 +41,7 @@ router.post("/create", (req, res) => {
         console.log(karaokes)
         if (karaokes.length === 0) {
             const newKaraoke = new Karaoke({
-                current: "placeholder",
+                current: placeholder,
                 queue: [],
                 roomid: req.body.roomid
               });
@@ -62,7 +67,7 @@ router.post("/order", (req, res) => {
         YD.download(link,link+".mp3");
         YD.on("finished", function(err, data) {
             Karaoke.findOne({roomid:roomid}).then(karaoke => {
-                if (karaoke.current === "placeholder"){
+                if (karaoke.current.link === "placeholder"){
                     karaoke.current = order
                 }else{
                     karaoke.queue.push( order )
@@ -82,7 +87,7 @@ router.post("/order", (req, res) => {
         });
     }else{
         Karaoke.findOne({roomid:roomid}).then(karaoke => {
-            if (karaoke.current === "placeholder"){
+            if (karaoke.current.link === "placeholder"){
                 karaoke.current=order
             }else{
                 karaoke.queue.push(order)
@@ -153,7 +158,7 @@ router.post("/next", (req, res) => {
             karaoke.current = karaoke.queue[0]
             karaoke.queue.shift()
         }else{
-            karaoke.current = "placeholder"
+            karaoke.current = placeholder
         }
         karaoke.save()
         .then(karaoke => res.json(karaoke))
@@ -186,7 +191,7 @@ router.delete("/", (req, res) => {
 router.delete("/all",  (req, res) => {
     Karaoke.find().then(async karaokes => {
         console.log(karaokes)
-        await Promise.all(karaokes.forEach(karaoke =>{
+        await Promise.all(karaokes.map(karaoke =>{
             karaoke.remove()
         }))
         res.send("done")
