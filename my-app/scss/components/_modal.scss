@@ -53,6 +53,17 @@
           padding: 10px 16px;
           padding-bottom:3rem;
         }
+        .actions{
+          display:flex;
+          justify-content: space-around;
+        }
+        .karaoke__card{
+          img{
+            width:60%;
+            display: block;
+            margin: 1rem auto;
+          }
+        }
       }
     }
   }

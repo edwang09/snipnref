@@ -45,6 +45,12 @@
   @mixin tablet-landscape {
     @media(min-width: 839px){@content}
   };
+  @mixin m-tablet-portrait {
+    @media(max-width: 480px){@content}
+  };
+  @mixin m-tablet-landscape {
+    @media(max-width: 839px){@content}
+  };
   @mixin computer {
     @media(min-width: 1024px){@content}
   };

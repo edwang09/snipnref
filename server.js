@@ -8,6 +8,7 @@ const users = require("./routes/api/users");
 const snippets = require("./routes/api/snippets");
 const references = require("./routes/api/references");
 const votes = require("./routes/api/votes");
+const karaokes = require("./routes/api/karaokes");
 const fengshui = require("./routes/fengshui/api");
 
 const app = express();
@@ -74,6 +75,7 @@ app.use("/api/users", users);
 app.use("/api/snippets", snippets);
 app.use("/api/references", references);
 app.use("/api/votes", votes);
+app.use("/api/karaokes", karaokes);
 
 //万年历api
 app.use("/api/fengshui", fengshui);

@@ -27,6 +27,9 @@ import voteentry from "./pages/demos/voter/vote-entry";
 import vote from "./pages/demos/voter/vote";
 import VoteResult from "./pages/demos/voter/vote-result";
 import votecreate from "./pages/demos/voter/vote-create";
+import Karaokeentry from "./pages/demos/karaoke/karaoke-entry";
+import Karaokehost from "./pages/demos/karaoke/karaoke-host";
+import Karaokeclient from "./pages/demos/karaoke/karaoke-client";
 
 // Check for token
 if (localStorage.jwtToken) {
@@ -68,6 +71,9 @@ class App extends Component {
                   component={VoteResult}
                 />
                 <Route exact path="/demos/votecreate" component={votecreate} />
+                <Route exact path="/demos/karaoke" component={Karaokeentry} />
+                <Route exact path="/demos/karaokehost" component={Karaokehost} />
+                <Route exact path="/demos/karaokeclient" component={Karaokeclient} />
               </div>
             </main>
             <ModalContainer />

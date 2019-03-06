@@ -9,6 +9,8 @@ import Addusefulsitesitemmodal from "./modals/Addusefulsitesitemmodal";
 import Editusefulsitetabmodal from "./modals/Editusefulsitetabmodal";
 import Addprojectmodal from "./modals/Addprojectmodal";
 import Editprojectmodal from "./modals/Editprojectmodal";
+import Karaokeordermodal from "./modals/Karaokeordermodal";
+import Karaokeeditmodal from "./modals/Karaokeeditmodal";
 const MODAL_COMPONENTS = {
   TEST_MODAL: Testmodal,
   CONFIRM_MODAL: Confirmmodal,
@@ -17,7 +19,9 @@ const MODAL_COMPONENTS = {
   ADDUSEFULSITEITEM_MODAL: Addusefulsitesitemmodal,
   EDITUSEFULSITETAB_MODAL: Editusefulsitetabmodal,
   ADDPROJECT_MODAL: Addprojectmodal,
-  EDITPROJECT_MODAL: Editprojectmodal
+  EDITPROJECT_MODAL: Editprojectmodal,
+  KARAOKEORDER_MODAL: Karaokeordermodal,
+  KARAOKEEDIT_MODAL: Karaokeeditmodal
 };
 
 class ModalContainer extends Component {

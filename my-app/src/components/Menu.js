@@ -84,6 +84,9 @@ class Navbar extends Component {
                   <Link className="nav-link" to="/demos/lunarcalendar">
                     Lunar Calendar
                   </Link>
+                  <Link className="nav-link" to="/demos/karaoke">
+                    Karaoke
+                  </Link>
                 </div>
               </li>
               <li className="nav-item">

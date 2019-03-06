@@ -1,0 +1,123 @@
+.karaoke-entry{
+    @include shadow;
+    @include container;
+    min-height: 100vh;
+    .karaokenav{
+        max-width: 20rem;
+        margin: 2rem auto;
+    }
+
+}
+
+
+
+.karaoke-host{
+    @include shadow;
+    @include container;
+    .youtubecontainer{
+        position: absolute;
+        left:0;
+        .youtubeplayer{
+            height: 90vh;
+            bottom:0;
+            width: 99vw;
+        }
+    }
+    .control{
+        display:flex;
+    }
+}
+
+.karaoke-client{
+    
+    @include shadow;
+    @include container;
+    .room{
+        .roomhead{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .controller{
+            .panel{
+                display: flex;
+                justify-content: space-around;
+            }
+        }
+        .search{
+            .searchicon{
+                display: inline-block;
+                font-size: 170%;
+                margin-left:1rem;
+            }
+            .navigation{
+                display: flex;
+                justify-content: space-around;
+                button{
+                    width: 45%;
+                }
+            }
+        }
+    }
+    .results{
+        .itemcard{
+            @include shadow;
+            display: flex;
+            justify-content: flex-start;
+            padding: 1rem 2rem;
+            margin-bottom: 2rem;
+            .thumbnail{
+                margin-right:2rem;
+            }
+            .information{
+                p{
+                    margin-bottom: 0.5rem;
+                    color: #555;
+                }
+            }
+
+        }
+    }
+}
+@include m-tablet-landscape{
+    .karaoke-client{
+        padding: .2rem .5rem;
+        .results{
+            .itemcard{
+                padding: .2rem .5rem;
+                .thumbnail{
+                    flex-basis: 50%;
+                    img{
+                        width: 100%;
+                    }
+                }
+                .information{
+                    flex-basis: 50%;
+                    font-size:65%;
+                }
+    
+            }
+        }
+    }
+}
+@include m-tablet-portrait{
+    .karaoke-client{
+        .results{
+            .itemcard{
+                flex-direction: column;
+                justify-content: center;
+        
+                .thumbnail{
+                    margin-right: 0;
+                    img{
+                        width: 100%;
+                    }
+                }
+                .information{
+                    font-size:65%;
+                }
+    
+            }
+        }
+    }
+}
