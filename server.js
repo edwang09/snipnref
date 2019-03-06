@@ -25,7 +25,6 @@ app.use(
     extended: true
   })
 );
-
 app.use(bodyParser.json());
 
 //Permissions Control (will be deleted)
