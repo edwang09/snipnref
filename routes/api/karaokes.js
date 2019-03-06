@@ -117,15 +117,15 @@ router.get("/audio/:url", (req, res) => {
     const path = "karaoke/" + url + ".mp3"
     if (fs.existsSync(path)){
         const transform = sox({
-            soxPath : "sox/sox",
+            soxPath : "sox",
             input: { type: 'mp3' },
             output: { type: 'mp3' },
             effects: 'oops'
         })
         fs.createReadStream(path)
-        // .pipe( transform ).on("error",e=>{
-        //     console.log(e)
-        // })
+        .pipe( transform ).on("error",e=>{
+            console.log(e)
+        })
         .pipe(res);
     }else{
         res.send({failed:true})
