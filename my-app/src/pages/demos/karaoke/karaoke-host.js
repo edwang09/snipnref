@@ -68,7 +68,7 @@ class Karaokehost extends Component {
       }
     },200)
   }
-  
+
   reactplayerReady = () => e =>{
     this.setState({reactplayerReady:true})
   }
@@ -178,7 +178,7 @@ class Karaokehost extends Component {
               onEnd={this.next()}
               ref={this.youtubeplayer}
             />
-            <ReactPlayer url={"http://localhost:8080/api/karaokes/audio/"+this.state.current.link} 
+            <ReactPlayer url={"https://pacific-plains-62879.herokuapp.com/api/karaokes/audio/"+this.state.current.link} 
             playing
               onError = {this.playerError()}
               onReady = {this.reactplayerReady()}
