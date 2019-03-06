@@ -5,7 +5,7 @@ const ytdl = require('ytdl-core');
 const fs = require('fs');
 const YoutubeMp3Downloader = require("youtube-mp3-downloader");
 const YD = new YoutubeMp3Downloader({
-    "ffmpegPath": "ffmpegwin/bin/ffmpeg",        // Where is the FFmpeg binary located?
+    "ffmpegPath": "ffmpeg",        // Where is the FFmpeg binary located?
     "outputPath": "./karaoke",    // Where should the downloaded and encoded files be stored?
     "youtubeVideoQuality": "highest",       // What video quality should be used?
     "queueParallelism": 2,                  // How many parallel downloads/encodes should be started?
