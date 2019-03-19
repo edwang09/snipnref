@@ -180,11 +180,11 @@ class Karaokeclient extends Component {
               }
               {!this.state.controller &&
                 <div className="search">
-                  <form action="">
+                  <form  onSubmit={this.submitSearch()}>
                     <div className="formgroup--inline">
                     <label htmlFor="search">Search:</label>
                     <input name="search" type = "text" value={this.state.search} onChange={this.seachChange()}/>
-                    <span className="searchicon" onClick={this.submitSearch()}><i className="fas fa-search"></i></span>
+                    <span  className="searchicon" onClick={this.submitSearch()}><i className="fas fa-search"></i></span>
                     </div>
                   </form>
                   <div className="results">

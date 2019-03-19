@@ -50,9 +50,9 @@ class Navbar extends Component {
             <Link className="nav-link" to="/dashboard">
               Dashboard
             </Link>
-            <a className="nav-link" onClick={this.props.logoutUser}>
+            <p className="nav-link" onClick={this.props.logoutUser}>
               Log out
-            </a>
+            </p>
           </div>
         </li>
       </ul>
@@ -71,7 +71,7 @@ class Navbar extends Component {
           </Link>
           <div className={classNames("navbar__menu",{"sidebar-open":this.state.slideOpen})}>
             <ul className="navbar__nav">
-              <a  className="btn-close" onClick={this.toggleSlide()}>&times;</a>
+              <p  className="btn-close" onClick={this.toggleSlide()}>&times;</p>
               <li className="nav-item dropdown">
                 <p className="nav-link" onClick={this.toggleDropdown("applications")}>Applications</p>
                 <div className={classNames("dropdown-content",{"dropdown-open":this.state.applicationDropdownOpen})}>

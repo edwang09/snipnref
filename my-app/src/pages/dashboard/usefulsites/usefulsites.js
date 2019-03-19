@@ -23,13 +23,13 @@ class Usefulsites extends Component {
           className = "tab-item";
         }
         return (
-          <a
+          <p
             key={id}
             className={className}
             onClick={this.switchtab(id)}
           >
             {cat.name}
-          </a>
+          </p>
         );
       });
       sitelistRender = sitelist.map((cat, tabid) => {

@@ -1,5 +1,7 @@
 /node_modules
 /ffmpegwin
+/sox
 package-lock.json
 /config/keys_dev.js
 /.vscode
+karaoke/*.mp3

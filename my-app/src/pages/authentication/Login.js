@@ -6,7 +6,6 @@ import classnames from "classnames";
 import GoogleLogin from 'react-google-login';
 //import FacebookLogin from 'react-facebook-login';
 import { withRouter, Link } from "react-router-dom";
-const keys = require('../../client_id.json');
 
 class Login extends Component {
   constructor(props) {

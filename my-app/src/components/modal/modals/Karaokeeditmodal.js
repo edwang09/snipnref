@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import Modal from "../Modal";
 import { hideModal } from "../../../actions/modalActions";
-import { editUsefulsitetab } from "../../../actions/dashboardActions";
 import Axios from "axios";
 
 export class Karaokeeditmodal extends Component {

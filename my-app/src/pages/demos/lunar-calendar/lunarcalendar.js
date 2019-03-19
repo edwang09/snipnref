@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import axios from 'axios'
-import { rejects } from "assert";
 
 class LunarCalendar extends Component {
   constructor(props) {
@@ -226,7 +225,7 @@ class LunarCalendar extends Component {
                   Lunar Year
                 </span>
                 <span>
-                { this.state.result.lunarYear + "(" + this.state.result.animalsYear + ")" + "  " +this.state.result.lunar }
+                { this.state.result.lunarYear + "(" + this.state.result.animalsYear + ")  " + this.state.result.lunar }
                 </span>
               <hr/>
               </div>

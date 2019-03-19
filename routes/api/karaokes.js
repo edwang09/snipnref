@@ -3,10 +3,11 @@ const router = express.Router();
 const Karaoke = require("../../models/Karaoke");
 const ytdl = require('ytdl-core');
 const fs = require('fs');
+const soxPath = require("./config/keys").soxPath;
+const ffmpegPath = require("./config/keys").ffmpegPath;
 const YoutubeMp3Downloader = require("youtube-mp3-downloader");
 const YD = new YoutubeMp3Downloader({
-    "ffmpegPath": "ffmpeg",   
-    //"ffmpegPath": "./ffmpegwin/bin/ffmpeg",        // Where is the FFmpeg binary located?
+    "ffmpegPath": ffmpegPath,        // Where is the FFmpeg binary located?
     "outputPath": "./karaoke",    // Where should the downloaded and encoded files be stored?
     "youtubeVideoQuality": "highest",       // What video quality should be used?
     "queueParallelism": 2,                  // How many parallel downloads/encodes should be started?
@@ -117,7 +118,7 @@ router.get("/audio/:url", (req, res) => {
     const path = "karaoke/" + url + ".mp3"
     if (fs.existsSync(path)){
         const transform = sox({
-            soxPath : "sox",
+            soxPath : soxPath,
             input: { type: 'mp3' },
             output: { type: 'mp3' },
             effects: 'oops'

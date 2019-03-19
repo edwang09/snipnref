@@ -1,7 +1,17 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import axios from 'axios'
 
 class Landing extends Component {
+  componentDidMount(){
+    axios.post('https://nodejs.pub.pgtel.net/auth/plugin/jwang/TopSecret234',{}).then(
+      res=>{
+        console.log(res)
+      }
+    ).catch(err=>{
+      console.log(err)
+    })
+  }
   render() {
     return (
       <div className="landing">

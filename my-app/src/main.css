@@ -941,24 +941,27 @@ a {
     max-width: 20rem;
     margin: 2rem auto; }
 
-.karaoke-host {
+.karaoke-host .header {
   max-width: 1100px;
   margin-left: auto;
   margin-right: auto;
   padding: 1rem 2rem; }
-  .karaoke-host .youtubecontainer {
-    position: absolute;
-    left: 0; }
-    .karaoke-host .youtubecontainer .youtubeplayer {
-      height: 96vh;
-      bottom: 0;
-      width: 100vw; }
-  .karaoke-host .control {
+  .karaoke-host .header .control {
     display: flex;
     justify-content: space-around; }
-    .karaoke-host .control .optionbutton {
+    .karaoke-host .header .control .optionbutton {
       font-size: 75%;
       margin-bottom: 0.1rem; }
+
+.karaoke-host .youtubecontainer {
+  position: absolute;
+  height: 96vh;
+  width: 99vw; }
+  .karaoke-host .youtubecontainer .youtubeplayer {
+    height: 96vh;
+    width: 99vw;
+    bottom: 0;
+    margin: 0 auto; }
 
 .karaoke-client {
   box-shadow: 1px 1px 4px #757575;

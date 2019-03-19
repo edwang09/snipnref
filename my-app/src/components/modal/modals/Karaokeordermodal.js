@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import Modal from "../Modal";
 import { hideModal } from "../../../actions/modalActions";
-import { editUsefulsitetab } from "../../../actions/dashboardActions";
 import Axios from "axios";
 
 export class Karaokeordermodal extends Component {
@@ -31,6 +30,7 @@ export class Karaokeordermodal extends Component {
     }).catch(err=>{
         console.log(err)
     })
+    this.props.hideModal();
   }
   addToTop=()=>e=>{
       

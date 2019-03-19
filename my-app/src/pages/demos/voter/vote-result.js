@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import spongebob from "./spongebob.jpg";
 import axios from "axios";
 
 class VoteResult extends Component {
