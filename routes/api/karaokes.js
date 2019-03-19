@@ -3,8 +3,8 @@ const router = express.Router();
 const Karaoke = require("../../models/Karaoke");
 const ytdl = require('ytdl-core');
 const fs = require('fs');
-const soxPath = require("./config/keys").soxPath;
-const ffmpegPath = require("./config/keys").ffmpegPath;
+const soxPath = require("../../config/keys").soxPath;
+const ffmpegPath = require("../../config/keys").ffmpegPath;
 const YoutubeMp3Downloader = require("youtube-mp3-downloader");
 const YD = new YoutubeMp3Downloader({
     "ffmpegPath": ffmpegPath,        // Where is the FFmpeg binary located?
