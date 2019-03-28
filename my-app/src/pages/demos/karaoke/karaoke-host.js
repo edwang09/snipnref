@@ -89,7 +89,7 @@ class Karaokehost extends Component {
       },30000)
     };
     this.connection.onmessage = evt => {
-      if (evt.data) {
+      if (evt.data && evt.data!=="pong") {
         const result = JSON.parse(evt.data)
         console.log(result)
         switch (result.type) {
