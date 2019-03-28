@@ -12,29 +12,31 @@ class Karaokehost extends Component {
       changeroom:""
     };
   }
-  roomChange=()=>e=>{
-    this.setState({changeroom:e.target.value})
-  }
-  changeRoom=()=>e=>{
-    e.preventDefault()
-    this.setState({roomid:this.state.changeroom})
-    const fetchCurrent = setInterval(async ()=>{
-      const res = await axios.post("/api/karaokes/room",{
-        roomid: this.state.roomid
-      })
-      console.log(res.data.current)
-      if (res.data.current && res.data.current.link !== "placeholder"){
-        this.setState({current:res.data.current})
-        clearInterval(fetchCurrent)
-      }
-    },3000)
-  }
-  waitForOrder = () => {
+  // roomChange=()=>e=>{
+  //   this.setState({changeroom:e.target.value})
+  // }
+  // changeRoom=()=>e=>{
+  //   e.preventDefault()
+  //   this.setState({roomid:this.state.changeroom})
+  //   const fetchCurrent = setInterval(async ()=>{
+  //     const res = await axios.post("/api/karaokes/room",{
+  //       roomid: this.state.changeroom
+  //     })
+  //     console.log(res.data.current)
+  //     if (res.data.current && res.data.current.link !== "placeholder"){
+  //       this.setState({current:res.data.current})
+  //       clearInterval(fetchCurrent)
+  //     }
+  //   },3000)
+  // }
+  waitForOrder = (roomid) => {
     // const fetchCurrent = setInterval(async ()=>{
       axios.post("/api/karaokes/room",{
-        roomid: this.state.roomid
+        roomid
       }).then(res=>{
         this.setState({currentroom : res.data})
+      }).catch(err=>{
+        console.log(err)
       })
       // if (res.data.current && res.data.current.link !== "placeholder"){
       //   clearInterval(fetchCurrent)
@@ -69,7 +71,7 @@ class Karaokehost extends Component {
     //     this.setState({roomid:res.data.roomid})
     //   }
     // })
-    this.waitForOrder()
+    this.waitForOrder(roomid)
   } 
   componentDidMount() {
     this.connection = new WebSocket((process.env.NODE_ENV === "production"? "ws://www.yoshio.space": "ws://localhost:8080") );
@@ -142,9 +144,6 @@ class Karaokehost extends Component {
         this.setState({currentroom:{...this.state.currentroom, current: {link:"placeholder"}} })
         setTimeout(()=>
         this.setState({currentroom : res.data}),300)
-      if (res.data.current && res.data.current.link === "placeholder" ){
-        this.waitForOrder()
-      }
     }).catch(err=>console.log(err))
   }
 
