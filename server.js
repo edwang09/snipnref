@@ -10,8 +10,35 @@ const references = require("./routes/api/references");
 const votes = require("./routes/api/votes");
 const karaokes = require("./routes/api/karaokes");
 const fengshui = require("./routes/fengshui/api");
+const uuidv1 = require('uuid/v1');
 
+// const WebSocket = require('ws');
 const app = express();
+
+var expressWs = require('express-ws')(app);
+WSCLIENTS = {}
+WSclean = (roomid) => {
+  if (WSCLIENTS[roomid]){
+    const newclient = WSCLIENTS[roomid].client.filter(ws=>ws.ws.readyState === 1)
+    const newhost = (WSCLIENTS[roomid].host.ws.readyState===1 ? WSCLIENTS[roomid].host : undefined)
+    WSCLIENTS[roomid] = {host:newhost,client:newclient}
+  }
+}
+function printwsclient(WSCLIENTS){
+  console.log("===socket info===")
+  Object.keys(WSCLIENTS).forEach(key=>{
+    console.log("room number: " + key)
+    if (WSCLIENTS[key].host){
+      console.log("host: " + WSCLIENTS[key].host.clientID + ",status: " + WSCLIENTS[key].host.ws.readyState)
+    }
+    if (WSCLIENTS[key].client){
+      WSCLIENTS[key].client.forEach(client=>{
+        console.log("client: " + client.clientID + ",status: " + WSCLIENTS[key].host.ws.readyState)
+      })
+    }
+  })
+  console.log("===socket end===")
+}
 
 const mongoURI = require("./config/keys").mongoURI;
 mongoose
@@ -88,6 +115,90 @@ if (process.env.NODE_ENV === "production") {
     res.sendFile(path.resolve(__dirname, "my-app", "build", "index.html"));
   });
 }
+
+
+
+app.ws('/', function(ws, req) {
+  ws.on('message', function(message) {
+    const msg = JSON.parse(message)
+    console.log(msg)
+    switch (msg.type) {
+      case "register":
+        const clientID = uuidv1()
+        if (WSCLIENTS[msg.roomid]){
+          if(msg.role==="host"){
+            WSCLIENTS[msg.roomid].host={ws,clientID }
+          }else if(msg.role==="client"){
+            if (WSCLIENTS[msg.roomid].client && WSCLIENTS[msg.roomid].client.length){
+              WSCLIENTS[msg.roomid].client.push({ws,clientID })
+            }else{
+              WSCLIENTS[msg.roomid].client=[{ws,clientID }]
+            }
+          }
+        }else{
+          if(msg.role==="host"){
+            WSCLIENTS[msg.roomid]={host:{ ws,clientID },client:[]}
+          }else if(msg.role==="client"){
+            WSCLIENTS[msg.roomid]={client:[{ ws,clientID }],host:{}}
+          }
+        }
+        ws.send(JSON.stringify({
+          type:"register",
+          clientID
+        }),function ack(error) {
+          if (error){
+            console.log(error)
+          }
+        })
+        break;
+      case "next":
+        if (WSCLIENTS[msg.roomid] && WSCLIENTS[msg.roomid].host && WSCLIENTS[msg.roomid].host.ws.readyState===1){
+              WSCLIENTS[msg.roomid].host.ws.send(JSON.stringify({
+                type:"next"
+              }),function ack(error) {
+                if (error){
+                  console.log(error)
+                }
+              })
+        }
+        break;
+
+      case "withvocal":
+        if (WSCLIENTS[msg.roomid] && WSCLIENTS[msg.roomid].host && WSCLIENTS[msg.roomid].host.ws.readyState===1){
+              WSCLIENTS[msg.roomid].host.ws.send(JSON.stringify({
+                type:"withvocal"
+              }),function ack(error) {
+                if (error){
+                  console.log(error)
+                }
+              })
+        }
+        break;
+      case "novocal":
+        if (WSCLIENTS[msg.roomid] && WSCLIENTS[msg.roomid].host && WSCLIENTS[msg.roomid].host.ws.readyState===1){
+              WSCLIENTS[msg.roomid].host.ws.send(JSON.stringify({
+                type:"novocal"
+              }),function ack(error) {
+                if (error){
+                  console.log(error)
+                }
+              })
+        }
+        break;
+    
+      default:
+        break;
+    }
+    
+    WSclean(msg.roomid)
+    printwsclient(WSCLIENTS)
+  });
+  // console.log('socket', req.testing);
+});
+
+
+
+
 
 const port = process.env.PORT || 8080;
 

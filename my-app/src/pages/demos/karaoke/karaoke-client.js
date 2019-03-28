@@ -18,6 +18,9 @@ class Karaokeclient extends Component {
   componentWillMount() {
 
   }
+  componentDidMount() {
+    
+  }
   seachChange = () => e => {
     this.setState({search:e.target.value})
   }
@@ -77,6 +80,39 @@ class Karaokeclient extends Component {
       this.setState({
         currentroom: res.data
       })
+      this.connection = new WebSocket('ws://localhost:8080');
+      this.connection.onopen = evt => { 
+        console.log("connection open")
+        this.connection.send(JSON.stringify({
+          "type":"register",
+          "role":"client",
+          "roomid":res.data.roomid
+        }))
+      };
+      this.connection.onmessage = evt => {
+        if (evt.data) {
+          const result = JSON.parse(evt.data)
+          console.log(result)
+          switch (result.type) {
+            case "register":
+              this.setState({clientID: result.clientID})
+              break;
+            case "push":
+              this.setState({currentroom:result.data})
+              break;
+
+            default:
+              break;
+          }
+        }
+      };
+      this.connection.onclose = evt => {
+        alert("websocket closed")
+      };
+      this.connection.onerror = evt => { 
+        console.log("error recieved")
+        console.log(evt)
+      };
     }).catch(err=>{
       console.log(err)
     })
@@ -94,6 +130,34 @@ class Karaokeclient extends Component {
       })
     }
     this.setState({controller:!this.state.controller})
+  }
+  switchVocal = () => e =>{
+    let sockettype
+    if(e.target.checked){
+      sockettype="novocal"
+    }else{
+      sockettype="withvocal"
+    }
+    if (this.connection){
+      this.connection.send(JSON.stringify({
+        "type":sockettype,
+        "role":"client",
+        "roomid":this.state.currentroom.roomid,
+        "clientID":this.state.clientID
+      }))
+    }
+  }
+
+
+  nextSong = () => e => {
+    if (this.connection){
+      this.connection.send(JSON.stringify({
+        "type":"next",
+        "role":"client",
+        "roomid":this.state.currentroom.roomid,
+        "clientID":this.state.clientID
+      }))
+    }
   }
   render() {
     let ItemsRender 
@@ -153,10 +217,10 @@ class Karaokeclient extends Component {
                 <div className="controller">
                   <div className="panel">
                   <div className="switch">
-                    <input id="vocal" type="checkbox" className="toggle"  />
+                    <input id="vocal" type="checkbox" className="toggle" onClick={this.switchVocal()} />
                     <label htmlFor="vocal" className="toggle-button" data-tg-off = "Original" data-tg-on = "Accompany"></label>
                   </div>
-                  <button className="button--secondary">Next Song</button>
+                  <button className="button--secondary" onClick={this.nextSong()}>Next Song</button>
                 </div>
 
                   <div className="results">

@@ -30,15 +30,16 @@ class Karaokehost extends Component {
     },3000)
   }
   waitForOrder = () => {
-    const fetchCurrent = setInterval(async ()=>{
-      const res = await axios.post("/api/karaokes/room",{
+    // const fetchCurrent = setInterval(async ()=>{
+      axios.post("/api/karaokes/room",{
         roomid: this.state.roomid
+      }).then(res=>{
+        this.setState({currentroom : res.data})
       })
-      if (res.data.current && res.data.current.link !== "placeholder"){
-        this.setState({current : res.data.current, queue : res.data.queue})
-        clearInterval(fetchCurrent)
-      }
-    },3000)
+      // if (res.data.current && res.data.current.link !== "placeholder"){
+      //   clearInterval(fetchCurrent)
+      // }
+    // },3000)
   }
   waitForReady = (e) =>{
     const waitToPlay = setInterval(()=>{
@@ -69,6 +70,56 @@ class Karaokehost extends Component {
     //   }
     // })
     this.waitForOrder()
+  } 
+  componentDidMount() {
+    this.connection = new WebSocket('ws://localhost:8080');
+    this.connection.onopen = evt => { 
+      console.log("connection open")
+      if (this.state.roomid){
+        this.connection.send(JSON.stringify({
+          "type":"register",
+          "role":"host",
+          "roomid":this.state.roomid
+        }))
+
+      }
+    };
+    this.connection.onmessage = evt => {
+      if (evt.data) {
+        const result = JSON.parse(evt.data)
+        console.log(result)
+        switch (result.type) {
+          case "register":
+            this.setState({clientID: result.clientID})
+            break;
+          case "next":
+            console.log("playnext")
+            this.next()(null)
+            break;
+          case "novocal":
+            this.reactplayer.current.player.player.unmute()
+            this.youtubeplayer.current.internalPlayer.mute()
+            break;
+          case "withvocal":
+            this.reactplayer.current.player.player.mute()
+            this.youtubeplayer.current.internalPlayer.unMute()
+            break;
+          case "push":
+            this.setState({currentroom:result.data})
+            break;
+          default:
+            break;
+        }
+      }
+    	
+    };
+    this.connection.onclose = evt => {
+      alert("websocket closed")
+    };
+    this.connection.onerror = evt => { 
+    	console.log("error recieved")
+    	console.log(evt)
+    };
   }
   play = () => e => {
     this.waitForReady(e)
@@ -88,9 +139,9 @@ class Karaokehost extends Component {
       roomid: this.state.roomid
     }).then(res=>{
       console.log(res.data)
-        this.setState({current : {link:"placeholder"}})
+        this.setState({currentroom:{...this.state.currentroom, current: {link:"placeholder"}} })
         setTimeout(()=>
-        this.setState({current : res.data.current, queue : res.data.queue}),300)
+        this.setState({currentroom : res.data}),300)
       if (res.data.current && res.data.current.link === "placeholder" ){
         this.waitForOrder()
       }
@@ -128,17 +179,17 @@ class Karaokehost extends Component {
           Current:
         </h4>
         <p>
-          {this.state.current && this.state.current.title}
+          {this.state.currentroom && this.state.currentroom.current && this.state.currentroom.current.title}
         </p>
         <h4>
           Queue:
         </h4>
-          {(this.state.queue && this.state.queue.length > 0) && this.state.queue.map((item,idx)=>{return (
+          {(this.state.currentroom && this.state.currentroom.queue && this.state.currentroom.queue.length > 0) && this.state.currentroom.queue.map((item,idx)=>{return (
             <p key={idx}>
               {item.title}
             </p>
           )})}
-          {(!this.state.queue || this.state.queue.length === 0) && 
+          {(!this.state.currentroom || !this.state.currentroom.queue || this.state.currentroom.queue.length === 0) && 
             <p>
               Nothing in queue
             </p>
@@ -149,18 +200,18 @@ class Karaokehost extends Component {
           <button className="button--secondary optionbutton" onClick={this.next()}>Next Song</button>
           </div>
         </div>
-            {(this.state.current && this.state.current.link && this.state.current.link!=="placeholder") && 
+            {(this.state.currentroom && this.state.currentroom.current && this.state.currentroom.current.link && this.state.currentroom.current.link!=="placeholder") && 
               <div>
               <YouTube
                   className="youtubeplayer"
                   containerClassName="youtubecontainer"
-                  videoId={this.state.current.link}
+                  videoId={this.state.currentroom.current.link}
                   onReady = {this.waitForReady.bind(this)}
                   onStateChange={this.neworder()}
                   onEnd={this.next()}
                   ref={this.youtubeplayer}
                 />
-                <ReactPlayer url={"/api/karaokes/audio/"+this.state.current.link} 
+                <ReactPlayer url={"/api/karaokes/audio/"+this.state.currentroom.current.link} 
                 playing
                   onError = {this.playerError()}
                   onReady = {() => this.setState({reactplayerReady:true})}

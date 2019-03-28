@@ -20,6 +20,36 @@ const placeholder = {
     title: "placeholder",
     img: "https://designshack.net/wp-content/uploads/placehold.jpg"
 }
+
+function sendSocket(data,roomid){
+    console.log("send socket data")
+    const socketData = {
+        type:"push",
+        roomid: roomid,
+        data: data
+    }
+    if(WSCLIENTS[roomid] && WSCLIENTS[roomid].host && WSCLIENTS[roomid].host.ws.readyState===1){
+        WSCLIENTS[roomid].host.ws.send(JSON.stringify(socketData),function ack(error) {
+            if (error){
+              console.log(error)
+            }
+          })
+    }
+    if(WSCLIENTS[roomid] && WSCLIENTS[roomid].client){
+        WSCLIENTS[roomid].client.forEach(ws=>{
+            if (ws.ws.readyState===1) {
+                ws.ws.send(JSON.stringify(socketData),function ack(error) {
+                if (error){
+                    console.log(error)
+                }
+                })
+            }
+        })
+    }
+}
+
+
+
 //@route   GET api/karaoke/all
 //@desc    Test karaoke route
 //@access  Public
@@ -71,17 +101,25 @@ router.post("/order", (req, res) => {
             Karaoke.findOne({roomid:roomid}).then(karaoke => {
                 if (karaoke.current.link === "placeholder"){
                     karaoke.current = order
-                }else{
+                    karaoke.save()
+                    .then(karaoke => {
+                        sendSocket(karaoke,roomid)
+                        res.json(karaoke)})
+                    .catch(err=>{
+                        console.log(err)
+                    })
+                }else if(data.videoId === link){
+                    console.log(order)
                     karaoke.queue.push( order )
+                    karaoke.save()
+                    .then(karaoke => {
+                        sendSocket(karaoke,roomid)
+                        res.json(karaoke)})
+                    .catch(err=>{
+                        console.log(err)
+                    })
                 }
-                karaoke.save()
-                .then(karaoke => res.json(karaoke))
-                .catch(err=>{
-                    res.json({
-                        success: false,
-                        err
-                    });
-                })
+                
             });
         });
         YD.on("error", function(err, data) {
@@ -95,12 +133,11 @@ router.post("/order", (req, res) => {
                 karaoke.queue.push(order)
             }
             karaoke.save()
-            .then(karaoke => res.json(karaoke))
+            .then(karaoke => {
+                sendSocket(karaoke,roomid)
+                res.json(karaoke)})
             .catch(err=>{
-                res.json({
-                    success: false,
-                    err
-                });
+                console.log(err)
             })
         });
     }
@@ -125,7 +162,7 @@ router.get("/audio/:url", (req, res) => {
         })
         fs.createReadStream(path)
         .pipe( transform ).on("error",e=>{
-            console.log(e)
+            // console.log(e)
         })
         .pipe(res);
     }else{
@@ -163,7 +200,9 @@ router.post("/next", (req, res) => {
             karaoke.current = placeholder
         }
         karaoke.save()
-        .then(karaoke => res.json(karaoke))
+        .then(karaoke => {
+            sendSocket(karaoke,roomid)
+            res.json(karaoke)})
         .catch(err=>{
             res.json({
                 success: false,
