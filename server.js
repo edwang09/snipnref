@@ -11,11 +11,12 @@ const votes = require("./routes/api/votes");
 const karaokes = require("./routes/api/karaokes");
 const fengshui = require("./routes/fengshui/api");
 const uuidv1 = require('uuid/v1');
+const http = require('http');
+const WebSocket = require('ws');
 
 // const WebSocket = require('ws');
 const app = express();
 
-var expressWs = require('express-ws')(app);
 WSCLIENTS = {}
 WSclean = (roomid) => {
   if (WSCLIENTS[roomid]){
@@ -116,9 +117,10 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
+const server = http.createServer(app);
+const wss = new WebSocket.Server({server});
+wss.on("connection",function(ws){
 
-
-app.ws('/', function(ws, req) {
   ws.on('message', function(message) {
     const msg = JSON.parse(message)
     console.log(msg)
@@ -193,8 +195,7 @@ app.ws('/', function(ws, req) {
     WSclean(msg.roomid)
     printwsclient(WSCLIENTS)
   });
-  // console.log('socket', req.testing);
-});
+})
 
 
 
@@ -202,4 +203,4 @@ app.ws('/', function(ws, req) {
 
 const port = process.env.PORT || 8080;
 
-app.listen(port, () => console.log(`server running on port ${port}`));
+server.listen(port, () => console.log(`server running on port ${port}`));
