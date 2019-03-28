@@ -80,7 +80,7 @@ class Karaokeclient extends Component {
       this.setState({
         currentroom: res.data
       })
-      this.connection = new WebSocket('ws://localhost:8080');
+      this.connection = new WebSocket((process.env.NODE_ENV === "production"? "ws://www.yoshio.space": "ws://localhost:8080"));
       this.connection.onopen = evt => { 
         console.log("connection open")
         this.connection.send(JSON.stringify({

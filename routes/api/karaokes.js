@@ -177,6 +177,7 @@ router.post("/room", (req, res) => {
     const roomid = req.body.roomid;
     Karaoke.findOne({roomid}).then(karaoke => {
         if (!karaoke) {
+            let errors
             errors.votes = "No karaoke exists";
             return res.status(400).json(errors);
         } else {

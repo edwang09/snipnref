@@ -72,7 +72,7 @@ class Karaokehost extends Component {
     this.waitForOrder()
   } 
   componentDidMount() {
-    this.connection = new WebSocket('ws://localhost:8080');
+    this.connection = new WebSocket((process.env.NODE_ENV === "production"? "ws://www.yoshio.space": "ws://localhost:8080") );
     this.connection.onopen = evt => { 
       console.log("connection open")
       if (this.state.roomid){
