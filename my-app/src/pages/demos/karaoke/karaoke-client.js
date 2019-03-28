@@ -88,6 +88,9 @@ class Karaokeclient extends Component {
           "role":"client",
           "roomid":res.data.roomid
         }))
+        setInterval(()=>{
+          this.connection.send("ping")
+        },30000)
       };
       this.connection.onmessage = evt => {
         if (evt.data) {

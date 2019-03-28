@@ -83,8 +83,10 @@ class Karaokehost extends Component {
           "role":"host",
           "roomid":this.state.roomid
         }))
-
       }
+      setInterval(()=>{
+        this.connection.send("ping")
+      },30000)
     };
     this.connection.onmessage = evt => {
       if (evt.data) {
